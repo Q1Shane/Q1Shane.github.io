@@ -21,12 +21,12 @@ hr:before {
   }
 }
 
-/* 移动端主页背景缩小 
+/* 移动端主页背景缩小*/ 
 @media screen and (max-width: 900px) {
   #page-header.full_page {
     height: 20vh;
   }
-}*/
+}
 /*移动端优化：去除归档、标签、最新文章、公告、评论、只保留网站统计*/
 @media screen and (max-width: 900px) {
   .card-info,
