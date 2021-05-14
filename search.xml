@@ -300,9 +300,25 @@
     <url>/59924.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
 
-<h2 id="Linux下安装Go环境"><a href="#Linux下安装Go环境" class="headerlink" title="Linux下安装Go环境"></a>Linux下安装Go环境</h2><hr>
-<h3 id="登录-Linux"><a href="#登录-Linux" class="headerlink" title="登录 Linux"></a>登录 Linux</h3><p>Mac 或 Linux 的用户可以用命令<code>ssh root@xxx.xxx.xxx.xxx</code>登录主机<br>Window 的用户可以使用 SecureCRT 登录主机<br>虚拟机用户直接打开你的虚拟机</p>
-<h3 id="安装-Go-环境"><a href="#安装-Go-环境" class="headerlink" title="安装 Go 环境"></a>安装 Go 环境</h3><blockquote>
+<h1 id="安装-Go-语言及搭建-Go-语言开发环境"><a href="#安装-Go-语言及搭建-Go-语言开发环境" class="headerlink" title="安装 Go 语言及搭建 Go 语言开发环境"></a>安装 Go 语言及搭建 Go 语言开发环境</h1><hr>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h3><ul>
+<li><p>Go 官网下载地址：<a href="https://link.zhihu.com/?target=https://golang.org/dl/">https://golang.org/dl/</a></p>
+</li>
+<li><p>Go 官方镜像站（推荐）：<a href="https://link.zhihu.com/?target=https://golang.google.cn/dl/">https://golang.google.cn/dl/</a></p>
+</li>
+</ul>
+<h3 id="版本的选择"><a href="#版本的选择" class="headerlink" title="版本的选择"></a>版本的选择</h3><p>Windows 平台和 Mac 平台推荐下载可执行文件版，Linux 平台下载压缩文件版。</p>
+<p><em>(目前的最新版本可能不是 1.11.5，但是安装过程类似哦。)</em></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/v2-5b7945253d9729f6d6ceee5f5322072e_r.jpg"></p>
+<h1 id="Windows-下安装Go环境"><a href="#Windows-下安装Go环境" class="headerlink" title="Windows 下安装Go环境"></a>Windows 下安装Go环境</h1><hr>
+<p>此安装实例以 <code>64位Win10</code>系统安装 <code>Go1.11.5可执行文件版本</code>为例。</p>
+<p>将上一步选好的安装包下载到本地。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-86fc9e0126b5d7dd1b820abdda433745_r.jpg"></p>
+<p>双击下载好的文件，然后再按照下图步骤安装即可。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-7481d0f0ca16726c5ae9b72af4db7650_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/v2-dbb182b02a84582bdc13a42f29257ecf_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/v2-58d7a6598586f787446df4d1b6390216_r.jpg"></p>
+<h1 id="Linux下安装Go环境"><a href="#Linux下安装Go环境" class="headerlink" title="Linux下安装Go环境"></a>Linux下安装Go环境</h1><hr>
+<h2 id="登录-Linux"><a href="#登录-Linux" class="headerlink" title="登录 Linux"></a>登录 Linux</h2><p>Mac 或 Linux 的用户可以用命令<code>ssh root@xxx.xxx.xxx.xxx</code>登录主机<br>Window 的用户可以使用 SecureCRT 登录主机<br>虚拟机用户直接打开你的虚拟机</p>
+<h2 id="安装-Go-环境"><a href="#安装-Go-环境" class="headerlink" title="安装 Go 环境"></a>安装 Go 环境</h2><blockquote>
 <p>Golang 官网下载地址：<a href="https://golang.org/dl/">https://golang.org/dl/</a></p>
 </blockquote>
 <ol>
@@ -357,24 +373,63 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;hello</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="http://upload-images.jianshu.io/upload_images/1277729-94425080feff1bbd.png"></p>
-<h2 id="关于-Go-的一些介绍"><a href="#关于-Go-的一些介绍" class="headerlink" title="关于 Go 的一些介绍"></a>关于 Go 的一些介绍</h2><hr>
-<h3 id="环境变量："><a href="#环境变量：" class="headerlink" title="环境变量："></a>环境变量：</h3><ul>
+<h1 id="Mac-下安装Go环境"><a href="#Mac-下安装Go环境" class="headerlink" title="Mac 下安装Go环境"></a>Mac 下安装Go环境</h1><hr>
+<p>下载可执行文件版，直接点击<strong>下一步</strong>安装即可，默认会将 go 安装到<code>/usr/local/go</code>目录下。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/v2-45081f19819b3c3a69e4c78fed850d47_r.jpg"></p>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>上一步安装过程执行完毕后，可以打开终端窗口，输入<code>go version</code>命令，查看安装的 Go 版本。</p>
+<h1 id="关于-Go-的一些介绍"><a href="#关于-Go-的一些介绍" class="headerlink" title="关于 Go 的一些介绍"></a>关于 Go 的一些介绍</h1><hr>
+<h2 id="环境变量："><a href="#环境变量：" class="headerlink" title="环境变量："></a>环境变量：</h2><ul>
 <li>$GOROOT:<br>  表示 Go 的安装目录。也就是上面我们解压出来的文件夹里面的<code>go</code>文件夹。</li>
 <li>$GOPATH:<br>  表示我们的工作空间。用来存放我们的工程目录的地方。</li>
 </ul>
-<h3 id="GOPATH-目录："><a href="#GOPATH-目录：" class="headerlink" title="GOPATH 目录："></a>GOPATH 目录：</h3><p>一般来说 GOPATH 下面会有三个文件夹：<code>bin</code>、<code>pkg</code>、<code>src</code>，没有的话自己创建。每个文件夹都有其的作用。</p>
+<h2 id="GOPATH-目录："><a href="#GOPATH-目录：" class="headerlink" title="GOPATH 目录："></a>GOPATH 目录：</h2><p>一般来说 GOPATH 下面会有三个文件夹：<code>bin</code>、<code>pkg</code>、<code>src</code>，没有的话自己创建。每个文件夹都有其的作用。</p>
 <ul>
 <li>  bin：编译后可的执行文件的存放路径</li>
 <li>  pkg：编译包时，生成的. a 文件的存放路径</li>
 <li>  src：源码路径，一般我们的工程就创建在<code>src</code>下面。</li>
 </ul>
 <p>注意：如果要用<code>Go Mod</code>(Go1.11 及以上支持) 进行包管理，则需要在 GOPATH 以外的目录创建工程。关于<code>Go Mod</code>的使用，可以自行 Google 一下，这里就不赘述了。</p>
+<h2 id="配置-GOPATH"><a href="#配置-GOPATH" class="headerlink" title="配置 GOPATH"></a>配置 GOPATH</h2><p><code>GOPATH</code>是一个环境变量，用来表明你写的 go 项目的存放路径（工作目录），本文就选择使用 <code>D:\code\go</code> 这个目录作为 <code>GOPATH</code> 目录。</p>
+<p><code>GOPATH</code>路径最好只设置一个，我们写的所有 Go 项目代码都放到<code>GOPATH</code>的<code>src</code>目录下。</p>
+<p><em>补充说明：Go1.11 版本之后，开启<code>go mod</code>模式之后就不再强制需要配置<code>GOPATH</code>了。</em></p>
+<p>Linux 和 Mac 平台就参照上面配置环境变量的方式将自己的工作目录添加到环境变量中即可。</p>
+<p>Windows 平台按下面的步骤将<code>D:\code\go</code>添加到环境变量：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/v2-5e4fa7826f177c0d3e8aaaf645559fd6_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-07f79095623e958b07a518dcb35cef24_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/v2-c4f08c411d25b622f3577dd5cf72196f_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/v2-4a875a0e2dca47c4c813aae850a5ed2a_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-d563ad97c44aaf2adfa4b3231b0ee834_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-f04b1d2b9f17c73675c07b98b2b4f21d_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-00eef37d36fe47cd68c8cd0e320a7405_r.jpg"></p>
+<p>在 Go 1.8 版本之前，<code>GOPATH</code>环境变量默认是空的。从 Go 1.8 版本开始，Go 开发包在安装完成后会为 <code>GOPATH</code>设置一个默认目录，参见下图。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/v2-b8e098f6ce03c4d2947f6b3dd33c03eb_r.jpg"></p>
+<p>同时，我们将 <code>GOROOT</code>下的 bin 目录及<code>GOPATH</code>下的 bin 目录都添加到环境变量中。</p>
+<p>配置环境变量之后需要重启已经打开的终端才能让新配置的环境变量生效。（例如 cmd、VS Code 里面的终端和其他编辑器的终端等）。</p>
+<h2 id="Go-项目结构"><a href="#Go-项目结构" class="headerlink" title="Go 项目结构"></a>Go 项目结构</h2><p>在进行 Go 语言开发的时候，我们的代码总是会保存在<code>$GOPATH/src</code>目录下。在工程经过<code>go build</code>、<code>go install</code>或<code>go get</code>等指令后，会将下载的第三方包源代码文件放在<code>$GOPATH/src</code>目录下， 产生的二进制可执行文件放在 <code>$GOPATH/bin</code>目录下，生成的中间缓存文件会被保存在 <code>$GOPATH/pkg</code> 下。</p>
+<p>如果我们使用版本管理工具（Version Control System，VCS。常用如 Git）来管理我们的项目代码时，我们只需要添加<code>$GOPATH/src</code>目录的源代码即可。<code>bin</code> 和 <code>pkg</code> 目录的内容无需版本控制。</p>
+<h3 id="适合个人开发者"><a href="#适合个人开发者" class="headerlink" title="适合个人开发者"></a>适合个人开发者</h3><p>我们知道源代码都是存放在<code>GOPATH</code>的<code>src</code>目录下，那我们可以按照下图来组织我们的代码。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/v2-8d441d70a1caebb5f69197686a3b1e5f_r.jpg"></p>
+<h3 id="目前流行的项目结构"><a href="#目前流行的项目结构" class="headerlink" title="目前流行的项目结构"></a>目前流行的项目结构</h3><p>Go 语言中也是通过包来组织代码文件，我们可以引用别人的包也可以发布自己的包，但是为了防止不同包的项目名冲突，我们通常使用<code>顶级域名</code>来作为包名的前缀，这样就不担心项目名冲突的问题了。</p>
+<p>因为不是每个个人开发者都拥有自己的顶级域名，所以目前流行的方式是使用个人的 github 用户名来区分不同的包。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/v2-01248b3f1900f995a437395cdec5e756_r.jpg"></p>
+<p>举个例子：张三和李四都有一个名叫<code>studygo</code>的项目，那么这两个包的路径就会是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &quot;github.com&#x2F;zhangsan&#x2F;studygo&quot;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &quot;github.com&#x2F;lisi&#x2F;studygo&quot;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>以后我们从 github 上下载别人包的时候，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go get github.com&#x2F;jmoiron&#x2F;sqlx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>那么，这个包会下载到我们本地<code>GOPATH</code>目录下的<code>src/github.com/jmoiron/sqlx</code>。</p>
+<h3 id="适合企业开发者"><a href="#适合企业开发者" class="headerlink" title="适合企业开发者"></a>适合企业开发者</h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-da6bd50401d8c030f1b79e9b3131ed04_r.jpg"></p>
+<h1 id="Goland-官网下载"><a href="#Goland-官网下载" class="headerlink" title="Goland 官网下载"></a>Goland 官网下载</h1><hr>
+<p>Goland 官网地址：<a href="https://www.jetbrains.com/go/specials/go/go.html?gclid=EAIaIQobChMI9Y2H-vDV4AIV2CCtBh0nrAPYEAAYASAAEgJ-cfD_BwE&gclsrc=aw.ds">https://www.jetbrains.com/go/specials/go/go.html?gclid=EAIaIQobChMI9Y2H-vDV4AIV2CCtBh0nrAPYEAAYASAAEgJ-cfD_BwE&amp;gclsrc=aw.ds</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/2019022522171329.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuZ2VsaWE2MjA=,size_16,color_FFFFFF,t_70"></p>
+<h2 id="配置-GoLand-的-GOPATH-和-GOROOT"><a href="#配置-GoLand-的-GOPATH-和-GOROOT" class="headerlink" title="配置 GoLand 的 GOPATH 和 GOROOT"></a>配置 GoLand 的 GOPATH 和 GOROOT</h2><p>打开 Goland 软件，点击右下角 Configure，然后点击 Setting，如下图所示：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190225222635750.png"></p>
+<p>在打开的界面中，点击 GO 列表，然后找到 GOPATH 和 GOROOT</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190225222831313.png"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190225222847786.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuZ2VsaWE2MjA=,size_16,color_FFFFFF,t_70"></p>
+<h2 id="测试软件是否安装成功"><a href="#测试软件是否安装成功" class="headerlink" title="测试软件是否安装成功"></a>测试软件是否安装成功</h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190225223126694.png"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190225223141314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuZ2VsaWE2MjA=,size_16,color_FFFFFF,t_70"></p>
 ]]></content>
       <categories>
-        <category>默认</category>
+        <category>Go</category>
       </categories>
       <tags>
-        <tag>默认</tag>
+        <tag>Go</tag>
       </tags>
   </entry>
 </search>
