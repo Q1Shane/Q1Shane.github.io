@@ -295,4 +295,86 @@
         <tag>毕设</tag>
       </tags>
   </entry>
+  <entry>
+    <title>安装Go环境</title>
+    <url>/59924.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="Linux下安装Go环境"><a href="#Linux下安装Go环境" class="headerlink" title="Linux下安装Go环境"></a>Linux下安装Go环境</h2><hr>
+<h3 id="登录-Linux"><a href="#登录-Linux" class="headerlink" title="登录 Linux"></a>登录 Linux</h3><p>Mac 或 Linux 的用户可以用命令<code>ssh root@xxx.xxx.xxx.xxx</code>登录主机<br>Window 的用户可以使用 SecureCRT 登录主机<br>虚拟机用户直接打开你的虚拟机</p>
+<h3 id="安装-Go-环境"><a href="#安装-Go-环境" class="headerlink" title="安装 Go 环境"></a>安装 Go 环境</h3><blockquote>
+<p>Golang 官网下载地址：<a href="https://golang.org/dl/">https://golang.org/dl/</a></p>
+</blockquote>
+<ol>
+<li>打开官网下载地址选择对应的系统版本, 复制下载链接<br> 这里我选择的是<br> <code>go1.11.5.linux-amd64.tar.gz</code>：<a href="https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz">https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz</a></li>
+</ol>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="http://upload-images.jianshu.io/upload_images/1277729-7d5e14c2c8c994bf.png"> image.png</p>
+<ol start="2">
+<li> <code>cd</code>进入你用来存放安装包的目录，我习惯在<code>~</code>下面创建个<code>go</code>文件夹。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 在 ~ 下创建 go 文件夹，并进入 go 文件夹</span><br><span class="line">mkdir ~&#x2F;go &amp;&amp; cd ~&#x2F;go</span><br><span class="line">下载的 go 压缩包</span><br><span class="line">wget https:&#x2F;&#x2F;dl.google.com&#x2F;go&#x2F;go1.11.5.linux-amd64.tar.gz</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li> 下载完成</li>
+</ol>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="http://upload-images.jianshu.io/upload_images/1277729-60625ab3615c752e.png"></p>
+<ol start="4">
+<li> 执行<code>tar</code>解压到<code>/usr/loacl</code>目录下（官方推荐），得到<code>go</code>文件夹等</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -C &#x2F;usr&#x2F;local -zxvf  go1.11.5.linux-amd64.tar.gz</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li> 添加<code>/usr/loacl/go/bin</code>目录到 PATH 变量中。添加到<code>/etc/profile</code> 或<code>$HOME/.profile</code>都可以</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 习惯用vim，没有的话可以用命令&#96;sudo apt-get install vim&#96;安装一个</span><br><span class="line">vim &#x2F;etc&#x2F;profile</span><br><span class="line"># 在最后一行添加</span><br><span class="line">export GOROOT&#x3D;&#x2F;usr&#x2F;local&#x2F;go</span><br><span class="line">export PATH&#x3D;$PATH:$GOROOT&#x2F;bin</span><br><span class="line"># 保存退出后source一下（vim 的使用方法可以自己搜索一下）</span><br><span class="line">source &#x2F;etc&#x2F;profile</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>执行<code>go version</code>，如果现实版本号，则 Go 环境安装成功。是不是很简单呢？<br> <img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="http://upload-images.jianshu.io/upload_images/1277729-bd36e8e538989c62.png"></li>
+</ol>
+<h2 id="运行第一个程序"><a href="#运行第一个程序" class="headerlink" title="运行第一个程序"></a>运行第一个程序</h2><ol>
+<li> 先创建你的工作空间 (<a href="%5Bworkspace%5D(https://golang.org/doc/code.html#Workspaces)">Workspaces</a>)，官方建议目录<code>$HOME/go</code>。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir $HOME&#x2F;go</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li> 将你的工作空间路径声明到环境变量中。和上一部分的第 5 步相似。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 编辑 ~&#x2F;.bash_profile 文件</span><br><span class="line">vim ~&#x2F;.bash_profile</span><br><span class="line"># 在最后一行添加下面这句。$HOME&#x2F;go 为你工作空间的路径，你也可以换成你喜欢的路径</span><br><span class="line">export GOPATH&#x3D;$HOME&#x2F;go</span><br><span class="line"># 保存退出后source一下（vim 的使用方法可以自己搜索一下）</span><br><span class="line">source ~&#x2F;.bash_profile</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li> 在你的工作空间创建你的第一个工程目录</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 创建并进入你的第一个工程目录</span><br><span class="line">mkdir -p $GOPATH&#x2F;src&#x2F;hello &amp;&amp; cd $GOPATH&#x2F;src&#x2F;hello</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li> 在你的工程目录下创建名为<code>hello.go</code>的文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim hello.go</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li> 将下面内容粘贴到 hello.go 文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    fmt.Printf(&quot;hello, world\n&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li> 好了，工程目录和工程文件都准备好了。现在我们到我们的工程目录 (<code>$GOPATH/src/hello</code>) 下构建我们的工程</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 如果你当前的目录不在 $GOPATH&#x2F;src&#x2F;hello， 需要先执行 &quot;cd $GOPATH&#x2F;src&#x2F;hello&quot; 进入该目录</span><br><span class="line"># 执行构建工程的命令</span><br><span class="line">go build</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li> 等一会，命令执行完之后你可以看到目录下会多出一个 hello 的文件，这就是我们编译之后的文件啦。怎么执行我们的程序呢？只需要在当前目录下执行<code>./xxx</code>就可以啦！是不是敲鸡煎蛋呢！</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;hello</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="http://upload-images.jianshu.io/upload_images/1277729-94425080feff1bbd.png"></p>
+<h2 id="关于-Go-的一些介绍"><a href="#关于-Go-的一些介绍" class="headerlink" title="关于 Go 的一些介绍"></a>关于 Go 的一些介绍</h2><hr>
+<h3 id="环境变量："><a href="#环境变量：" class="headerlink" title="环境变量："></a>环境变量：</h3><ul>
+<li>$GOROOT:<br>  表示 Go 的安装目录。也就是上面我们解压出来的文件夹里面的<code>go</code>文件夹。</li>
+<li>$GOPATH:<br>  表示我们的工作空间。用来存放我们的工程目录的地方。</li>
+</ul>
+<h3 id="GOPATH-目录："><a href="#GOPATH-目录：" class="headerlink" title="GOPATH 目录："></a>GOPATH 目录：</h3><p>一般来说 GOPATH 下面会有三个文件夹：<code>bin</code>、<code>pkg</code>、<code>src</code>，没有的话自己创建。每个文件夹都有其的作用。</p>
+<ul>
+<li>  bin：编译后可的执行文件的存放路径</li>
+<li>  pkg：编译包时，生成的. a 文件的存放路径</li>
+<li>  src：源码路径，一般我们的工程就创建在<code>src</code>下面。</li>
+</ul>
+<p>注意：如果要用<code>Go Mod</code>(Go1.11 及以上支持) 进行包管理，则需要在 GOPATH 以外的目录创建工程。关于<code>Go Mod</code>的使用，可以自行 Google 一下，这里就不赘述了。</p>
+]]></content>
+      <categories>
+        <category>默认</category>
+      </categories>
+      <tags>
+        <tag>默认</tag>
+      </tags>
+  </entry>
 </search>
