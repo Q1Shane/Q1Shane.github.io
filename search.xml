@@ -163,6 +163,24 @@
       </tags>
   </entry>
   <entry>
+    <title>卷积核（kernels）与滤波器（filters）的关系</title>
+    <url>/45549.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="简单理解："><a href="#简单理解：" class="headerlink" title="简单理解："></a><strong>简单理解：</strong></h2><p>卷积核：二维的矩阵<br>滤波器：多个卷积核组成的三维矩阵，多出的一维是通道。</p>
+<p>先介绍一些术语：layers（层）、channels（通道）、feature maps（特征图），filters（滤波器），kernels（卷积核）。<br>从层次结构的角度来看，层和滤波器的概念处于同一水平，而通道和卷积核在下一级结构中。通道和特征图是同一个事情。一层可以有多个通道（或者说特征图）。如果输入的是一个 RGB 图像，那么就会有 3 个通道。“channel”通常被用来描述 “layer” 的结构。相似的，“kernel”是被用来描述 “filter” 的结构。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190915145942491.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NjA5,size_16,color_FFFFFF,t_70"><br>filter 和 kernel 之间的不同很微妙。很多时候，它们可以互换，所以这可能造成我们的混淆。</p>
+<h2 id="那它们之间的不同在于哪里呢？"><a href="#那它们之间的不同在于哪里呢？" class="headerlink" title="那它们之间的不同在于哪里呢？"></a><strong>那它们之间的不同在于哪里呢？</strong></h2><p>一个 “Kernel” 更倾向于是 2D 的权重矩阵。而 “filter” 则是指多个 Kernel 堆叠的 3D 结构。如果是一个 2D 的 filter，那么两者就是一样的。但是一个 3Dfilter，在大多数深度学习的卷积中，它是包含 kernel 的。每个卷积核都是独一无二的，主要在于强调输入通道的不同方面。</p>
+<p>参考：[深度学习中的各种卷积](</p>
+]]></content>
+      <categories>
+        <category>默认</category>
+      </categories>
+      <tags>
+        <tag>默认</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>安装Go环境</title>
     <url>/59924.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
