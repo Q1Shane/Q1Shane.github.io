@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hexo 写一篇博客</title>
+    <url>/37981.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>欢迎来到 <a href="https://hexo.io/">Hexo</a>！这是您的第一篇文章。查看<a href="(https://hexo.io/docs/)">文档</a>以获取更多信息。如果在使用Hexo时遇到任何问题，可以在<a href="%5D(https://hexo.io/docs/troubleshooting.html)">故障排除</a>中找到答案，或者可以在<a href="https://github.com/hexojs/hexo/issues">GitHub</a>上问我。 </p>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="创建一篇新文章"><a href="#创建一篇新文章" class="headerlink" title="创建一篇新文章"></a>创建一篇新文章</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>更多信息：<a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>更多信息： <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+<p>更多信息： <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="部署到远程站点"><a href="#部署到远程站点" class="headerlink" title="部署到远程站点"></a>部署到远程站点</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p>更多信息： <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/16107.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World!"></a>Hello World!</h2><h3 id="一个收藏回忆与分享技术的地方！"><a href="#一个收藏回忆与分享技术的地方！" class="headerlink" title="一个收藏回忆与分享技术的地方！"></a>一个收藏回忆与分享技术的地方！</h3>]]></content>
+      <categories>
+        <category>默认</category>
+      </categories>
+      <tags>
+        <tag>默认</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>anaconda3的使用</title>
+    <url>/32873.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="1、安装-anaconda3"><a href="#1、安装-anaconda3" class="headerlink" title="1、安装 anaconda3"></a><strong>1、安装 anaconda3</strong></h2><h2 id="安装条件"><a href="#安装条件" class="headerlink" title="    安装条件"></a>    安装条件</h2><ul>
+<li>  系统要求：32 位或 64 位系统均可</li>
+<li>  下载文件大小：约 500MB</li>
+<li>  所需空间大小：3GB 空间大小（Miniconda 仅需 400MB 空间即可）</li>
+</ul>
+<p>（1）地址 <a href="https://www.anaconda.com/products/individual#linux">anaconda 下载</a>。最新版本为 Anaconda3-2020.02-Linux-x86_64.sh，启动终端，输入如下指令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bash ~&#x2F;Downloads&#x2F;Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+<p>（2）安装过程中，看到提示 “In order to continue the installation process, please review the license agreement.”（“请浏览许可证协议以便继续安装。”），点击“Enter” 查看 “许可证协议”，也可以点击空格翻页，这样快一些。在“许可证协议” 界面将屏幕滚动至底，输入 “yes” 表示同意许可证协议内容。然后进行下一步。</p>
+<p>（3）安装过程中，提示 “Press Enter to accept the default install location, CTRL-C to cancel the installation or specify an alternate installation directory.”（“按回车键确认安装路径，按’CTRL-C’取消安装或者指定安装目录。”）可以指定目录，输入要安装的目录即可。</p>
+<p>（4）安装器若提示 You currently have a PYTHONPATH environment variable set….. 等类似提示时：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20200628222025241.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pJRUpJTlFVQU5JTA==,size_16,color_FFFFFF,t_70"></p>
+<p>这里是将 anaconda3 添加到环境变量中，这里十分建议选 no，否则安装完成后在终端前面始终会有个 (base) 存在，无论用不用 anaconda3。总之选 no 就对了！</p>
+<p>        看到 Thank you for installing Anaconda3! 这个提示证明安装成功了！</p>
+<h2 id="2、anaconda3-的使用"><a href="#2、anaconda3-的使用" class="headerlink" title="2、anaconda3 的使用"></a><strong>2、anaconda3 的使用</strong></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ cd &#x2F;home&#x2F;zydz&#x2F;anaconda3&#x2F;bin</span><br><span class="line">$ . .&#x2F;activate</span><br></pre></td></tr></table></figure>
+<p>         这两条指令是进入 conda 环境，其中第 2 条指令第一个点相当于 source，第二个点代表当前路径。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda list</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         显示已经安装的包名和版本号。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anaconda-navigator</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         anaconda 交互界面。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda --version</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>          验证 conda 已被安装，查看 conda 版本号。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda info --envs</span><br><span class="line">$ conda info -e</span><br><span class="line">$ conda env list</span><br></pre></td></tr></table></figure>
+<p>         这 3 条指令含义相同，显示已创建环境。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda --help</span><br><span class="line">$ conda -h</span><br></pre></td></tr></table></figure>
+<p>         查看 conda 帮助信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create --name &lt;env_name&gt; &lt;package_names&gt;</span><br><span class="line">$ conda create -n &lt;env_name&gt; &lt;package_names&gt;</span><br></pre></td></tr></table></figure>
+<p>         创建新环境，以下举例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create -n conda_test python&#x3D;3.5 numpy</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         表示创建一个名为 conda_test 的环境，环境中安装版本为 3.5 的 python，同时也安装了 numpy。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create --name &lt;new_env_name&gt; --clone &lt;copied_env_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         复制环境，以下举例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create --name new_conda --clone conda_test</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         表示克隆名为 conda_test 的环境，克隆后的新环境名为 new_conda。此时，环境中将同时存在 conda_test 和 new_conda 环境，且两个环境的配置相同。 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda remove --name &lt;env_name&gt; --all</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         删除环境，<env_name> 为被删除环境的名称。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda search --full python</span><br><span class="line">$ conda search --full-name python</span><br></pre></td></tr></table></figure>
+<p>         表示查找全名为 python 的包有哪些版本可供安装。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda install --name &lt;env_name&gt; &lt;package_name&gt;</span><br><span class="line">$ conda install --name conda_test pandas</span><br></pre></td></tr></table></figure>
+<p>          表示在名为 conda_test 的环境中安装 pandas 包。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ pip install &lt;package_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         当使用 conda install 无法进行安装时，可以使用 pip 进行安装。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda remove --name &lt;env_name&gt; &lt;package_name&gt;</span><br><span class="line">$ conda remove --name conda_test pandas</span><br></pre></td></tr></table></figure>
+<p>         表示卸载名为 conda_test 环境中的 pandas 包。 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda remove &lt;package_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         表示卸载当前环境中的包。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda activate &lt;env_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>          切换环境。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda deactivate</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         退出环境至 root。</p>
+<p>         如果在其他电脑上使用，你可以将已经配置好的 xxx 环境，复制到其他电脑上，仍然能够使用。</p>
+<h2 id="3、卸载-anaconda3"><a href="#3、卸载-anaconda3" class="headerlink" title="3、卸载 anaconda3"></a><strong>3、卸载 anaconda3</strong></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ rm -rf ~&#x2F;anaconda3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>        即删除 Anaconda 的安装目录。根据安装的 Anaconda 版本选择相应的卸载命令。</p>
+<h2 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a><strong>参考网址</strong></h2><p><a href="https://www.jianshu.com/p/62f155eb6ac5">Anaconda 介绍、安装及使用教程</a></p>
+]]></content>
+      <categories>
+        <category>Anaconda</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Numpy基础用法</title>
+    <url>/64862.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<p> 一个由国外大神制作的 NumPy 可视化教程，直观地介绍 NumPy 的各种用法，很容易就能理解。</p>
+<p>话不多说，一睹为快。</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a><strong>数组</strong></h2><p>先来介绍最基础的一维数组。</p>
+<h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a><strong>创建数组</strong></h3><p>np.array() 直接创建：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-90de7812f9fc3169cffb7e39d4c3cfd8_720w.jpg" alt="img"></p>
+<p>使用 np.ones()、np.zeros() 等方法：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-6e73db4bcf9e406d110da4f2827200ab_720w.jpg" alt="img"></p>
+<p>我们在写数组的时候是横着写的，而其实数组是列向量，这样很直观。</p>
+<h3 id="数组运算"><a href="#数组运算" class="headerlink" title="数组运算"></a><strong>数组运算</strong></h3><p>加减乘除</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-ae2106c929707e5613c6d8b8bb7aab16_720w.png" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-651679ca10deeda9810c5a59de52bac6_720w.jpg" alt="img"></p>
+<p>（注意这里的data和ones不是上面的data，ones）</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-c2b47f98a0c1ae65eedd798bb222758d_720w.png" alt="img"></p>
+<p>数组乘以数值</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-e461f0c4e4a66622b487b71f22e3eb7b_720w.png" alt="img"></p>
+<h3 id="数组索引"><a href="#数组索引" class="headerlink" title="数组索引"></a><strong>数组索引</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-6ab0797b53e61645a9564376ae9f3d0c_720w.jpg" alt="img"></p>
+<h3 id="数组聚合"><a href="#数组聚合" class="headerlink" title="数组聚合"></a><strong>数组聚合</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-6e8ef73d761be46fdf60aefcf3953821_720w.jpg" alt="img"></p>
+<p>上面是一维数组，下面介绍二维维数组也就是矩阵的使用技巧。</p>
+<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a><strong>矩阵</strong></h2><h3 id="创建矩阵"><a href="#创建矩阵" class="headerlink" title="创建矩阵"></a><strong>创建矩阵</strong></h3><p>直接创建：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-58fe9b45561eed23069a721ec516279b_720w.jpg" alt="img"></p>
+<p>使用 np.ones()、np.zeros() 等方法：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-63b85180f9ac32626669e0cd662f5d92_720w.jpg" alt="img"></p>
+<p>这样就很容易理解括号里 (3,2) 的含义。</p>
+<h3 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a><strong>矩阵运算</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-651679ca10deeda9810c5a59de52bac6_720w.jpg" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-b1a31f23c0cab9570a3f7b0d2af42031_720w.jpg" alt="img"></p>
+<h3 id="矩阵点积"><a href="#矩阵点积" class="headerlink" title="矩阵点积"></a><strong>矩阵点积</strong></h3><p>矩阵点积跟线性代数基本一样，有些抽象，借助示意图能很好理解：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-c3f791e0c27505216111dfe9d3f51c74_720w.jpg" alt="img"></p>
+<p>进一步拆分解释：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-ffeacb71407ec517f64294c30a962159_720w.jpg" alt="img"></p>
+<h3 id="矩阵索引"><a href="#矩阵索引" class="headerlink" title="矩阵索引"></a><strong>矩阵索引</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-45f4ce6a4ffd5f8af7ab6c7ba717720e_720w.jpg" alt="img"></p>
+<h3 id="矩阵聚合"><a href="#矩阵聚合" class="headerlink" title="矩阵聚合"></a><strong>矩阵聚合</strong></h3><p>求最值</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-fa64dda84ef6ac60c277446e5dea8029_720w.jpg" alt="img"></p>
+<p>按行 / 列聚合</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-e5dbfb6c39c9065351628b8e9f22ba35_720w.jpg" alt="img"></p>
+<h3 id="矩阵转置"><a href="#矩阵转置" class="headerlink" title="矩阵转置"></a><strong>矩阵转置</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-689c92bca6be7d624a473b41fa0fec9b_720w.jpg" alt="img"></p>
+<h3 id="矩阵重塑"><a href="#矩阵重塑" class="headerlink" title="矩阵重塑"></a><strong>矩阵重塑</strong></h3><p>reshape() 用法：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-676cd66b7083e7507ebec3b69c0b8d3f_720w.jpg" alt="img"></p>
+<p>mark</p>
+<h2 id="高维数组"><a href="#高维数组" class="headerlink" title="高维数组"></a><strong>高维数组</strong></h2><p>Numpy 不仅可以处理上述的一维数组和二维矩阵，还可以处理任意 N 维的数组，方法也大同小异。</p>
+<h3 id="创建多维数组"><a href="#创建多维数组" class="headerlink" title="创建多维数组"></a><strong>创建多维数组</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-00e2ef23fefed05864e66318b6c5d107_720w.jpg" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-e5bb94c075e23e20e58cea9e2df47cf1_720w.jpg" alt="img"></p>
+<p>掌握了以上基础后，我们可以做个小练习，计算均方误差 MSE：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-70d84cd6b6975b2757e5e164249b0cdb_720w.jpg" alt="img"></p>
+<p>可以看到有减法、平方、求和等运算：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-e52fd0fc193ad26494ee9ce35559753c_720w.jpg" alt="img"></p>
+<p>分别假设相应的预测值和真实值：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-0462ab48e91ca9081cc652fce298de6c_720w.jpg" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-fb39528fcfd3447639f203df41949b00_720w.jpg" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-a2ed39331e8841397d4908fc2157a46c_720w.jpg" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-56048efa2b5f2a10832388b69c050ebc_720w.jpg" alt="img"></p>
+]]></content>
+      <categories>
+        <category>Numpy</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>卷积核（kernels）与滤波器（filters）的关系</title>
+    <url>/45549.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="简单理解："><a href="#简单理解：" class="headerlink" title="简单理解："></a><strong>简单理解：</strong></h2><p>卷积核：二维的矩阵<br>滤波器：多个卷积核组成的三维矩阵，多出的一维是通道。</p>
+<p>先介绍一些术语：layers（层）、channels（通道）、feature maps（特征图），filters（滤波器），kernels（卷积核）。<br>从层次结构的角度来看，层和滤波器的概念处于同一水平，而通道和卷积核在下一级结构中。通道和特征图是同一个事情。一层可以有多个通道（或者说特征图）。如果输入的是一个 RGB 图像，那么就会有 3 个通道。“channel”通常被用来描述 “layer” 的结构。相似的，“kernel”是被用来描述 “filter” 的结构。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190915145942491.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NjA5,size_16,color_FFFFFF,t_70"><br>filter 和 kernel 之间的不同很微妙。很多时候，它们可以互换，所以这可能造成我们的混淆。</p>
+<h2 id="那它们之间的不同在于哪里呢？"><a href="#那它们之间的不同在于哪里呢？" class="headerlink" title="那它们之间的不同在于哪里呢？"></a><strong>那它们之间的不同在于哪里呢？</strong></h2><p>一个 “Kernel” 更倾向于是 2D 的权重矩阵。而 “filter” 则是指多个 Kernel 堆叠的 3D 结构。如果是一个 2D 的 filter，那么两者就是一样的。但是一个 3Dfilter，在大多数深度学习的卷积中，它是包含 kernel 的。每个卷积核都是独一无二的，主要在于强调输入通道的不同方面。</p>
+<p>参考：[深度学习中的各种卷积](</p>
+]]></content>
+      <categories>
+        <category>默认</category>
+      </categories>
+      <tags>
+        <tag>默认</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安装Go环境</title>
+    <url>/59924.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h1 id="安装-Go-语言及搭建-Go-语言开发环境"><a href="#安装-Go-语言及搭建-Go-语言开发环境" class="headerlink" title="安装 Go 语言及搭建 Go 语言开发环境"></a>安装 Go 语言及搭建 Go 语言开发环境</h1><hr>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h3><ul>
+<li><p>Go 官网下载地址：<a href="https://link.zhihu.com/?target=https://golang.org/dl/">https://golang.org/dl/</a></p>
+</li>
+<li><p>Go 官方镜像站（推荐）：<a href="https://link.zhihu.com/?target=https://golang.google.cn/dl/">https://golang.google.cn/dl/</a></p>
+</li>
+</ul>
+<h3 id="版本的选择"><a href="#版本的选择" class="headerlink" title="版本的选择"></a>版本的选择</h3><p>Windows 平台和 Mac 平台推荐下载可执行文件版，Linux 平台下载压缩文件版。</p>
+<p><em>(目前的最新版本可能不是 1.11.5，但是安装过程类似哦。)</em></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/v2-5b7945253d9729f6d6ceee5f5322072e_r.jpg"></p>
+<h1 id="Windows-下安装Go环境"><a href="#Windows-下安装Go环境" class="headerlink" title="Windows 下安装Go环境"></a>Windows 下安装Go环境</h1><hr>
+<p>此安装实例以 <code>64位Win10</code>系统安装 <code>Go1.11.5可执行文件版本</code>为例。</p>
+<p>将上一步选好的安装包下载到本地。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-86fc9e0126b5d7dd1b820abdda433745_r.jpg"></p>
+<p>双击下载好的文件，然后再按照下图步骤安装即可。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-7481d0f0ca16726c5ae9b72af4db7650_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/v2-dbb182b02a84582bdc13a42f29257ecf_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/v2-58d7a6598586f787446df4d1b6390216_r.jpg"></p>
+<h1 id="Linux下安装Go环境"><a href="#Linux下安装Go环境" class="headerlink" title="Linux下安装Go环境"></a>Linux下安装Go环境</h1><hr>
+<h2 id="登录-Linux"><a href="#登录-Linux" class="headerlink" title="登录 Linux"></a>登录 Linux</h2><p>Mac 或 Linux 的用户可以用命令<code>ssh root@xxx.xxx.xxx.xxx</code>登录主机<br>Window 的用户可以使用 SecureCRT 登录主机<br>虚拟机用户直接打开你的虚拟机</p>
+<h2 id="安装-Go-环境"><a href="#安装-Go-环境" class="headerlink" title="安装 Go 环境"></a>安装 Go 环境</h2><blockquote>
+<p>Golang 官网下载地址：<a href="https://golang.org/dl/">https://golang.org/dl/</a></p>
+</blockquote>
+<ol>
+<li>打开官网下载地址选择对应的系统版本, 复制下载链接<br> 这里我选择的是<br> <code>go1.11.5.linux-amd64.tar.gz</code>：<a href="https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz">https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz</a></li>
+</ol>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="http://upload-images.jianshu.io/upload_images/1277729-7d5e14c2c8c994bf.png"> image.png</p>
+<ol start="2">
+<li> <code>cd</code>进入你用来存放安装包的目录，我习惯在<code>~</code>下面创建个<code>go</code>文件夹。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 在 ~ 下创建 go 文件夹，并进入 go 文件夹</span><br><span class="line">mkdir ~&#x2F;go &amp;&amp; cd ~&#x2F;go</span><br><span class="line">下载的 go 压缩包</span><br><span class="line">wget https:&#x2F;&#x2F;dl.google.com&#x2F;go&#x2F;go1.11.5.linux-amd64.tar.gz</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li> 下载完成</li>
+</ol>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="http://upload-images.jianshu.io/upload_images/1277729-60625ab3615c752e.png"></p>
+<ol start="4">
+<li> 执行<code>tar</code>解压到<code>/usr/loacl</code>目录下（官方推荐），得到<code>go</code>文件夹等</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -C &#x2F;usr&#x2F;local -zxvf  go1.11.5.linux-amd64.tar.gz</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li> 添加<code>/usr/loacl/go/bin</code>目录到 PATH 变量中。添加到<code>/etc/profile</code> 或<code>$HOME/.profile</code>都可以</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 习惯用vim，没有的话可以用命令&#96;sudo apt-get install vim&#96;安装一个</span><br><span class="line">vim &#x2F;etc&#x2F;profile</span><br><span class="line"># 在最后一行添加</span><br><span class="line">export GOROOT&#x3D;&#x2F;usr&#x2F;local&#x2F;go</span><br><span class="line">export PATH&#x3D;$PATH:$GOROOT&#x2F;bin</span><br><span class="line"># 保存退出后source一下（vim 的使用方法可以自己搜索一下）</span><br><span class="line">source &#x2F;etc&#x2F;profile</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>执行<code>go version</code>，如果现实版本号，则 Go 环境安装成功。是不是很简单呢？<br> <img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="http://upload-images.jianshu.io/upload_images/1277729-bd36e8e538989c62.png"></li>
+</ol>
+<h2 id="运行第一个程序"><a href="#运行第一个程序" class="headerlink" title="运行第一个程序"></a>运行第一个程序</h2><ol>
+<li> 先创建你的工作空间 (<a href="%5Bworkspace%5D(https://golang.org/doc/code.html#Workspaces)">Workspaces</a>)，官方建议目录<code>$HOME/go</code>。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir $HOME&#x2F;go</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li> 将你的工作空间路径声明到环境变量中。和上一部分的第 5 步相似。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 编辑 ~&#x2F;.bash_profile 文件</span><br><span class="line">vim ~&#x2F;.bash_profile</span><br><span class="line"># 在最后一行添加下面这句。$HOME&#x2F;go 为你工作空间的路径，你也可以换成你喜欢的路径</span><br><span class="line">export GOPATH&#x3D;$HOME&#x2F;go</span><br><span class="line"># 保存退出后source一下（vim 的使用方法可以自己搜索一下）</span><br><span class="line">source ~&#x2F;.bash_profile</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li> 在你的工作空间创建你的第一个工程目录</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 创建并进入你的第一个工程目录</span><br><span class="line">mkdir -p $GOPATH&#x2F;src&#x2F;hello &amp;&amp; cd $GOPATH&#x2F;src&#x2F;hello</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li> 在你的工程目录下创建名为<code>hello.go</code>的文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim hello.go</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li> 将下面内容粘贴到 hello.go 文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    fmt.Printf(&quot;hello, world\n&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li> 好了，工程目录和工程文件都准备好了。现在我们到我们的工程目录 (<code>$GOPATH/src/hello</code>) 下构建我们的工程</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 如果你当前的目录不在 $GOPATH&#x2F;src&#x2F;hello， 需要先执行 &quot;cd $GOPATH&#x2F;src&#x2F;hello&quot; 进入该目录</span><br><span class="line"># 执行构建工程的命令</span><br><span class="line">go build</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li> 等一会，命令执行完之后你可以看到目录下会多出一个 hello 的文件，这就是我们编译之后的文件啦。怎么执行我们的程序呢？只需要在当前目录下执行<code>./xxx</code>就可以啦！是不是敲鸡煎蛋呢！</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;hello</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="http://upload-images.jianshu.io/upload_images/1277729-94425080feff1bbd.png"></p>
+<h1 id="Mac-下安装Go环境"><a href="#Mac-下安装Go环境" class="headerlink" title="Mac 下安装Go环境"></a>Mac 下安装Go环境</h1><hr>
+<p>下载可执行文件版，直接点击<strong>下一步</strong>安装即可，默认会将 go 安装到<code>/usr/local/go</code>目录下。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/v2-45081f19819b3c3a69e4c78fed850d47_r.jpg"></p>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>上一步安装过程执行完毕后，可以打开终端窗口，输入<code>go version</code>命令，查看安装的 Go 版本。</p>
+<h1 id="关于-Go-的一些介绍"><a href="#关于-Go-的一些介绍" class="headerlink" title="关于 Go 的一些介绍"></a>关于 Go 的一些介绍</h1><hr>
+<h2 id="环境变量："><a href="#环境变量：" class="headerlink" title="环境变量："></a>环境变量：</h2><ul>
+<li>$GOROOT:<br>  表示 Go 的安装目录。也就是上面我们解压出来的文件夹里面的<code>go</code>文件夹。</li>
+<li>$GOPATH:<br>  表示我们的工作空间。用来存放我们的工程目录的地方。</li>
+</ul>
+<h2 id="GOPATH-目录："><a href="#GOPATH-目录：" class="headerlink" title="GOPATH 目录："></a>GOPATH 目录：</h2><p>一般来说 GOPATH 下面会有三个文件夹：<code>bin</code>、<code>pkg</code>、<code>src</code>，没有的话自己创建。每个文件夹都有其的作用。</p>
+<ul>
+<li>  bin：编译后可的执行文件的存放路径</li>
+<li>  pkg：编译包时，生成的. a 文件的存放路径</li>
+<li>  src：源码路径，一般我们的工程就创建在<code>src</code>下面。</li>
+</ul>
+<p>注意：如果要用<code>Go Mod</code>(Go1.11 及以上支持) 进行包管理，则需要在 GOPATH 以外的目录创建工程。关于<code>Go Mod</code>的使用，可以自行 Google 一下，这里就不赘述了。</p>
+<h2 id="配置-GOPATH"><a href="#配置-GOPATH" class="headerlink" title="配置 GOPATH"></a>配置 GOPATH</h2><p><code>GOPATH</code>是一个环境变量，用来表明你写的 go 项目的存放路径（工作目录），本文就选择使用 <code>D:\code\go</code> 这个目录作为 <code>GOPATH</code> 目录。</p>
+<p><code>GOPATH</code>路径最好只设置一个，我们写的所有 Go 项目代码都放到<code>GOPATH</code>的<code>src</code>目录下。</p>
+<p><em>补充说明：Go1.11 版本之后，开启<code>go mod</code>模式之后就不再强制需要配置<code>GOPATH</code>了。</em></p>
+<p>Linux 和 Mac 平台就参照上面配置环境变量的方式将自己的工作目录添加到环境变量中即可。</p>
+<p>Windows 平台按下面的步骤将<code>D:\code\go</code>添加到环境变量：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/v2-5e4fa7826f177c0d3e8aaaf645559fd6_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-07f79095623e958b07a518dcb35cef24_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/v2-c4f08c411d25b622f3577dd5cf72196f_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/v2-4a875a0e2dca47c4c813aae850a5ed2a_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-d563ad97c44aaf2adfa4b3231b0ee834_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-f04b1d2b9f17c73675c07b98b2b4f21d_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-00eef37d36fe47cd68c8cd0e320a7405_r.jpg"></p>
+<p>在 Go 1.8 版本之前，<code>GOPATH</code>环境变量默认是空的。从 Go 1.8 版本开始，Go 开发包在安装完成后会为 <code>GOPATH</code>设置一个默认目录，参见下图。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/v2-b8e098f6ce03c4d2947f6b3dd33c03eb_r.jpg"></p>
+<p>同时，我们将 <code>GOROOT</code>下的 bin 目录及<code>GOPATH</code>下的 bin 目录都添加到环境变量中。</p>
+<p>配置环境变量之后需要重启已经打开的终端才能让新配置的环境变量生效。（例如 cmd、VS Code 里面的终端和其他编辑器的终端等）。</p>
+<h2 id="Go-项目结构"><a href="#Go-项目结构" class="headerlink" title="Go 项目结构"></a>Go 项目结构</h2><p>在进行 Go 语言开发的时候，我们的代码总是会保存在<code>$GOPATH/src</code>目录下。在工程经过<code>go build</code>、<code>go install</code>或<code>go get</code>等指令后，会将下载的第三方包源代码文件放在<code>$GOPATH/src</code>目录下， 产生的二进制可执行文件放在 <code>$GOPATH/bin</code>目录下，生成的中间缓存文件会被保存在 <code>$GOPATH/pkg</code> 下。</p>
+<p>如果我们使用版本管理工具（Version Control System，VCS。常用如 Git）来管理我们的项目代码时，我们只需要添加<code>$GOPATH/src</code>目录的源代码即可。<code>bin</code> 和 <code>pkg</code> 目录的内容无需版本控制。</p>
+<h3 id="适合个人开发者"><a href="#适合个人开发者" class="headerlink" title="适合个人开发者"></a>适合个人开发者</h3><p>我们知道源代码都是存放在<code>GOPATH</code>的<code>src</code>目录下，那我们可以按照下图来组织我们的代码。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/v2-8d441d70a1caebb5f69197686a3b1e5f_r.jpg"></p>
+<h3 id="目前流行的项目结构"><a href="#目前流行的项目结构" class="headerlink" title="目前流行的项目结构"></a>目前流行的项目结构</h3><p>Go 语言中也是通过包来组织代码文件，我们可以引用别人的包也可以发布自己的包，但是为了防止不同包的项目名冲突，我们通常使用<code>顶级域名</code>来作为包名的前缀，这样就不担心项目名冲突的问题了。</p>
+<p>因为不是每个个人开发者都拥有自己的顶级域名，所以目前流行的方式是使用个人的 github 用户名来区分不同的包。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/v2-01248b3f1900f995a437395cdec5e756_r.jpg"></p>
+<p>举个例子：张三和李四都有一个名叫<code>studygo</code>的项目，那么这两个包的路径就会是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &quot;github.com&#x2F;zhangsan&#x2F;studygo&quot;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &quot;github.com&#x2F;lisi&#x2F;studygo&quot;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>以后我们从 github 上下载别人包的时候，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go get github.com&#x2F;jmoiron&#x2F;sqlx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>那么，这个包会下载到我们本地<code>GOPATH</code>目录下的<code>src/github.com/jmoiron/sqlx</code>。</p>
+<h3 id="适合企业开发者"><a href="#适合企业开发者" class="headerlink" title="适合企业开发者"></a>适合企业开发者</h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-da6bd50401d8c030f1b79e9b3131ed04_r.jpg"></p>
+<h1 id="Goland-官网下载"><a href="#Goland-官网下载" class="headerlink" title="Goland 官网下载"></a>Goland 官网下载</h1><hr>
+<p>Goland 官网地址：<a href="https://www.jetbrains.com/go/specials/go/go.html?gclid=EAIaIQobChMI9Y2H-vDV4AIV2CCtBh0nrAPYEAAYASAAEgJ-cfD_BwE&gclsrc=aw.ds">https://www.jetbrains.com/go/specials/go/go.html?gclid=EAIaIQobChMI9Y2H-vDV4AIV2CCtBh0nrAPYEAAYASAAEgJ-cfD_BwE&amp;gclsrc=aw.ds</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/2019022522171329.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuZ2VsaWE2MjA=,size_16,color_FFFFFF,t_70"></p>
+<h2 id="配置-GoLand-的-GOPATH-和-GOROOT"><a href="#配置-GoLand-的-GOPATH-和-GOROOT" class="headerlink" title="配置 GoLand 的 GOPATH 和 GOROOT"></a>配置 GoLand 的 GOPATH 和 GOROOT</h2><p>打开 Goland 软件，点击右下角 Configure，然后点击 Setting，如下图所示：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190225222635750.png"></p>
+<p>在打开的界面中，点击 GO 列表，然后找到 GOPATH 和 GOROOT</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190225222831313.png"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190225222847786.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuZ2VsaWE2MjA=,size_16,color_FFFFFF,t_70"></p>
+<h2 id="测试软件是否安装成功"><a href="#测试软件是否安装成功" class="headerlink" title="测试软件是否安装成功"></a>测试软件是否安装成功</h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190225223126694.png"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20190225223141314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuZ2VsaWE2MjA=,size_16,color_FFFFFF,t_70"></p>
+]]></content>
+      <categories>
+        <category>Go</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文解读：GPipe</title>
+    <url>/58735.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a><strong>背景：</strong></h2><p>增大模型规模通常是提高模型效果的有效方案，但是更多的模型参数，更复杂的模型计算逻辑，导致模型的训练过程需要更多的内存。同时计算设备 (GPU) 的内存资源往往非常非常有限，单台设备不足以支持超大规模模型的训练，而将模型分布在多台设备上则是一种可能的解决方案。</p>
+<h2 id="简介："><a href="#简介：" class="headerlink" title="简介："></a><strong>简介：</strong></h2><p>GPipe 使用模型并行方案，将模型切分成一连串 stage，每个 stage 放在独立的设备（GPU/TPU）上，实现对超大规模模型的支持，同时利用 Pipeline 的方案，提高了模型并行模式下的设备利用率。最终 GPipe 通过更大规模的模型和更大的 batch_size，在图像和 NLP 的模型上都得到更好的模型效果。</p>
+<h2 id="方案设计"><a href="#方案设计" class="headerlink" title="方案设计"></a><strong>方案设计</strong></h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-dea46cace07195b41da36a71cfdf6169_r.jpg"></p>
+<h3 id="1-划分-stage"><a href="#1-划分-stage" class="headerlink" title="1. 划分 stage"></a><strong>1. 划分 stage</strong></h3><p>如图 1.(a) 左图所示，将模型划分为连续的几个 stage，每个 stage 各自对应一个设备。这样就使得模型的大小可以突破单个设备内存的大小，因为一台设备只需要能够容纳部分模型的参数和计算。</p>
+<h3 id="2-划分-Micro-Batch-和-Pipeline"><a href="#2-划分-Micro-Batch-和-Pipeline" class="headerlink" title="2. 划分 Micro-Batch 和 Pipeline"></a><strong>2. 划分 Micro-Batch 和 Pipeline</strong></h3><p>图 1.(b) 为一般的模型并行的运算模式，在每个时间点只有一台设备在处理计算逻辑，完成计算后将结果发送给下一台设备，其中设备空闲的时间称为 Bubble。GPipe 将 mini-batch 进一步划分成更小的 micro-batch，同时利用 pipipline 方案，每次处理一个 micro-batch 的数据，得到结果后，将该 micro-batch 的结果发送给下游设备，同时开始处理后一个 micro-batch 的数据，通过这套方案减小设备中的 Bubble。</p>
+<p>GPipe 实验发现，当增加 micro_batch 数目的时候，设备上的 bubble 可忽略 (一定条件下)，一方面是由于如图 1.(c) 所示的的运行模式导致的，另一方面是由于 Re-Materializaition 方案中，计算梯度过程中的前向计算部分可以不依赖前一部分数据的计算结果 (即在图 1.(c) 中的 Bubble 阶段执行。)</p>
+<h3 id="3-Re-Materialization"><a href="#3-Re-Materialization" class="headerlink" title="3. Re-Materialization"></a><strong>3. Re-Materialization</strong></h3><p>基于现有的训练框架，在前向计算时，训练框架会记录每一个算子的计算结果，用于 backward 时的梯度计算。在很多模型中，这部分的内存消耗可能大于模型参数，是限制模型大小（以及 batch-size）的一个重要原因。</p>
+<p>Re-Materialization 具体是指在前向计算过程中，GPipe 只记录 stage 划分处的输出，在计算梯度时，GPipe 会重新执行前向计算逻辑，从而得到各个算子的前向结果，然后再计算梯度结果。</p>
+<p>Re-Materialization 的好处是大大减少了内存需求，可以有效增大训练的 batch_size，比如正常的训练模式下 (忽略输出所占的内存，这部分一般占比较小)，内存能够支持 mini-batch=16，在 Gpipe 的模式下，可以将 micro-batch 设置为 16, 这样实际的 batch_size 就扩大了 min-batch/micor_batch 倍。</p>
+<h2 id="方案效果"><a href="#方案效果" class="headerlink" title="方案效果"></a><strong>方案效果</strong></h2><h3 id="1-更大的模型"><a href="#1-更大的模型" class="headerlink" title="1. 更大的模型"></a><strong>1. 更大的模型</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-a250b74bdb6cefb01ad66396d7d3b89c_r.jpg"></p>
+<p>Gpipe 给出的结果中，AmoebaNet-D 模型最大的是~ 25GB，使用了 8 块 GPU,</p>
+<p>对于 Transformer-L 模型，在使用 128 块 GPU 的情况下，模型最大达到 937.9GB，使用了 128 块 GPU。</p>
+<h3 id="2-更大的-batch-size"><a href="#2-更大的-batch-size" class="headerlink" title="2. 更大的 batch_size"></a><strong>2. 更大的 batch_size</strong></h3><p>Transformer Big 的训练 batch size 从之前的 400k 提高到 4M。</p>
+<h3 id="3-更好的模型效果"><a href="#3-更好的模型效果" class="headerlink" title="3. 更好的模型效果"></a><strong>3. 更好的模型效果</strong></h3><p>结合大模型和大 batch 的优势，大部分图像和 NLP 模型效果都得到了比之前更好的结果。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-9b67b5ad569d20766eb810469912c311_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-572fc0b4f52ac7b0a8a7149bab83e6cc_b.jpg"></p>
+<h3 id="4-训练效率"><a href="#4-训练效率" class="headerlink" title="4. 训练效率"></a><strong>4. 训练效率</strong></h3><p>按照 paper 所说，在增加设备个数的情况下，最优能达到接近线性的加速效果。不过没有看到与相同设备下的数据并行方案的对比。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-f2da3e9dd8fdf1cadc88bf5bd8d86d41_b.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-f655032c4a5a7cfe663b756c73405c5c_b.jpg"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>这是谷歌出品的一个可扩展的模型并行库，用于训练巨型神经网络。通过批量分隔流水线并行方法，取得了几乎线性加速，并且按照论文表述，可支持各种深度网络，有很高的可靠性（同步梯度下降模式下，无论分区数量多少，都可以保证一致的训练）。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>毕业设计-日志</title>
+    <url>/45623.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="2021-3-3"><a href="#2021-3-3" class="headerlink" title="2021/3/3"></a>2021/3/3</h2><ul>
+<li><p>阅读论文： <strong><em>PipeDream: Fast and Effiffifficient Pipeline Parallel DNN Training</em></strong> ，</p>
+<p>​                   <strong><em>GPipe: Easy Scaling with Micro-Batch Pipeline Parallelism</em></strong></p>
+</li>
+<li><p>学习PyTorch分布式架构的使用</p>
+</li>
+</ul>
+<h2 id="2021-3-2"><a href="#2021-3-2" class="headerlink" title="2021/3/2"></a>2021/3/2</h2><ul>
+<li>配置服务器环境，安装anaconda, pytorch, 导入torchgpipe。学习其使用</li>
+<li>翻译论文：**<em>torchgpipe: On-the-ﬂy Pipeline Parallelism for Training Giant Models**</em></li>
+</ul>
+<h2 id="2021-2-2021-2-7"><a href="#2021-2-2021-2-7" class="headerlink" title="2021/2/-2021/2/7"></a>2021/2/-2021/2/7</h2><ul>
+<li><p><strong>1.查阅分布式深度学习的相关知识</strong></p>
+<p>（在对分布式深度学习有一定了解后，再研读论文，有一定的思路。）</p>
+<p>‘’它使用同步随机梯度下降和流水线并行的方式进行训练，适用于任何由多个有序的层组成的深度神经网络(Deep Neural Networks, DNN)。 Gpipe通过跨不同的加速器来分割模型，并自动将一小批训练示例划分成更小的批量。 该模型允许GPipe的加速器进行并行操作，最大限度地提高了训练过程中的可扩展性。‘’层序</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210115040032282.png" alt="image-20210115040032282"></p>
+<p><strong>2.阅读论文–torchgpipe: On-the-flfly Pipeline Parallelism for Training Giant Models</strong></p>
+<p>通过设置参数将一个计算划分为相同的几个小批次，实现并行。通过超参数调优，有效的将训练时间减少到一定大小的批次。</p>
+<p>文中解决的问题：</p>
+<p>每个分布式机器做完自己的任务，需要更新参数，用于同步网络参数。大量的参数需要同步时，可能会导致大量的通信负载</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210115041557350.png" alt="image-20210115041557350"></p>
+<p>1：</p>
+<p>​    不同任务所占据的CPU时间不定，可长可短，解决方法：引入确定性时间周期，给出任务总排序</p>
+<p>2：</p>
+<p>​    由于pytorch的特点是，需要时调用，用完即弃，所以不保存前向图逻辑，只保留计算梯度等参数。所以反馈时不一定会顺序正确，所以需要引入fork，join原语标注顺序</p>
+<p>3：</p>
+<p>​    出现双向同步的问题，导致使用不足，出现双方相互等待。所以需要使用非默认C UDA流来避免这个问题，这样副本就不会阻止计算，除非计算必须等待数据。</p>
+<p>4：</p>
+<p>​    考虑有些任务会跳过一些批次，所以放宽顺序执行，增加设计一个接口来跳过中间张量。</p>
+</li>
+</ul>
+<p>  <strong>提出的问题</strong></p>
+<p>  ​    不同批次的大小该如何划分以达到最优？</p>
+<p>  <strong>近期计划</strong></p>
+<p>  1.开始在pytorch上实践torchpipe，尽早发现问题，解决问题。前期工作主要是实现torchpipe的思想，后期再进一步优化。</p>
+<p>  2.继续研读相关论文，正确理解其含义，误解的开始</p>
+<p>  介于假期不能线下开会，计划每两周开一次小会，将有关问题汇总和研究生学长讨论。</p>
+]]></content>
+      <categories>
+        <category>日志</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文解读：PipeDream</title>
+    <url>/29937.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="本文介绍了微软新提出的-PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。"><a href="#本文介绍了微软新提出的-PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。" class="headerlink" title="本文介绍了微软新提出的 PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。"></a>本文介绍了微软新提出的 PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。</h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117085931501.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"></p>
+<p>深度神经网络（DNNs：Deep Neural Networks）已经在大量应用中取得了巨大进展，这些应用包括图像分类、翻译、语言建模以及视频字幕等。但 DNN 训练极其耗时，需要多个加速器高效地并行化。</p>
+<p>在论文 “ <a href="https://www.microsoft.com/en-us/research/publication/pipedream-generalized-pipeline-parallelism-for-dnn-training/">PipeDream: Greneralized Pipeline Parallelism for DNN Training</a> ”（该论文发表于第 27 届 ACM 操作系统原理研讨会： <a href="https://sosp19.rcs.uwaterloo.ca/">SOSP 2019</a> ）中，微软系统研究小组的研究员，与来自卡内基梅隆大学和斯坦福大学的同事和学生们一起提出了一种 DNN 并行化训练的新方法。正如论文里在大量模型上展示的那样，这套被称为 PipeDream 的系统比传统的训练方法快了最多 4.3 倍。</p>
+<p>DNN 训练是在前向和后向通道计算中迭代进行的。在每轮迭代中，训练过程循环处理输入数据的一个 minibatch，并且更新模型参数。最常见的 DNN 并行化训练方法是一种被称为数据并行化的方法（见下图 1），这种方法把输入数据分散到各个 workers（加速器）中运行。</p>
+<p>不幸的是，尽管在数据并行化加速方面有一些性能优化的进展，但若要放在云基础设施上训练就会产生很大的通信开销。而且，GPU 计算速度的飞快提升，更进一步地把所有模型训练的耗时瓶颈转向了通信环节。</p>
+<p>不那么常见的并行化训练形式是模型的并行化（见下图 1），是把算子分散到各个 worker 上计算的，这在以往通常用于训练大型 DNN 模型。模型并行化也遇到了挑战：它不能高效地利用硬件资源，并且需要程序员决定怎样按照给定的硬件资源来分割特定的模型，这其实无形中加重了程序员的负担。</p>
+<p>PipeDream 是微软研究院 <a href="https://www.microsoft.com/en-us/research/project/fiddle/">Fiddle 项目</a>开发的一个系统，它引入了流水线并行化，这是一种 DNN 并行化训练的新方法，结合了传统的 batch 内并行化（模型并行化和数据并行化）和 batch 间并行化（流水线）。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117090027132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"></p>
+<p>图 1：传统的 batch 内并行化训练方式（如数据并行化和模型并行化）对硬件利用率太低。左图中，数据并行化中的单个 worker 在交换梯度数据时不得不进行通信等待。右图是模型并行化，worker 之间只能同时处理一个 minibatch，这大大限制了硬件利用率。</p>
+<h2 id="使用流水线并行化训练来解决-batch-内的并行化限制"><a href="#使用流水线并行化训练来解决-batch-内的并行化限制" class="headerlink" title="使用流水线并行化训练来解决 batch 内的并行化限制"></a>使用流水线并行化训练来解决 batch 内的并行化限制</h2><p>PipeDream 重新审视了模型的并行化，希望以此来优化性能，这与以往的动机不同，以前模型并行化是因为训练大型模型时，训练过程受限于数据集的大小。PipeDream 使用多个输入数据的流水线作业，来克服模型并行训练时硬件效率限制的问题。典型的流水线并行化设置涉及到不同 stage 之间 layer 的分割，每个 stage 都会被复制并且并行运行数据。流水线会被注入多个 batch，以使流水线满负荷运行在稳定状态。在大部分情况下，流水线并行化训练比数据并行化训练需要通信的数据要少很多，因为它只需要在两个 stage 边界之间传输 activation 和梯度。在稳定状态下，所有的 workers 时刻都在运转，不像模型并行化训练中会有停下来等待的时候（如下图所示）。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117090111768.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"></p>
+<p>图 2：左图中，我们展示了一个流水线并行化的例子，8 块 GPU 被分配到 4 个 stage 中。通信只用于 stage 边界的 actiavtion 和梯度上。stage 1,2 和 3 通过对其各自的 stage 进行复制来保证流水线的负载平衡。右图展示了具有 4 个 worker 的一个流水线，展示了启动阶段和稳定阶段。在这个例子中，后向处理花费的时间是前向处理的两倍。</p>
+<h2 id="在-PipeDream-中克服流水线并行化训练的挑战"><a href="#在-PipeDream-中克服流水线并行化训练的挑战" class="headerlink" title="在 PipeDream 中克服流水线并行化训练的挑战"></a>在 PipeDream 中克服流水线并行化训练的挑战</h2><p>为了获得流水线并行化训练的潜在收益，PipeDream 必须克服三个主要挑战：</p>
+<ul>
+<li>  首先，PipeDream 必须在不同的输入数据间，协调双向流水线的工作。</li>
+<li>  然后，PipeDream 必须管理后向通道里的权重版本，从而在数值上能够正确计算梯度，并且在后向通道里使用的权重版本必须和前向通道里使用的相同。</li>
+<li>  最后，PipeDream 需要流水线里的所有 stage 都花费大致相同的计算时间，这是为了使流水线得到最大的通量（因为最慢的 stage 会成为流水线通量的瓶颈）。</li>
+</ul>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117090229924.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"> <strong>图 3：PipeDream 工作流程概览</strong></p>
+<p>图 3 展示了 PipeDream 工作流程的顶层概览。给定一个模型和硬件部署方式，PipeDream 在单个 GPU 上进行短暂的运行时性能分析后，可以自动决定怎样分割这些 DNN 算子，如何平衡不同 stage 之间的计算负载，而同时尽可能减少目标平台上的通信量。PipeDream 即使是在不同的模型（不同点体现在计算和通信方面）和不同的平台上（不同点体现在互联的网络拓扑和分层带宽上）也能够有效的均衡负载。</p>
+<p>由于 DNN 并不总是在可用的 worker 间进行均等分割，所以 PipeDream 可能在某些 stage 上使用数据并行化——多个 worker 会被分配到给定的 stage 上，并行化地处理不同的 minibatch。PipeDream 使用称作 1F1B 的调度算法来使硬件保持满负荷运转，同时还能达到类似数据并行化的语义。</p>
+<p>在 1F1B 的稳定状态下，每个 worker 为它所在的 stage 严格地切换前向和后向通道，保证资源的高利用率（可忽略的流水线暂停，没有流水线 flush），即使在常见情况下，后向通道花费的时间多于前向通道时也是如此。上面的图 2 已经通过例子展示了这一点。与数据并行化不同，1F1B 还使用不同版本的权重来维持统计有效性。最后，PipeDream 扩展了 1F1B，在数据并行 stage 上引入了循环调度策略，保证了后向通道计算的梯度被引流至前向通道对应的 worker 上。</p>
+<p>PipeDream 是基于 PyTorch（PipeDream 的<a href="https://arxiv.org/pdf/1806.03377.pdf">早期版本</a>使用 Caffe）构建出来的。我们的评估围绕着 DNN 模型、数据集和硬件配置的不同组合进行，证实了 PipeDream 流水线并行化所带来的训练时间上的收益。相比于数据并行化训练，PipeDream 在多 GPU 机器上达到了很高的精确度，性能方面，在图像分类上有 5.3 倍提升，机器翻译上 3.1 倍提升，语言建模任务有 4.3 倍提升，视频字幕模型则有 3 倍提升。PipeDream 比模型并行化有 2.6 至 15 倍的性能提升，相比混合并行化有 1.9 倍提升。</p>
+<p>如果你对 PipeDream 更多细节感兴趣，可以在 GitHub 上找到<a href="https://github.com/msr-fiddle/pipedream">源码</a>。</p>
+<p><strong>原文链接：</strong></p>
+<p>[<a href="https://www.microsoft.com/en-us/research/blog/pipedream-a-more-effective-way-to-train-deep-neural-networks-using-pipeline-parallelism/]">https://www.microsoft.com/en-us/research/blog/pipedream-a-more-effective-way-to-train-deep-neural-networks-using-pipeline-parallelism/]</a>(</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
+      </tags>
+  </entry>
+</search>
