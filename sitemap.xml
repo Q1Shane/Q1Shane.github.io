@@ -137,14 +137,14 @@
 
   
   <url>
-    <loc>https://hexo.ml/tags/Blog/</loc>
+    <loc>https://hexo.ml/tags/%E9%BB%98%E8%AE%A4/</loc>
     <lastmod>2023-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hexo.ml/tags/%E9%BB%98%E8%AE%A4/</loc>
+    <loc>https://hexo.ml/tags/Blog/</loc>
     <lastmod>2023-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -174,13 +174,6 @@
 
   
   <url>
-    <loc>https://hexo.ml/categories/Hexo/</loc>
-    <lastmod>2023-05-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://hexo.ml/categories/%E9%BB%98%E8%AE%A4/</loc>
     <lastmod>2023-05-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -188,7 +181,7 @@
   </url>
   
   <url>
-    <loc>https://hexo.ml/categories/Anaconda/</loc>
+    <loc>https://hexo.ml/categories/Hexo/</loc>
     <lastmod>2023-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -202,6 +195,13 @@
   </url>
   
   <url>
+    <loc>https://hexo.ml/categories/Anaconda/</loc>
+    <lastmod>2023-05-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://hexo.ml/categories/Go/</loc>
     <lastmod>2023-05-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -209,14 +209,14 @@
   </url>
   
   <url>
-    <loc>https://hexo.ml/categories/%E8%AE%BA%E6%96%87/</loc>
+    <loc>https://hexo.ml/categories/%E6%97%A5%E5%BF%97/</loc>
     <lastmod>2023-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hexo.ml/categories/%E6%97%A5%E5%BF%97/</loc>
+    <loc>https://hexo.ml/categories/%E8%AE%BA%E6%96%87/</loc>
     <lastmod>2023-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
