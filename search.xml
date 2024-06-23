@@ -34,69 +34,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Numpy基础用法</title>
-    <url>/64862.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
-
-<p> 一个由国外大神制作的 NumPy 可视化教程，直观地介绍 NumPy 的各种用法，很容易就能理解。</p>
-<p>话不多说，一睹为快。</p>
-<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a><strong>数组</strong></h2><p>先来介绍最基础的一维数组。</p>
-<h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a><strong>创建数组</strong></h3><p>np.array() 直接创建：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-90de7812f9fc3169cffb7e39d4c3cfd8_720w.jpg" alt="img"></p>
-<p>使用 np.ones()、np.zeros() 等方法：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-6e73db4bcf9e406d110da4f2827200ab_720w.jpg" alt="img"></p>
-<p>我们在写数组的时候是横着写的，而其实数组是列向量，这样很直观。</p>
-<h3 id="数组运算"><a href="#数组运算" class="headerlink" title="数组运算"></a><strong>数组运算</strong></h3><p>加减乘除</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-ae2106c929707e5613c6d8b8bb7aab16_720w.png" alt="img"></p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-651679ca10deeda9810c5a59de52bac6_720w.jpg" alt="img"></p>
-<p>（注意这里的data和ones不是上面的data，ones）</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-c2b47f98a0c1ae65eedd798bb222758d_720w.png" alt="img"></p>
-<p>数组乘以数值</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-e461f0c4e4a66622b487b71f22e3eb7b_720w.png" alt="img"></p>
-<h3 id="数组索引"><a href="#数组索引" class="headerlink" title="数组索引"></a><strong>数组索引</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-6ab0797b53e61645a9564376ae9f3d0c_720w.jpg" alt="img"></p>
-<h3 id="数组聚合"><a href="#数组聚合" class="headerlink" title="数组聚合"></a><strong>数组聚合</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-6e8ef73d761be46fdf60aefcf3953821_720w.jpg" alt="img"></p>
-<p>上面是一维数组，下面介绍二维维数组也就是矩阵的使用技巧。</p>
-<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a><strong>矩阵</strong></h2><h3 id="创建矩阵"><a href="#创建矩阵" class="headerlink" title="创建矩阵"></a><strong>创建矩阵</strong></h3><p>直接创建：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-58fe9b45561eed23069a721ec516279b_720w.jpg" alt="img"></p>
-<p>使用 np.ones()、np.zeros() 等方法：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-63b85180f9ac32626669e0cd662f5d92_720w.jpg" alt="img"></p>
-<p>这样就很容易理解括号里 (3,2) 的含义。</p>
-<h3 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a><strong>矩阵运算</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-651679ca10deeda9810c5a59de52bac6_720w.jpg" alt="img"></p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-b1a31f23c0cab9570a3f7b0d2af42031_720w.jpg" alt="img"></p>
-<h3 id="矩阵点积"><a href="#矩阵点积" class="headerlink" title="矩阵点积"></a><strong>矩阵点积</strong></h3><p>矩阵点积跟线性代数基本一样，有些抽象，借助示意图能很好理解：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-c3f791e0c27505216111dfe9d3f51c74_720w.jpg" alt="img"></p>
-<p>进一步拆分解释：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-ffeacb71407ec517f64294c30a962159_720w.jpg" alt="img"></p>
-<h3 id="矩阵索引"><a href="#矩阵索引" class="headerlink" title="矩阵索引"></a><strong>矩阵索引</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-45f4ce6a4ffd5f8af7ab6c7ba717720e_720w.jpg" alt="img"></p>
-<h3 id="矩阵聚合"><a href="#矩阵聚合" class="headerlink" title="矩阵聚合"></a><strong>矩阵聚合</strong></h3><p>求最值</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-fa64dda84ef6ac60c277446e5dea8029_720w.jpg" alt="img"></p>
-<p>按行 / 列聚合</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-e5dbfb6c39c9065351628b8e9f22ba35_720w.jpg" alt="img"></p>
-<h3 id="矩阵转置"><a href="#矩阵转置" class="headerlink" title="矩阵转置"></a><strong>矩阵转置</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-689c92bca6be7d624a473b41fa0fec9b_720w.jpg" alt="img"></p>
-<h3 id="矩阵重塑"><a href="#矩阵重塑" class="headerlink" title="矩阵重塑"></a><strong>矩阵重塑</strong></h3><p>reshape() 用法：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-676cd66b7083e7507ebec3b69c0b8d3f_720w.jpg" alt="img"></p>
-<p>mark</p>
-<h2 id="高维数组"><a href="#高维数组" class="headerlink" title="高维数组"></a><strong>高维数组</strong></h2><p>Numpy 不仅可以处理上述的一维数组和二维矩阵，还可以处理任意 N 维的数组，方法也大同小异。</p>
-<h3 id="创建多维数组"><a href="#创建多维数组" class="headerlink" title="创建多维数组"></a><strong>创建多维数组</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-00e2ef23fefed05864e66318b6c5d107_720w.jpg" alt="img"></p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-e5bb94c075e23e20e58cea9e2df47cf1_720w.jpg" alt="img"></p>
-<p>掌握了以上基础后，我们可以做个小练习，计算均方误差 MSE：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-70d84cd6b6975b2757e5e164249b0cdb_720w.jpg" alt="img"></p>
-<p>可以看到有减法、平方、求和等运算：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-e52fd0fc193ad26494ee9ce35559753c_720w.jpg" alt="img"></p>
-<p>分别假设相应的预测值和真实值：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-0462ab48e91ca9081cc652fce298de6c_720w.jpg" alt="img"></p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-fb39528fcfd3447639f203df41949b00_720w.jpg" alt="img"></p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-a2ed39331e8841397d4908fc2157a46c_720w.jpg" alt="img"></p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-56048efa2b5f2a10832388b69c050ebc_720w.jpg" alt="img"></p>
-]]></content>
-      <categories>
-        <category>Numpy</category>
-      </categories>
-      <tags>
-        <tag>毕设</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>anaconda3的使用</title>
     <url>/32873.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
@@ -163,6 +100,69 @@
       </tags>
   </entry>
   <entry>
+    <title>Numpy基础用法</title>
+    <url>/64862.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<p> 一个由国外大神制作的 NumPy 可视化教程，直观地介绍 NumPy 的各种用法，很容易就能理解。</p>
+<p>话不多说，一睹为快。</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a><strong>数组</strong></h2><p>先来介绍最基础的一维数组。</p>
+<h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a><strong>创建数组</strong></h3><p>np.array() 直接创建：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-90de7812f9fc3169cffb7e39d4c3cfd8_720w.jpg" alt="img"></p>
+<p>使用 np.ones()、np.zeros() 等方法：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-6e73db4bcf9e406d110da4f2827200ab_720w.jpg" alt="img"></p>
+<p>我们在写数组的时候是横着写的，而其实数组是列向量，这样很直观。</p>
+<h3 id="数组运算"><a href="#数组运算" class="headerlink" title="数组运算"></a><strong>数组运算</strong></h3><p>加减乘除</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-ae2106c929707e5613c6d8b8bb7aab16_720w.png" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-651679ca10deeda9810c5a59de52bac6_720w.jpg" alt="img"></p>
+<p>（注意这里的data和ones不是上面的data，ones）</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-c2b47f98a0c1ae65eedd798bb222758d_720w.png" alt="img"></p>
+<p>数组乘以数值</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-e461f0c4e4a66622b487b71f22e3eb7b_720w.png" alt="img"></p>
+<h3 id="数组索引"><a href="#数组索引" class="headerlink" title="数组索引"></a><strong>数组索引</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-6ab0797b53e61645a9564376ae9f3d0c_720w.jpg" alt="img"></p>
+<h3 id="数组聚合"><a href="#数组聚合" class="headerlink" title="数组聚合"></a><strong>数组聚合</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-6e8ef73d761be46fdf60aefcf3953821_720w.jpg" alt="img"></p>
+<p>上面是一维数组，下面介绍二维维数组也就是矩阵的使用技巧。</p>
+<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a><strong>矩阵</strong></h2><h3 id="创建矩阵"><a href="#创建矩阵" class="headerlink" title="创建矩阵"></a><strong>创建矩阵</strong></h3><p>直接创建：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-58fe9b45561eed23069a721ec516279b_720w.jpg" alt="img"></p>
+<p>使用 np.ones()、np.zeros() 等方法：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-63b85180f9ac32626669e0cd662f5d92_720w.jpg" alt="img"></p>
+<p>这样就很容易理解括号里 (3,2) 的含义。</p>
+<h3 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a><strong>矩阵运算</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-651679ca10deeda9810c5a59de52bac6_720w.jpg" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-b1a31f23c0cab9570a3f7b0d2af42031_720w.jpg" alt="img"></p>
+<h3 id="矩阵点积"><a href="#矩阵点积" class="headerlink" title="矩阵点积"></a><strong>矩阵点积</strong></h3><p>矩阵点积跟线性代数基本一样，有些抽象，借助示意图能很好理解：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-c3f791e0c27505216111dfe9d3f51c74_720w.jpg" alt="img"></p>
+<p>进一步拆分解释：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-ffeacb71407ec517f64294c30a962159_720w.jpg" alt="img"></p>
+<h3 id="矩阵索引"><a href="#矩阵索引" class="headerlink" title="矩阵索引"></a><strong>矩阵索引</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic3.zhimg.com/80/v2-45f4ce6a4ffd5f8af7ab6c7ba717720e_720w.jpg" alt="img"></p>
+<h3 id="矩阵聚合"><a href="#矩阵聚合" class="headerlink" title="矩阵聚合"></a><strong>矩阵聚合</strong></h3><p>求最值</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-fa64dda84ef6ac60c277446e5dea8029_720w.jpg" alt="img"></p>
+<p>按行 / 列聚合</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-e5dbfb6c39c9065351628b8e9f22ba35_720w.jpg" alt="img"></p>
+<h3 id="矩阵转置"><a href="#矩阵转置" class="headerlink" title="矩阵转置"></a><strong>矩阵转置</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-689c92bca6be7d624a473b41fa0fec9b_720w.jpg" alt="img"></p>
+<h3 id="矩阵重塑"><a href="#矩阵重塑" class="headerlink" title="矩阵重塑"></a><strong>矩阵重塑</strong></h3><p>reshape() 用法：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-676cd66b7083e7507ebec3b69c0b8d3f_720w.jpg" alt="img"></p>
+<p>mark</p>
+<h2 id="高维数组"><a href="#高维数组" class="headerlink" title="高维数组"></a><strong>高维数组</strong></h2><p>Numpy 不仅可以处理上述的一维数组和二维矩阵，还可以处理任意 N 维的数组，方法也大同小异。</p>
+<h3 id="创建多维数组"><a href="#创建多维数组" class="headerlink" title="创建多维数组"></a><strong>创建多维数组</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-00e2ef23fefed05864e66318b6c5d107_720w.jpg" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/80/v2-e5bb94c075e23e20e58cea9e2df47cf1_720w.jpg" alt="img"></p>
+<p>掌握了以上基础后，我们可以做个小练习，计算均方误差 MSE：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic4.zhimg.com/80/v2-70d84cd6b6975b2757e5e164249b0cdb_720w.jpg" alt="img"></p>
+<p>可以看到有减法、平方、求和等运算：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-e52fd0fc193ad26494ee9ce35559753c_720w.jpg" alt="img"></p>
+<p>分别假设相应的预测值和真实值：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-0462ab48e91ca9081cc652fce298de6c_720w.jpg" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-fb39528fcfd3447639f203df41949b00_720w.jpg" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-a2ed39331e8841397d4908fc2157a46c_720w.jpg" alt="img"></p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/80/v2-56048efa2b5f2a10832388b69c050ebc_720w.jpg" alt="img"></p>
+]]></content>
+      <categories>
+        <category>Numpy</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>卷积核（kernels）与滤波器（filters）的关系</title>
     <url>/45549.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
@@ -178,6 +178,56 @@
       </categories>
       <tags>
         <tag>默认</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>毕业设计-日志</title>
+    <url>/45623.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="2021-3-3"><a href="#2021-3-3" class="headerlink" title="2021/3/3"></a>2021/3/3</h2><ul>
+<li><p>阅读论文： <strong><em>PipeDream: Fast and Effiffifficient Pipeline Parallel DNN Training</em></strong> ，</p>
+<p>​                   <strong><em>GPipe: Easy Scaling with Micro-Batch Pipeline Parallelism</em></strong></p>
+</li>
+<li><p>学习PyTorch分布式架构的使用</p>
+</li>
+</ul>
+<h2 id="2021-3-2"><a href="#2021-3-2" class="headerlink" title="2021/3/2"></a>2021/3/2</h2><ul>
+<li>配置服务器环境，安装anaconda, pytorch, 导入torchgpipe。学习其使用</li>
+<li>翻译论文：**<em>torchgpipe: On-the-ﬂy Pipeline Parallelism for Training Giant Models**</em></li>
+</ul>
+<h2 id="2021-2-2021-2-7"><a href="#2021-2-2021-2-7" class="headerlink" title="2021/2/-2021/2/7"></a>2021/2/-2021/2/7</h2><ul>
+<li><p><strong>1.查阅分布式深度学习的相关知识</strong></p>
+<p>（在对分布式深度学习有一定了解后，再研读论文，有一定的思路。）</p>
+<p>‘’它使用同步随机梯度下降和流水线并行的方式进行训练，适用于任何由多个有序的层组成的深度神经网络(Deep Neural Networks, DNN)。 Gpipe通过跨不同的加速器来分割模型，并自动将一小批训练示例划分成更小的批量。 该模型允许GPipe的加速器进行并行操作，最大限度地提高了训练过程中的可扩展性。‘’层序</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210115040032282.png" alt="image-20210115040032282"></p>
+<p><strong>2.阅读论文–torchgpipe: On-the-flfly Pipeline Parallelism for Training Giant Models</strong></p>
+<p>通过设置参数将一个计算划分为相同的几个小批次，实现并行。通过超参数调优，有效的将训练时间减少到一定大小的批次。</p>
+<p>文中解决的问题：</p>
+<p>每个分布式机器做完自己的任务，需要更新参数，用于同步网络参数。大量的参数需要同步时，可能会导致大量的通信负载</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210115041557350.png" alt="image-20210115041557350"></p>
+<p>1：</p>
+<p>​    不同任务所占据的CPU时间不定，可长可短，解决方法：引入确定性时间周期，给出任务总排序</p>
+<p>2：</p>
+<p>​    由于pytorch的特点是，需要时调用，用完即弃，所以不保存前向图逻辑，只保留计算梯度等参数。所以反馈时不一定会顺序正确，所以需要引入fork，join原语标注顺序</p>
+<p>3：</p>
+<p>​    出现双向同步的问题，导致使用不足，出现双方相互等待。所以需要使用非默认C UDA流来避免这个问题，这样副本就不会阻止计算，除非计算必须等待数据。</p>
+<p>4：</p>
+<p>​    考虑有些任务会跳过一些批次，所以放宽顺序执行，增加设计一个接口来跳过中间张量。</p>
+</li>
+</ul>
+<p>  <strong>提出的问题</strong></p>
+<p>  ​    不同批次的大小该如何划分以达到最优？</p>
+<p>  <strong>近期计划</strong></p>
+<p>  1.开始在pytorch上实践torchpipe，尽早发现问题，解决问题。前期工作主要是实现torchpipe的思想，后期再进一步优化。</p>
+<p>  2.继续研读相关论文，正确理解其含义，误解的开始</p>
+<p>  介于假期不能线下开会，计划每两周开一次小会，将有关问题汇总和研究生学长讨论。</p>
+]]></content>
+      <categories>
+        <category>日志</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
       </tags>
   </entry>
   <entry>
@@ -315,56 +365,6 @@
       </categories>
       <tags>
         <tag>Go</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>毕业设计-日志</title>
-    <url>/45623.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
-
-<h2 id="2021-3-3"><a href="#2021-3-3" class="headerlink" title="2021/3/3"></a>2021/3/3</h2><ul>
-<li><p>阅读论文： <strong><em>PipeDream: Fast and Effiffifficient Pipeline Parallel DNN Training</em></strong> ，</p>
-<p>​                   <strong><em>GPipe: Easy Scaling with Micro-Batch Pipeline Parallelism</em></strong></p>
-</li>
-<li><p>学习PyTorch分布式架构的使用</p>
-</li>
-</ul>
-<h2 id="2021-3-2"><a href="#2021-3-2" class="headerlink" title="2021/3/2"></a>2021/3/2</h2><ul>
-<li>配置服务器环境，安装anaconda, pytorch, 导入torchgpipe。学习其使用</li>
-<li>翻译论文：**<em>torchgpipe: On-the-ﬂy Pipeline Parallelism for Training Giant Models**</em></li>
-</ul>
-<h2 id="2021-2-2021-2-7"><a href="#2021-2-2021-2-7" class="headerlink" title="2021/2/-2021/2/7"></a>2021/2/-2021/2/7</h2><ul>
-<li><p><strong>1.查阅分布式深度学习的相关知识</strong></p>
-<p>（在对分布式深度学习有一定了解后，再研读论文，有一定的思路。）</p>
-<p>‘’它使用同步随机梯度下降和流水线并行的方式进行训练，适用于任何由多个有序的层组成的深度神经网络(Deep Neural Networks, DNN)。 Gpipe通过跨不同的加速器来分割模型，并自动将一小批训练示例划分成更小的批量。 该模型允许GPipe的加速器进行并行操作，最大限度地提高了训练过程中的可扩展性。‘’层序</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210115040032282.png" alt="image-20210115040032282"></p>
-<p><strong>2.阅读论文–torchgpipe: On-the-flfly Pipeline Parallelism for Training Giant Models</strong></p>
-<p>通过设置参数将一个计算划分为相同的几个小批次，实现并行。通过超参数调优，有效的将训练时间减少到一定大小的批次。</p>
-<p>文中解决的问题：</p>
-<p>每个分布式机器做完自己的任务，需要更新参数，用于同步网络参数。大量的参数需要同步时，可能会导致大量的通信负载</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210115041557350.png" alt="image-20210115041557350"></p>
-<p>1：</p>
-<p>​    不同任务所占据的CPU时间不定，可长可短，解决方法：引入确定性时间周期，给出任务总排序</p>
-<p>2：</p>
-<p>​    由于pytorch的特点是，需要时调用，用完即弃，所以不保存前向图逻辑，只保留计算梯度等参数。所以反馈时不一定会顺序正确，所以需要引入fork，join原语标注顺序</p>
-<p>3：</p>
-<p>​    出现双向同步的问题，导致使用不足，出现双方相互等待。所以需要使用非默认C UDA流来避免这个问题，这样副本就不会阻止计算，除非计算必须等待数据。</p>
-<p>4：</p>
-<p>​    考虑有些任务会跳过一些批次，所以放宽顺序执行，增加设计一个接口来跳过中间张量。</p>
-</li>
-</ul>
-<p>  <strong>提出的问题</strong></p>
-<p>  ​    不同批次的大小该如何划分以达到最优？</p>
-<p>  <strong>近期计划</strong></p>
-<p>  1.开始在pytorch上实践torchpipe，尽早发现问题，解决问题。前期工作主要是实现torchpipe的思想，后期再进一步优化。</p>
-<p>  2.继续研读相关论文，正确理解其含义，误解的开始</p>
-<p>  介于假期不能线下开会，计划每两周开一次小会，将有关问题汇总和研究生学长讨论。</p>
-]]></content>
-      <categories>
-        <category>日志</category>
-      </categories>
-      <tags>
-        <tag>毕设</tag>
       </tags>
   </entry>
   <entry>
