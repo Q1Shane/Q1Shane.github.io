@@ -34,6 +34,72 @@
       </tags>
   </entry>
   <entry>
+    <title>anaconda3的使用</title>
+    <url>/32873.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="1、安装-anaconda3"><a href="#1、安装-anaconda3" class="headerlink" title="1、安装 anaconda3"></a><strong>1、安装 anaconda3</strong></h2><h2 id="安装条件"><a href="#安装条件" class="headerlink" title="    安装条件"></a>    安装条件</h2><ul>
+<li>  系统要求：32 位或 64 位系统均可</li>
+<li>  下载文件大小：约 500MB</li>
+<li>  所需空间大小：3GB 空间大小（Miniconda 仅需 400MB 空间即可）</li>
+</ul>
+<p>（1）地址 <a href="https://www.anaconda.com/products/individual#linux">anaconda 下载</a>。最新版本为 Anaconda3-2020.02-Linux-x86_64.sh，启动终端，输入如下指令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bash ~&#x2F;Downloads&#x2F;Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+<p>（2）安装过程中，看到提示 “In order to continue the installation process, please review the license agreement.”（“请浏览许可证协议以便继续安装。”），点击“Enter” 查看 “许可证协议”，也可以点击空格翻页，这样快一些。在“许可证协议” 界面将屏幕滚动至底，输入 “yes” 表示同意许可证协议内容。然后进行下一步。</p>
+<p>（3）安装过程中，提示 “Press Enter to accept the default install location, CTRL-C to cancel the installation or specify an alternate installation directory.”（“按回车键确认安装路径，按’CTRL-C’取消安装或者指定安装目录。”）可以指定目录，输入要安装的目录即可。</p>
+<p>（4）安装器若提示 You currently have a PYTHONPATH environment variable set….. 等类似提示时：</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20200628222025241.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pJRUpJTlFVQU5JTA==,size_16,color_FFFFFF,t_70"></p>
+<p>这里是将 anaconda3 添加到环境变量中，这里十分建议选 no，否则安装完成后在终端前面始终会有个 (base) 存在，无论用不用 anaconda3。总之选 no 就对了！</p>
+<p>        看到 Thank you for installing Anaconda3! 这个提示证明安装成功了！</p>
+<h2 id="2、anaconda3-的使用"><a href="#2、anaconda3-的使用" class="headerlink" title="2、anaconda3 的使用"></a><strong>2、anaconda3 的使用</strong></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ cd &#x2F;home&#x2F;zydz&#x2F;anaconda3&#x2F;bin</span><br><span class="line">$ . .&#x2F;activate</span><br></pre></td></tr></table></figure>
+<p>         这两条指令是进入 conda 环境，其中第 2 条指令第一个点相当于 source，第二个点代表当前路径。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda list</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         显示已经安装的包名和版本号。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anaconda-navigator</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         anaconda 交互界面。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda --version</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>          验证 conda 已被安装，查看 conda 版本号。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda info --envs</span><br><span class="line">$ conda info -e</span><br><span class="line">$ conda env list</span><br></pre></td></tr></table></figure>
+<p>         这 3 条指令含义相同，显示已创建环境。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda --help</span><br><span class="line">$ conda -h</span><br></pre></td></tr></table></figure>
+<p>         查看 conda 帮助信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create --name &lt;env_name&gt; &lt;package_names&gt;</span><br><span class="line">$ conda create -n &lt;env_name&gt; &lt;package_names&gt;</span><br></pre></td></tr></table></figure>
+<p>         创建新环境，以下举例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create -n conda_test python&#x3D;3.5 numpy</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         表示创建一个名为 conda_test 的环境，环境中安装版本为 3.5 的 python，同时也安装了 numpy。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create --name &lt;new_env_name&gt; --clone &lt;copied_env_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         复制环境，以下举例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create --name new_conda --clone conda_test</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         表示克隆名为 conda_test 的环境，克隆后的新环境名为 new_conda。此时，环境中将同时存在 conda_test 和 new_conda 环境，且两个环境的配置相同。 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda remove --name &lt;env_name&gt; --all</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         删除环境，<env_name> 为被删除环境的名称。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda search --full python</span><br><span class="line">$ conda search --full-name python</span><br></pre></td></tr></table></figure>
+<p>         表示查找全名为 python 的包有哪些版本可供安装。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda install --name &lt;env_name&gt; &lt;package_name&gt;</span><br><span class="line">$ conda install --name conda_test pandas</span><br></pre></td></tr></table></figure>
+<p>          表示在名为 conda_test 的环境中安装 pandas 包。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ pip install &lt;package_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         当使用 conda install 无法进行安装时，可以使用 pip 进行安装。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda remove --name &lt;env_name&gt; &lt;package_name&gt;</span><br><span class="line">$ conda remove --name conda_test pandas</span><br></pre></td></tr></table></figure>
+<p>         表示卸载名为 conda_test 环境中的 pandas 包。 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda remove &lt;package_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         表示卸载当前环境中的包。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda activate &lt;env_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>          切换环境。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda deactivate</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>         退出环境至 root。</p>
+<p>         如果在其他电脑上使用，你可以将已经配置好的 xxx 环境，复制到其他电脑上，仍然能够使用。</p>
+<h2 id="3、卸载-anaconda3"><a href="#3、卸载-anaconda3" class="headerlink" title="3、卸载 anaconda3"></a><strong>3、卸载 anaconda3</strong></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ rm -rf ~&#x2F;anaconda3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>        即删除 Anaconda 的安装目录。根据安装的 Anaconda 版本选择相应的卸载命令。</p>
+<h2 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a><strong>参考网址</strong></h2><p><a href="https://www.jianshu.com/p/62f155eb6ac5">Anaconda 介绍、安装及使用教程</a></p>
+]]></content>
+      <categories>
+        <category>Anaconda</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Numpy基础用法</title>
     <url>/64862.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
@@ -112,72 +178,6 @@
       </categories>
       <tags>
         <tag>默认</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>anaconda3的使用</title>
-    <url>/32873.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
-
-<h2 id="1、安装-anaconda3"><a href="#1、安装-anaconda3" class="headerlink" title="1、安装 anaconda3"></a><strong>1、安装 anaconda3</strong></h2><h2 id="安装条件"><a href="#安装条件" class="headerlink" title="    安装条件"></a>    安装条件</h2><ul>
-<li>  系统要求：32 位或 64 位系统均可</li>
-<li>  下载文件大小：约 500MB</li>
-<li>  所需空间大小：3GB 空间大小（Miniconda 仅需 400MB 空间即可）</li>
-</ul>
-<p>（1）地址 <a href="https://www.anaconda.com/products/individual#linux">anaconda 下载</a>。最新版本为 Anaconda3-2020.02-Linux-x86_64.sh，启动终端，输入如下指令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bash ~&#x2F;Downloads&#x2F;Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-<p>（2）安装过程中，看到提示 “In order to continue the installation process, please review the license agreement.”（“请浏览许可证协议以便继续安装。”），点击“Enter” 查看 “许可证协议”，也可以点击空格翻页，这样快一些。在“许可证协议” 界面将屏幕滚动至底，输入 “yes” 表示同意许可证协议内容。然后进行下一步。</p>
-<p>（3）安装过程中，提示 “Press Enter to accept the default install location, CTRL-C to cancel the installation or specify an alternate installation directory.”（“按回车键确认安装路径，按’CTRL-C’取消安装或者指定安装目录。”）可以指定目录，输入要安装的目录即可。</p>
-<p>（4）安装器若提示 You currently have a PYTHONPATH environment variable set….. 等类似提示时：</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20200628222025241.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0pJRUpJTlFVQU5JTA==,size_16,color_FFFFFF,t_70"></p>
-<p>这里是将 anaconda3 添加到环境变量中，这里十分建议选 no，否则安装完成后在终端前面始终会有个 (base) 存在，无论用不用 anaconda3。总之选 no 就对了！</p>
-<p>        看到 Thank you for installing Anaconda3! 这个提示证明安装成功了！</p>
-<h2 id="2、anaconda3-的使用"><a href="#2、anaconda3-的使用" class="headerlink" title="2、anaconda3 的使用"></a><strong>2、anaconda3 的使用</strong></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ cd &#x2F;home&#x2F;zydz&#x2F;anaconda3&#x2F;bin</span><br><span class="line">$ . .&#x2F;activate</span><br></pre></td></tr></table></figure>
-<p>         这两条指令是进入 conda 环境，其中第 2 条指令第一个点相当于 source，第二个点代表当前路径。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda list</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>         显示已经安装的包名和版本号。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anaconda-navigator</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>         anaconda 交互界面。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda --version</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>          验证 conda 已被安装，查看 conda 版本号。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda info --envs</span><br><span class="line">$ conda info -e</span><br><span class="line">$ conda env list</span><br></pre></td></tr></table></figure>
-<p>         这 3 条指令含义相同，显示已创建环境。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda --help</span><br><span class="line">$ conda -h</span><br></pre></td></tr></table></figure>
-<p>         查看 conda 帮助信息。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create --name &lt;env_name&gt; &lt;package_names&gt;</span><br><span class="line">$ conda create -n &lt;env_name&gt; &lt;package_names&gt;</span><br></pre></td></tr></table></figure>
-<p>         创建新环境，以下举例：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create -n conda_test python&#x3D;3.5 numpy</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>         表示创建一个名为 conda_test 的环境，环境中安装版本为 3.5 的 python，同时也安装了 numpy。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create --name &lt;new_env_name&gt; --clone &lt;copied_env_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>         复制环境，以下举例：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda create --name new_conda --clone conda_test</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>         表示克隆名为 conda_test 的环境，克隆后的新环境名为 new_conda。此时，环境中将同时存在 conda_test 和 new_conda 环境，且两个环境的配置相同。 </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda remove --name &lt;env_name&gt; --all</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>         删除环境，<env_name> 为被删除环境的名称。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda search --full python</span><br><span class="line">$ conda search --full-name python</span><br></pre></td></tr></table></figure>
-<p>         表示查找全名为 python 的包有哪些版本可供安装。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda install --name &lt;env_name&gt; &lt;package_name&gt;</span><br><span class="line">$ conda install --name conda_test pandas</span><br></pre></td></tr></table></figure>
-<p>          表示在名为 conda_test 的环境中安装 pandas 包。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ pip install &lt;package_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>         当使用 conda install 无法进行安装时，可以使用 pip 进行安装。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda remove --name &lt;env_name&gt; &lt;package_name&gt;</span><br><span class="line">$ conda remove --name conda_test pandas</span><br></pre></td></tr></table></figure>
-<p>         表示卸载名为 conda_test 环境中的 pandas 包。 </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda remove &lt;package_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>         表示卸载当前环境中的包。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda activate &lt;env_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>          切换环境。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ conda deactivate</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>         退出环境至 root。</p>
-<p>         如果在其他电脑上使用，你可以将已经配置好的 xxx 环境，复制到其他电脑上，仍然能够使用。</p>
-<h2 id="3、卸载-anaconda3"><a href="#3、卸载-anaconda3" class="headerlink" title="3、卸载 anaconda3"></a><strong>3、卸载 anaconda3</strong></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ rm -rf ~&#x2F;anaconda3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>        即删除 Anaconda 的安装目录。根据安装的 Anaconda 版本选择相应的卸载命令。</p>
-<h2 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a><strong>参考网址</strong></h2><p><a href="https://www.jianshu.com/p/62f155eb6ac5">Anaconda 介绍、安装及使用教程</a></p>
-]]></content>
-      <categories>
-        <category>Anaconda</category>
-      </categories>
-      <tags>
-        <tag>毕设</tag>
       </tags>
   </entry>
   <entry>
