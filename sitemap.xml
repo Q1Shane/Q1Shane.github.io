@@ -144,13 +144,6 @@
   </url>
   
   <url>
-    <loc>https://hexo.ml/tags/Blog/</loc>
-    <lastmod>2024-06-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://hexo.ml/tags/%E6%AF%95%E8%AE%BE/</loc>
     <lastmod>2024-06-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -159,6 +152,13 @@
   
   <url>
     <loc>https://hexo.ml/tags/Go/</loc>
+    <lastmod>2024-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hexo.ml/tags/Blog/</loc>
     <lastmod>2024-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -181,13 +181,6 @@
   </url>
   
   <url>
-    <loc>https://hexo.ml/categories/Hexo/</loc>
-    <lastmod>2024-06-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://hexo.ml/categories/Anaconda/</loc>
     <lastmod>2024-06-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -203,6 +196,13 @@
   
   <url>
     <loc>https://hexo.ml/categories/Go/</loc>
+    <lastmod>2024-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hexo.ml/categories/Hexo/</loc>
     <lastmod>2024-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
