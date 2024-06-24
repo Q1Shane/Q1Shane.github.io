@@ -368,37 +368,6 @@
       </tags>
   </entry>
   <entry>
-    <title>论文解读：GPipe</title>
-    <url>/58735.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
-
-<h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a><strong>背景：</strong></h2><p>增大模型规模通常是提高模型效果的有效方案，但是更多的模型参数，更复杂的模型计算逻辑，导致模型的训练过程需要更多的内存。同时计算设备 (GPU) 的内存资源往往非常非常有限，单台设备不足以支持超大规模模型的训练，而将模型分布在多台设备上则是一种可能的解决方案。</p>
-<h2 id="简介："><a href="#简介：" class="headerlink" title="简介："></a><strong>简介：</strong></h2><p>GPipe 使用模型并行方案，将模型切分成一连串 stage，每个 stage 放在独立的设备（GPU/TPU）上，实现对超大规模模型的支持，同时利用 Pipeline 的方案，提高了模型并行模式下的设备利用率。最终 GPipe 通过更大规模的模型和更大的 batch_size，在图像和 NLP 的模型上都得到更好的模型效果。</p>
-<h2 id="方案设计"><a href="#方案设计" class="headerlink" title="方案设计"></a><strong>方案设计</strong></h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-dea46cace07195b41da36a71cfdf6169_r.jpg"></p>
-<h3 id="1-划分-stage"><a href="#1-划分-stage" class="headerlink" title="1. 划分 stage"></a><strong>1. 划分 stage</strong></h3><p>如图 1.(a) 左图所示，将模型划分为连续的几个 stage，每个 stage 各自对应一个设备。这样就使得模型的大小可以突破单个设备内存的大小，因为一台设备只需要能够容纳部分模型的参数和计算。</p>
-<h3 id="2-划分-Micro-Batch-和-Pipeline"><a href="#2-划分-Micro-Batch-和-Pipeline" class="headerlink" title="2. 划分 Micro-Batch 和 Pipeline"></a><strong>2. 划分 Micro-Batch 和 Pipeline</strong></h3><p>图 1.(b) 为一般的模型并行的运算模式，在每个时间点只有一台设备在处理计算逻辑，完成计算后将结果发送给下一台设备，其中设备空闲的时间称为 Bubble。GPipe 将 mini-batch 进一步划分成更小的 micro-batch，同时利用 pipipline 方案，每次处理一个 micro-batch 的数据，得到结果后，将该 micro-batch 的结果发送给下游设备，同时开始处理后一个 micro-batch 的数据，通过这套方案减小设备中的 Bubble。</p>
-<p>GPipe 实验发现，当增加 micro_batch 数目的时候，设备上的 bubble 可忽略 (一定条件下)，一方面是由于如图 1.(c) 所示的的运行模式导致的，另一方面是由于 Re-Materializaition 方案中，计算梯度过程中的前向计算部分可以不依赖前一部分数据的计算结果 (即在图 1.(c) 中的 Bubble 阶段执行。)</p>
-<h3 id="3-Re-Materialization"><a href="#3-Re-Materialization" class="headerlink" title="3. Re-Materialization"></a><strong>3. Re-Materialization</strong></h3><p>基于现有的训练框架，在前向计算时，训练框架会记录每一个算子的计算结果，用于 backward 时的梯度计算。在很多模型中，这部分的内存消耗可能大于模型参数，是限制模型大小（以及 batch-size）的一个重要原因。</p>
-<p>Re-Materialization 具体是指在前向计算过程中，GPipe 只记录 stage 划分处的输出，在计算梯度时，GPipe 会重新执行前向计算逻辑，从而得到各个算子的前向结果，然后再计算梯度结果。</p>
-<p>Re-Materialization 的好处是大大减少了内存需求，可以有效增大训练的 batch_size，比如正常的训练模式下 (忽略输出所占的内存，这部分一般占比较小)，内存能够支持 mini-batch=16，在 Gpipe 的模式下，可以将 micro-batch 设置为 16, 这样实际的 batch_size 就扩大了 min-batch/micor_batch 倍。</p>
-<h2 id="方案效果"><a href="#方案效果" class="headerlink" title="方案效果"></a><strong>方案效果</strong></h2><h3 id="1-更大的模型"><a href="#1-更大的模型" class="headerlink" title="1. 更大的模型"></a><strong>1. 更大的模型</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-a250b74bdb6cefb01ad66396d7d3b89c_r.jpg"></p>
-<p>Gpipe 给出的结果中，AmoebaNet-D 模型最大的是~ 25GB，使用了 8 块 GPU,</p>
-<p>对于 Transformer-L 模型，在使用 128 块 GPU 的情况下，模型最大达到 937.9GB，使用了 128 块 GPU。</p>
-<h3 id="2-更大的-batch-size"><a href="#2-更大的-batch-size" class="headerlink" title="2. 更大的 batch_size"></a><strong>2. 更大的 batch_size</strong></h3><p>Transformer Big 的训练 batch size 从之前的 400k 提高到 4M。</p>
-<h3 id="3-更好的模型效果"><a href="#3-更好的模型效果" class="headerlink" title="3. 更好的模型效果"></a><strong>3. 更好的模型效果</strong></h3><p>结合大模型和大 batch 的优势，大部分图像和 NLP 模型效果都得到了比之前更好的结果。</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-9b67b5ad569d20766eb810469912c311_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-572fc0b4f52ac7b0a8a7149bab83e6cc_b.jpg"></p>
-<h3 id="4-训练效率"><a href="#4-训练效率" class="headerlink" title="4. 训练效率"></a><strong>4. 训练效率</strong></h3><p>按照 paper 所说，在增加设备个数的情况下，最优能达到接近线性的加速效果。不过没有看到与相同设备下的数据并行方案的对比。</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-f2da3e9dd8fdf1cadc88bf5bd8d86d41_b.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-f655032c4a5a7cfe663b756c73405c5c_b.jpg"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>这是谷歌出品的一个可扩展的模型并行库，用于训练巨型神经网络。通过批量分隔流水线并行方法，取得了几乎线性加速，并且按照论文表述，可支持各种深度网络，有很高的可靠性（同步梯度下降模式下，无论分区数量多少，都可以保证一致的训练）。</p>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>毕设</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>论文解读：MuCGEC</title>
     <url>/42505.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="MuCGEC-a-Multi-Reference-Multi-Source-Evaluation-Dataset-for-Chinese-Grammatical-Error-Correction"><a href="#MuCGEC-a-Multi-Reference-Multi-Source-Evaluation-Dataset-for-Chinese-Grammatical-Error-Correction" class="headerlink" title="MuCGEC- a Multi-Reference Multi-Source Evaluation Dataset for Chinese Grammatical Error Correction"></a>MuCGEC- a Multi-Reference Multi-Source Evaluation Dataset for Chinese Grammatical Error Correction</h2><hr>
@@ -539,6 +508,37 @@
       </categories>
       <tags>
         <tag>GEC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文解读：GPipe</title>
+    <url>/58735.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a><strong>背景：</strong></h2><p>增大模型规模通常是提高模型效果的有效方案，但是更多的模型参数，更复杂的模型计算逻辑，导致模型的训练过程需要更多的内存。同时计算设备 (GPU) 的内存资源往往非常非常有限，单台设备不足以支持超大规模模型的训练，而将模型分布在多台设备上则是一种可能的解决方案。</p>
+<h2 id="简介："><a href="#简介：" class="headerlink" title="简介："></a><strong>简介：</strong></h2><p>GPipe 使用模型并行方案，将模型切分成一连串 stage，每个 stage 放在独立的设备（GPU/TPU）上，实现对超大规模模型的支持，同时利用 Pipeline 的方案，提高了模型并行模式下的设备利用率。最终 GPipe 通过更大规模的模型和更大的 batch_size，在图像和 NLP 的模型上都得到更好的模型效果。</p>
+<h2 id="方案设计"><a href="#方案设计" class="headerlink" title="方案设计"></a><strong>方案设计</strong></h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-dea46cace07195b41da36a71cfdf6169_r.jpg"></p>
+<h3 id="1-划分-stage"><a href="#1-划分-stage" class="headerlink" title="1. 划分 stage"></a><strong>1. 划分 stage</strong></h3><p>如图 1.(a) 左图所示，将模型划分为连续的几个 stage，每个 stage 各自对应一个设备。这样就使得模型的大小可以突破单个设备内存的大小，因为一台设备只需要能够容纳部分模型的参数和计算。</p>
+<h3 id="2-划分-Micro-Batch-和-Pipeline"><a href="#2-划分-Micro-Batch-和-Pipeline" class="headerlink" title="2. 划分 Micro-Batch 和 Pipeline"></a><strong>2. 划分 Micro-Batch 和 Pipeline</strong></h3><p>图 1.(b) 为一般的模型并行的运算模式，在每个时间点只有一台设备在处理计算逻辑，完成计算后将结果发送给下一台设备，其中设备空闲的时间称为 Bubble。GPipe 将 mini-batch 进一步划分成更小的 micro-batch，同时利用 pipipline 方案，每次处理一个 micro-batch 的数据，得到结果后，将该 micro-batch 的结果发送给下游设备，同时开始处理后一个 micro-batch 的数据，通过这套方案减小设备中的 Bubble。</p>
+<p>GPipe 实验发现，当增加 micro_batch 数目的时候，设备上的 bubble 可忽略 (一定条件下)，一方面是由于如图 1.(c) 所示的的运行模式导致的，另一方面是由于 Re-Materializaition 方案中，计算梯度过程中的前向计算部分可以不依赖前一部分数据的计算结果 (即在图 1.(c) 中的 Bubble 阶段执行。)</p>
+<h3 id="3-Re-Materialization"><a href="#3-Re-Materialization" class="headerlink" title="3. Re-Materialization"></a><strong>3. Re-Materialization</strong></h3><p>基于现有的训练框架，在前向计算时，训练框架会记录每一个算子的计算结果，用于 backward 时的梯度计算。在很多模型中，这部分的内存消耗可能大于模型参数，是限制模型大小（以及 batch-size）的一个重要原因。</p>
+<p>Re-Materialization 具体是指在前向计算过程中，GPipe 只记录 stage 划分处的输出，在计算梯度时，GPipe 会重新执行前向计算逻辑，从而得到各个算子的前向结果，然后再计算梯度结果。</p>
+<p>Re-Materialization 的好处是大大减少了内存需求，可以有效增大训练的 batch_size，比如正常的训练模式下 (忽略输出所占的内存，这部分一般占比较小)，内存能够支持 mini-batch=16，在 Gpipe 的模式下，可以将 micro-batch 设置为 16, 这样实际的 batch_size 就扩大了 min-batch/micor_batch 倍。</p>
+<h2 id="方案效果"><a href="#方案效果" class="headerlink" title="方案效果"></a><strong>方案效果</strong></h2><h3 id="1-更大的模型"><a href="#1-更大的模型" class="headerlink" title="1. 更大的模型"></a><strong>1. 更大的模型</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-a250b74bdb6cefb01ad66396d7d3b89c_r.jpg"></p>
+<p>Gpipe 给出的结果中，AmoebaNet-D 模型最大的是~ 25GB，使用了 8 块 GPU,</p>
+<p>对于 Transformer-L 模型，在使用 128 块 GPU 的情况下，模型最大达到 937.9GB，使用了 128 块 GPU。</p>
+<h3 id="2-更大的-batch-size"><a href="#2-更大的-batch-size" class="headerlink" title="2. 更大的 batch_size"></a><strong>2. 更大的 batch_size</strong></h3><p>Transformer Big 的训练 batch size 从之前的 400k 提高到 4M。</p>
+<h3 id="3-更好的模型效果"><a href="#3-更好的模型效果" class="headerlink" title="3. 更好的模型效果"></a><strong>3. 更好的模型效果</strong></h3><p>结合大模型和大 batch 的优势，大部分图像和 NLP 模型效果都得到了比之前更好的结果。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-9b67b5ad569d20766eb810469912c311_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-572fc0b4f52ac7b0a8a7149bab83e6cc_b.jpg"></p>
+<h3 id="4-训练效率"><a href="#4-训练效率" class="headerlink" title="4. 训练效率"></a><strong>4. 训练效率</strong></h3><p>按照 paper 所说，在增加设备个数的情况下，最优能达到接近线性的加速效果。不过没有看到与相同设备下的数据并行方案的对比。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-f2da3e9dd8fdf1cadc88bf5bd8d86d41_b.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-f655032c4a5a7cfe663b756c73405c5c_b.jpg"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>这是谷歌出品的一个可扩展的模型并行库，用于训练巨型神经网络。通过批量分隔流水线并行方法，取得了几乎线性加速，并且按照论文表述，可支持各种深度网络，有很高的可靠性（同步梯度下降模式下，无论分区数量多少，都可以保证一致的训练）。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
       </tags>
   </entry>
   <entry>
