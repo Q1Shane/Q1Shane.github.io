@@ -580,4 +580,90 @@
         <tag>毕设</tag>
       </tags>
   </entry>
+  <entry>
+    <title>机器学习(1)——特征工程</title>
+    <url>/32820.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3 id="机器学习的流程"><a href="#机器学习的流程" class="headerlink" title="机器学习的流程"></a>机器学习的流程</h3><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/Users/shane/Library/Application Support/typora-user-images/image-20241101190446153.png" alt="image-20241101190446153" style="zoom:50%;" />
+
+
+
+<center>预处理  ——> 特征工程  ——> 机器学习  ——> 模型评估</center>
+
+<p>如果未达到要求，重新循环</p>
+<h3 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h3><p>将<strong>原始数据</strong>转换为更好地<strong>代表预测模型的潜在问题的特征</strong>的工程，从而提高了模型对位置数据预测的准确性（ <strong>属于数据预处理阶段的工作</strong>）</p>
+<p>以scikit-learn为例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction <span class="keyword">import</span> DictVectorizer</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer, TfidfVectorizer</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> VarianceThreshold</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.impute <span class="keyword">import</span> SimpleImputer</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dictvec</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    字典数据抽取</span></span><br><span class="line"><span class="string">    :return: None</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 实例化</span></span><br><span class="line">    <span class="comment"># sparse改为True,输出的是每个不为零位置的坐标，稀疏矩阵可以节省存储空间</span></span><br><span class="line">    <span class="built_in">dict</span> = DictVectorizer(sparse=<span class="literal">False</span>)  <span class="comment"># 把sparse改为True看看</span></span><br><span class="line">    <span class="comment">#矩阵中存在大量的0，sparse存储只记录非零位置，节省空间</span></span><br><span class="line">    <span class="comment"># 调用fit_transform</span></span><br><span class="line">    data = <span class="built_in">dict</span>.fit_transform([&#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;北京&#x27;</span>, <span class="string">&#x27;temperature&#x27;</span>: <span class="number">100</span>&#125;,</span><br><span class="line">                               &#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;上海&#x27;</span>, <span class="string">&#x27;temperature&#x27;</span>: <span class="number">60</span>&#125;,</span><br><span class="line">                               &#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;深圳&#x27;</span>, <span class="string">&#x27;temperature&#x27;</span>: <span class="number">30</span>&#125;])</span><br><span class="line">    print(data)</span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span> * <span class="number">50</span>)</span><br><span class="line">    print(<span class="built_in">dict</span>.get_feature_names_out())  <span class="comment"># 字典中的一些类别数据，分别进行转换成特征</span></span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span> * <span class="number">50</span>)</span><br><span class="line">    print(<span class="built_in">dict</span>.inverse_transform(data))  <span class="comment">#去看每个特征代表的含义，逆转回去</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>DictVectorizer.fit_transform：（在训练集上）将字典数据<strong>转换</strong>为<strong>特征值</strong>数组（默认是one-hot编码）</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/Users/shane/Library/Application Support/typora-user-images/image-20241101192802034.png" alt="image-20241101192802034" style="zoom:50%;" />
+
+<p>DictVectorizer.inverse_transform：上述过程逆转换</p>
+<p>sklearn.feature_extraction.text.CountVectorizer：对文本进行特征值化,单个汉字单个字母不统计，因为单个汉字字母没有意义</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countvec</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    对文本进行特征值化,单个汉字单个字母不统计，因为单个汉字字母没有意义,(“我”没有统计)</span></span><br><span class="line"><span class="string">    :return: None</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    cv = CountVectorizer()</span><br><span class="line">    data = cv.fit_transform([<span class="string">&quot;人生苦短，我 喜欢 python python&quot;</span>, <span class="string">&quot;人生漫长，不用 python&quot;</span>])</span><br><span class="line"></span><br><span class="line">    print(cv.get_feature_names())</span><br><span class="line">    print(data)</span><br><span class="line">    print(data.toarray())</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">countvec()</span><br></pre></td></tr></table></figure>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/Users/shane/Library/Application Support/typora-user-images/image-20241101193028503.png" alt="image-20241101193028503" style="zoom:50%;" />
+
+<h3 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF-IDF"></a>TF-IDF</h3><p>如果某个词或短语在一篇文章中出现的概率高,并且在其他文章中很少出现，则认为此词或者短语具有很好的类别区分能力，适合用来分类。</p>
+<p>​        <strong>sklearn.feature extraction.text.TfidfVectorizer</strong></p>
+<p>Tf：term frequency:词的频率出现的次数<br>idf：逆文档频率inverse document frequency：log(总文档数量/该词出现的文档数量)<br>tf*idf 来代表重要性程度</p>
+<h4 id="（1）TF是词频-Term-Frequency"><a href="#（1）TF是词频-Term-Frequency" class="headerlink" title="（1）TF是词频(Term Frequency)"></a><strong>（1）TF是词频(Term Frequency)</strong></h4><p>        <strong>词频（TF）**</strong>表示词条（关键字）在文本中出现的频率**。</p>
+<p>        这个数字通常会被归一化(一般是词频除以文章总词数), 以防止它偏向长的文件。</p>
+<p>        <strong>公式：<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://i-blog.csdnimg.cn/blog_migrate/8aee8c29fb2c9263a4af7eb7a91e7b8c.png"></strong>           <strong>即：</strong><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://i-blog.csdnimg.cn/blog_migrate/a75dda581df4720b6af1e3c8581f7ef2.png"></p>
+<p>  其中 <strong>ni,j</strong> 是该词在文件 <strong>dj</strong> 中出现的次数，分母则是文件 dj 中所有词汇出现的次数总和；</p>
+<h4 id="（2）-IDF是逆向文件频率-Inverse-Document-Frequency"><a href="#（2）-IDF是逆向文件频率-Inverse-Document-Frequency" class="headerlink" title="（2） IDF是逆向文件频率(Inverse Document Frequency)"></a><strong>（2） IDF是逆向文件频率(Inverse Document Frequency)</strong></h4><p>        <strong>逆向文件频率 (IDF)</strong> ：某一特定词语的IDF，可以由<strong>总文件数目除以包含该词语的文件的数目</strong>，<strong>再将得到的商取对数得到</strong>。</p>
+<p>如果包含词条t的文档越少, IDF越大，则说明词条具有很好的类别区分能力。</p>
+<p>      <strong>公式：<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://i-blog.csdnimg.cn/blog_migrate/411c0ccae911cab9c24a2255ad5de264.png"></strong> </p>
+<p> 其中，**|D|** <strong>是语料库中的文件总数</strong>。 <strong>|{j:ti∈dj}| 表示包含词语 ti 的文件数目</strong>（即 ni,j≠0 的文件数目）。如果该词语不在语料库中，就会导致分母为零，因此<strong>一般情况下使用 1+|{j:ti∈dj}|</strong></p>
+<p> <strong>即：<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://i-blog.csdnimg.cn/blog_migrate/018f856511ec8d3db691f0efa00940f6.png"></strong></p>
+<h4 id="（3）TF-IDF实际上是：TF-IDF"><a href="#（3）TF-IDF实际上是：TF-IDF" class="headerlink" title="*（3）TF-IDF实际上是：TF * IDF*"></a>*<em>（3）TF-IDF实际上是：TF * IDF*</em></h4><p>       某一特定文件内的高词语频率，以及该词语在整个文件集合中的低文件频率，可以产生出高权重的TF-IDF。因此，TF-IDF倾向于过滤掉常见的词语，保留重要的词语。</p>
+<p>       <strong>公式：<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://i-blog.csdnimg.cn/blog_migrate/a08ae69bb765ac079f53b8967a7cc119.png"></strong></p>
+<p> <strong>注：</strong>  TF-IDF算法非常容易理解，并且很容易实现，但是其简单结构并没有考虑词语的语义信息，无法处理一词多义与一义多词的情况。</p>
+<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>特征工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器学习(2)——归一化与标准化</title>
+    <url>/11448.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h2><h3 id="归一化Normalization"><a href="#归一化Normalization" class="headerlink" title="归一化Normalization"></a>归一化Normalization</h3><p>由于每一组特征数据的量纲是不同的，我们需要先将他们的量纲统一，之后再去训练学习，每一组特征数据的变化对预测结果的影响。</p>
+<p><strong>特点:通过对原始数据进行变换把数据映射到(默认为[0,1])之间</strong></p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/Users/shane/Library/Application Support/typora-user-images/image-20241102202101832.png" alt="image-20241102202101832" style="zoom:50%;" />
+
+<p>def MinMaxScaler(feature_range=(0, 1…))：归一化。每个特征缩放到给定范围(默认[0,1])</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mm</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    归一化处理</span></span><br><span class="line"><span class="string">    :return: NOne</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 归一化容易受极值的影响</span></span><br><span class="line">    mm = MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		</span><br><span class="line">    <span class="comment">#通过fit_transform进行转换</span></span><br><span class="line">    data = mm.fit_transform([[<span class="number">90</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">40</span>], [<span class="number">60</span>, <span class="number">4</span>, <span class="number">15</span>, <span class="number">45</span>], [<span class="number">75</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">46</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">mm()</span><br></pre></td></tr></table></figure>
+
+
+<ol>
+<li><strong>归一化的好处</strong>：容易更快地通过梯度下降找到最优解</li>
+<li>归一化的弊端：由于是使用max和min数据进行处理，会很容易受极值的影响，如果max很大，而其他数据很小，那归一化后的其他数据则很接近0</li>
+</ol>
+<p><strong>注意</strong>：在特定场景下最大值最小值是变化的，另外，最大值与最小值非常容易受<strong>异常点</strong>影响，所以这种方法鲁棒性较差，<strong>只适合传统精确小数据场景</strong>。</p>
+<h3 id="标准化Standardization"><a href="#标准化Standardization" class="headerlink" title="标准化Standardization"></a>标准化Standardization</h3><p>z-score 标准化(zero-mean normalization)，最常见的标准化方法就是Z标准化，也叫<strong>标准差标准化</strong>。通过对原始数据进行变换把数据变换到均值为0,标准差为1范围内</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/Users/shane/Library/Application Support/typora-user-images/image-20241102203936014.png" alt="image-20241102203936014" style="zoom:50%;" />
+
+<p>def  StandardScaler(…)：标准化</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stand</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    标准化缩放，不是标准正太分布，只均值为0，方差为1的分布</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    std = StandardScaler()</span><br><span class="line">    data = std.fit_transform([[<span class="number">1.</span>, -<span class="number">1.</span>, <span class="number">3.</span>], [<span class="number">2.</span>, <span class="number">4.</span>, <span class="number">2.</span>], [<span class="number">4.</span>, <span class="number">6.</span>, -<span class="number">1.</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    print(std.mean_)</span><br><span class="line">    print(std.var_)</span><br><span class="line">    print(std.n_samples_seen_)  <span class="comment"># 样本数</span></span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span> * <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">stand()</span><br></pre></td></tr></table></figure>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/Users/shane/Library/Application Support/typora-user-images/image-20241102204330752.png" alt="image-20241102204330752" style="zoom:50%;" />
+
+<ul>
+<li>对于归一化来说：如果出现异常点，影响了<strong>最大值和最小值</strong>，那么结果显然会发生改变</li>
+<li>对于标准化来说：如果出现异常点，由于具有一定数据量，少量的异常点对于<strong>平均值的影响</strong>并不大，从而方差改变<strong>较小</strong>。</li>
+</ul>
+<p><strong>注意</strong>：在已有<strong>样本足够多</strong>的情况下比较稳定，适合现代嘈杂大数据场景。</p>
+<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>特征工程</tag>
+      </tags>
+  </entry>
 </search>
