@@ -38,6 +38,29 @@
   </entry>
   
   <entry>
+    <title>机器学习(3)——数据压缩</title>
+    <link href="https://hexo.ml/6552.html"/>
+    <id>https://hexo.ml/6552.html</id>
+    <published>2021-11-02T14:56:08.000Z</published>
+    <updated>2021-11-02T14:56:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="数据压缩"><a href="#数据压缩" class="headerlink" title="数据压缩"></a>数据压缩</h2><h3 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h3><p>主成分分析（Principal Component Analysis, PCA） 也称为 卡尔胡宁-勒夫变换（Karhunen-Loeve Transform），是一种用于探索高维数据结构的技术。PCA 通常用于高维数据集的探索与可视化；还可以用于数据压缩，数据预处理等。PCA 可以把可能具有相关性的高维变量合成线性无关的低维变量，称为主成分（ principal components）。新的低维数据集会尽可能的保留原始数据的变量。</p><p>作用：可以<strong>削减回归分析</strong>或者<strong>聚类分析</strong>中<strong>特征的数量</strong>，特征数量达到<strong>上百</strong>的时候，开始使用PCA</p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/1.png" style="zoom:50%;"><p>如图所示，第四张二维的平面图，最能体现出其三维的特性，因此，我们可以使用PCA，将三维的数据，转换为二维的数据，虽然会损失一部分信息，但不影响我们对特征的提取与预测。</p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/2.png" style="zoom:50%;"><p>直观就是，所有点到线的垂直距离和最短的一条线。也确定了每个点在新的维度上的特征值</p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/3.png" style="zoom:50%;"><p>(业界常使用90%～95%)</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pca</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    主成分分析进行特征降维</span></span><br><span class="line"><span class="string">    :return: None</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># n_ components:小数 0~1 90% 业界选择 90~95%</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># 整数   减少到的特征数量</span></span><br><span class="line"></span><br><span class="line">    pca = PCA(n_components=<span class="number">0.9</span>)</span><br><span class="line"></span><br><span class="line">    data = pca.fit_transform([[<span class="number">2</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">8</span>], [<span class="number">5</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">1</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">pca()</span><br></pre></td></tr></table></figure><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/4.png" style="zoom:50%;"><a id="more"></a>]]></content>
+    
+    
+    <summary type="html">默认</summary>
+    
+    
+    
+    <category term="机器学习" scheme="https://hexo.ml/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="机器学习" scheme="https://hexo.ml/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="特征工程" scheme="https://hexo.ml/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>机器学习(2)——归一化与标准化</title>
     <link href="https://hexo.ml/11448.html"/>
     <id>https://hexo.ml/11448.html</id>
