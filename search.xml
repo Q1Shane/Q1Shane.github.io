@@ -370,7 +370,7 @@
 <img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/11448/1.png" style="zoom:50%;">
 
 <p>def MinMaxScaler(feature_range=(0, 1…))：归一化。每个特征缩放到给定范围(默认[0,1])</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mm</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    归一化处理</span></span><br><span class="line"><span class="string">    :return: NOne</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 归一化容易受极值的影响</span></span><br><span class="line">    mm = MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		</span><br><span class="line">    <span class="comment">#通过fit_transform进行转换</span></span><br><span class="line">    data = mm.fit_transform([[<span class="number">90</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">40</span>], [<span class="number">60</span>, <span class="number">4</span>, <span class="number">15</span>, <span class="number">45</span>], [<span class="number">75</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">46</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">mm()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mm</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    归一化处理</span></span><br><span class="line"><span class="string">    :return: NOne</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 归一化容易受极值的影响</span></span><br><span class="line">    mm = MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		</span><br><span class="line">    <span class="comment">#通过fit_transform进行转换</span></span><br><span class="line">    data = mm.fit_transform([[<span class="number">90</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">40</span>], [<span class="number">60</span>, <span class="number">4</span>, <span class="number">15</span>, <span class="number">45</span>], [<span class="number">75</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">46</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#如果使用transform进行测试集的时候，量纲还是fit_transform的</span></span><br><span class="line">    out = mm.fit_transform([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">6</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">7</span>]])</span><br><span class="line"></span><br><span class="line">    print(out)</span><br><span class="line">    <span class="comment"># [[-1.96666667 0.		-1.4		-6		]</span></span><br><span class="line">    <span class="comment">#  [-1.8				1.5		-0.4		-5.5	]]</span></span><br><span class="line">		<span class="comment"># 相当于是用 (1-90/90-60) *1 + 1 = -1.966667</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">mm()</span><br></pre></td></tr></table></figure>
 
 
 <ol>
@@ -378,7 +378,7 @@
 <li>归一化的弊端：由于是使用max和min数据进行处理，会很容易受极值的影响，如果max很大，而其他数据很小，那归一化后的其他数据则很接近0</li>
 </ol>
 <p><strong>注意</strong>：在特定场景下最大值最小值是变化的，另外，最大值与最小值非常容易受<strong>异常点</strong>影响，所以这种方法鲁棒性较差，<strong>只适合传统精确小数据场景</strong>。</p>
-<h3 id="标准化Standardization"><a href="#标准化Standardization" class="headerlink" title="标准化Standardization"></a>标准化Standardization</h3><p>z-score 标准化(zero-mean normalization)，最常见的标准化方法就是Z标准化，也叫<strong>标准差标准化</strong>。通过对原始数据进行变换把数据变换到均值为0,标准差为1范围内</p>
+<h3 id="标准化Standardization"><a href="#标准化Standardization" class="headerlink" title="标准化Standardization"></a>标准化Standardization</h3><p>z-score 标准化(zero-mean normalization)，最常见的标准化方法就是Z标准化，也叫<strong>标准差标准化</strong>。通过对原始数据进行变换<strong>把数据变换到均值为0,标准差为1范围内</strong>，不是标准正态分布，只是均值为0，标准差为1的均匀分布</p>
 <img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/11448/2.png" style="zoom:25%;">
 
 <p>def  StandardScaler(…)：标准化</p>
@@ -678,9 +678,118 @@
 <img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/3.png" style="zoom:50%;">
 
 <p>(业界常使用90%～95%)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pca</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    主成分分析进行特征降维</span></span><br><span class="line"><span class="string">    :return: None</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># n_ components:小数 0~1 90% 业界选择 90~95%</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># 整数   减少到的特征数量</span></span><br><span class="line"></span><br><span class="line">    pca = PCA(n_components=<span class="number">0.9</span>)</span><br><span class="line"></span><br><span class="line">    data = pca.fit_transform([[<span class="number">2</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">8</span>], [<span class="number">5</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">1</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">pca()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pca</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    主成分分析进行特征降维</span></span><br><span class="line"><span class="string">    :return: None</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># n_ components:小数 0~1 90% 业界选择 90~95%</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># 整数   减少到的特征数量</span></span><br><span class="line"></span><br><span class="line">    pca = PCA(n_components=<span class="number">0.9</span>) <span class="comment">#成分保留</span></span><br><span class="line"></span><br><span class="line">    data = pca.fit_transform([[<span class="number">2</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">8</span>], [<span class="number">5</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">1</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">pca()</span><br></pre></td></tr></table></figure>
 <img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/4.png" style="zoom:50%;">
 
+<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>特征工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器学习(4)——算法</title>
+    <url>/6552.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="机器学习算法分类"><a href="#机器学习算法分类" class="headerlink" title="机器学习算法分类"></a>机器学习算法分类</h2><ol>
+<li><strong>监督学习</strong>：（英语：Supervised learning），可以由输入数据中学到或建立一个模型，并依此模式推测新的结果。输入数据是由输入特征值和目标值所组成。函数的输出可以是一个连续的值（称为回归），或是输出是有限个离散值（称作分类）分为：<ul>
+<li><strong>分类：k-近邻算法、贝叶斯分类、决策树与随机森林、逻辑回归、神经网络</strong></li>
+<li><strong>回归：线性回归、岭回归、神经网络</strong></li>
+</ul>
+</li>
+<li><strong>无监督学习</strong>：（英语：Supervised learning），可以由输入数据中学到或建立一个模型，并依此模式推测新的结果。输入数据是由输入特征值所组成。<ul>
+<li><strong>聚类：k-means（有几十种聚类）</strong></li>
+</ul>
+</li>
+</ol>
+<p>监督学习与非监督学习区别：</p>
+<ul>
+<li>监督学习:特征值+目标值</li>
+<li>非监督学习:特征值1000个样本</li>
+</ul>
+<p>分类与回归的区别：</p>
+<ul>
+<li>分类:目标值离散型</li>
+<li>回归:目标值连续型</li>
+</ul>
+<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>特征工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器学习-6-——K近邻算法</title>
+    <url>/6552.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>特征工程</tag>
+        <tag>K近邻</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器学习-5-——转换器与估计器</title>
+    <url>/6552.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="转换器（Transformer）"><a href="#转换器（Transformer）" class="headerlink" title="转换器（Transformer）"></a>转换器（Transformer）</h2><p>转换器是一种用于数据预处理的工具，它可以将原始数据转换为机器学习算法可以处理的格式。转换器通常用于特征工程，这是一种从原始数据中提取有意义特征的过程。</p>
+<p>在sklearn中，转换器通常实现了一个名为<code>fit_transform</code>的方法。这个方法首先通过<code>fit</code>步骤学习数据的特性（如平均值、标准差等），然后通过<code>transform</code>步骤应用这些学习到的特性来转换数据。</p>
+<p>转换器是一种实现特征工程操作的一组<a href="https://so.csdn.net/so/search?q=API&spm=1001.2101.3001.7020">API</a>，可以较方便的完成常用的特征工程操作，包括：</p>
+<ul>
+<li>fit：计算一些数据的平均数、方差等</li>
+<li>transform：进行一些数据转换</li>
+<li>fit_transform：相当于fit+transform，既实现了fit的功能，又实现了transform的功能。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">std1=StandardScaler()</span><br><span class="line">a=[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]]</span><br><span class="line">std1.fit_transform(a)</span><br><span class="line"><span class="comment"># 结果如下</span></span><br><span class="line">array([[-<span class="number">1.</span>, -<span class="number">1.</span>, -<span class="number">1.</span>], [ <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>]])</span><br><span class="line"></span><br><span class="line">print(std1.fit(a))<span class="comment">#计算每一列的平均值与标准差</span></span><br><span class="line">StandardScaler(copy=<span class="literal">True</span>, with_mean=<span class="literal">True</span>, with_std=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">std1.transform(a)<span class="comment">#进行最终的标准化</span></span><br><span class="line"><span class="comment"># 结果如下</span></span><br><span class="line">array([[-<span class="number">1.</span>, -<span class="number">1.</span>, -<span class="number">1.</span>],</span><br><span class="line">[ <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>]])</span><br></pre></td></tr></table></figure>
+<p>例如，<code>StandardScaler</code>是一个常用的转换器，它可以将特征数据标准化，即减去平均值并除以标准差。这样做的好处是，标准化后的数据具有零均值和单位方差，这对于许多机器学习算法来说是非常有益的。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例化转换器</span></span><br><span class="line">scaler = StandardScaler()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用fit_transform方法对数据进行转换</span></span><br><span class="line">X_scaled = scaler.fit_transform(X)</span><br></pre></td></tr></table></figure>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/3.png" style="zoom:45%;">
+
+
+
+<h2 id="估计器（Estimator）"><a href="#估计器（Estimator）" class="headerlink" title="估计器（Estimator）"></a>估计器（Estimator）</h2><p>估计器是机器学习算法的主要实现者。在sklearn中，估计器是一个实现了特定机器学习算法的类。例如，<code>LogisticRegression</code>是一个实现了逻辑回归算法的估计器，<code>RandomForestClassifier</code>是一个实现了随机森林算法的估计器。包括：</p>
+<p><strong>1、用于分类的估计器：</strong></p>
+<ul>
+<li>sklearn.neighbors k-近邻算法</li>
+<li>sklearn.naive_bayes 贝叶斯</li>
+<li>sklearn.linear_model.LogisticRegression 逻辑回归</li>
+<li>sklearn.tree 决策树与随机森林</li>
+</ul>
+<p>2、用于回归的估计器：</p>
+<ul>
+<li>sklearn.linear_model.LinearRegression 线性回归</li>
+<li>sklearn.linear_model.Ridge 岭回归</li>
+</ul>
+<p><strong>3、用于无监督学习的估计器：</strong></p>
+<ul>
+<li>sklearn.cluster.KMeans 聚类</li>
+</ul>
+<p>估计器通常提供了<code>fit</code>、<code>predict</code>等方法。<code>fit</code>方法用于训练模型，它接受训练数据作为输入并学习数据的特性。<code>predict</code>方法则用于对新数据进行预测。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例化估计器</span></span><br><span class="line">clf = LogisticRegression()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用fit方法对模型进行训练</span></span><br><span class="line">clf.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用predict方法对测试数据进行预测</span></span><br><span class="line">y_pred = clf.predict(X_test)</span><br></pre></td></tr></table></figure>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/2.jpg" style="zoom:45%;">
+
+<h3 id="估计器工作流程"><a href="#估计器工作流程" class="headerlink" title="估计器工作流程"></a>估计器工作流程</h3><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/1.jpg" style="zoom:25%;">
+
+
+
+<h2 id="转换器与估计器的结合"><a href="#转换器与估计器的结合" class="headerlink" title="转换器与估计器的结合"></a>转换器与估计器的结合</h2><p>在sklearn中，转换器和估计器可以非常方便地结合使用。这是因为sklearn提供了一个名为<code>Pipeline</code>的工具，它可以将转换器和估计器组合成一个整体。</p>
+<p>例如，我们可以创建一个包含标准化转换器和逻辑回归估计器的管道：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建管道</span></span><br><span class="line">pipe = Pipeline([</span><br><span class="line">    (<span class="string">&#x27;scaler&#x27;</span>, StandardScaler()),</span><br><span class="line">    (<span class="string">&#x27;clf&#x27;</span>, LogisticRegression())</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用fit方法对模型进行训练</span></span><br><span class="line">pipe.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用predict方法对测试数据进行预测</span></span><br><span class="line">y_pred = pipe.predict(X_test)</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，<code>Pipeline</code>会自动处理数据的转换和模型的训练。我们只需要调用<code>fit</code>和<code>predict</code>方法，<code>Pipeline</code>就会按照我们指定的顺序执行转换和预测。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>转换器和估计器是机器学习中的两个核心概念。转换器负责数据的预处理，而估计器则负责实现具体的机器学习算法。在sklearn中，这两个概念得到了很好的实现和整合，使得我们可以方便地进行机器学习任务。通过理解并熟练使用转换器和估计器，我们可以更好地掌握机器学习的精髓，并在实际应用中取得更好的效果。</p>
 <a id="more"></a>
 
 ]]></content>
