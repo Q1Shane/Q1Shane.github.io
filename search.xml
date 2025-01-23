@@ -363,71 +363,6 @@
       </tags>
   </entry>
   <entry>
-    <title>机器学习-10-——拟合与正则化</title>
-    <url>/6552.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="欠拟合和过拟合"><a href="#欠拟合和过拟合" class="headerlink" title="欠拟合和过拟合"></a>欠拟合和过拟合</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
-<li>过拟合：一个假设<strong>在训练数据上能够获得比其他假设更好的拟合， 但是在测试数据集上却不能很好地拟合数据</strong>，此时认为这个假设出现了过拟合的现象。(模型过于复杂)</li>
-<li>欠拟合：一个假设<strong>在训练数据上不能获得更好的拟合，并且在测试数据集上也不能很好地拟合数据</strong>，此时认为这个假设出现了欠拟合的现象。(模型过于简单)</li>
-</ul>
-<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/1.png" style="zoom:40%;">
-
-<h3 id="原因以及解决办法"><a href="#原因以及解决办法" class="headerlink" title="原因以及解决办法"></a>原因以及解决办法</h3><ul>
-<li>欠拟合原因以及解决办法<ul>
-<li>原因：学习到数据的特征过少</li>
-<li>解决办法：<ul>
-<li><strong>1）添加其他特征项，</strong>有时候我们模型出现欠拟合的时候是因为特征项不够导致的，可以添加其他特征项来很好地解决。例如，“组合”、“泛化”、“相关性”三类特征是特征添加的重要手段，无论在什么场景，都可以照葫芦画瓢，总会得到意想不到的效果。除上面的特征之外，“上下文特征”、“平台特征”等等，都可以作为特征添加的首选项。</li>
-<li><strong>2）添加多项式特征</strong>，这个在机器学习算法里面用的很普遍，例如将线性模型通过添加二次项或者三次项使模型泛化能力更强。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>过拟合原因以及解决办法<ul>
-<li>原因：原始特征过多，存在一些嘈杂特征， 模型过于复杂是因为模型尝试去兼顾各个测试数据点</li>
-<li>解决办法：<ul>
-<li>1）重新清洗数据，导致过拟合的一个原因也有可能是数据不纯导致的，如果出现了过拟合就需要我们重新清洗数据。</li>
-<li>2）增大数据的训练量，还有一个原因就是我们用于训练的数据量太小导致的，训练数据占总数据的比例过小。</li>
-<li><strong>3）正则化</strong></li>
-<li>4）减少特征维度，防止<strong>维灾难</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><h3 id="什么是正则化"><a href="#什么是正则化" class="headerlink" title="什么是正则化"></a>什么是正则化</h3><p>在解决回归过拟合中，我们选择正则化。但是对于其他机器学习算法如分类算法来说也会出现这样的问题，除了一些算法本身作用之外（决策树、神经网络），我们更多的也是去自己做特征选择，包括之前说的删除、合并一些特征</p>
-<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/2.png" style="zoom:50%;">
-
-<p><strong>在学习的时候，数据提供的特征有些影响模型复杂度或者这个特征的数据点异常较多，所以算法在学习的时候尽量减少这个特征的影响（甚至删除某个特征的影响），这就是正则化</strong></p>
-<p>注：调整时候，算法并不知道某个特征影响，而是去调整参数得出优化的结果</p>
-<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/3.png" style="zoom:40%;">
-
-<h3 id="正则化类别"><a href="#正则化类别" class="headerlink" title="正则化类别"></a>正则化类别</h3><ul>
-<li><strong>L2正则化</strong><ul>
-<li>作用：可以使得其中一些W的都很小，都接近于0，削弱某个特征的影响</li>
-<li>优点：越小的参数说明模型越简单，越简单的模型则越不容易产生过拟合现象</li>
-<li><strong>Ridge回归(岭回归)</strong></li>
-</ul>
-</li>
-<li><strong>L1正则化</strong><ul>
-<li>作用：可以使得其中一些W的值直接为0，删除这个特征的影响</li>
-<li><strong>LASSO回归</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="L1-与-L2-的区别"><a href="#L1-与-L2-的区别" class="headerlink" title="L1 与 L2 的区别"></a>L1 与 L2 的区别</h3><p>L1正则化产生稀疏的权值,L2正则化产生平滑的权值<br><strong>L1正则化偏向于稀疏，它会自动进行特征选择，去掉一些没用的特征，也就是将这些特征对应的权重置为0</strong>.<br>L2主要功能是为了防止过拟合，<strong>当要求参数越小时，说明模型越简单，而模型越简单则，越趋向于平滑</strong>，从而防止过拟合。</p>
-<p><strong>正则化力度:</strong><br><strong>大: 参数趋近于0</strong><br><strong>小: 参数变化小(高阶项权重没变)</strong></p>
-<a id="more"></a>
-
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>欠拟合与过拟合</tag>
-        <tag>L1和L2正则化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>机器学习-11-——逻辑回归</title>
     <url>/30190.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h2><p>逻辑回归（Logistic Regression）是机器学习中的一种分类模型，逻辑回归是一种分类算法，虽然名字中带有回归，但是它与回归之间有一定的联系。由于算法的简单和高效，在实际中应用非常广泛。<strong>是解决二分类问题的利器。</strong></p>
@@ -501,6 +436,71 @@
       <tags>
         <tag>机器学习</tag>
         <tag>逻辑回归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器学习-10-——拟合与正则化</title>
+    <url>/6552.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="欠拟合和过拟合"><a href="#欠拟合和过拟合" class="headerlink" title="欠拟合和过拟合"></a>欠拟合和过拟合</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>过拟合：一个假设<strong>在训练数据上能够获得比其他假设更好的拟合， 但是在测试数据集上却不能很好地拟合数据</strong>，此时认为这个假设出现了过拟合的现象。(模型过于复杂)</li>
+<li>欠拟合：一个假设<strong>在训练数据上不能获得更好的拟合，并且在测试数据集上也不能很好地拟合数据</strong>，此时认为这个假设出现了欠拟合的现象。(模型过于简单)</li>
+</ul>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/1.png" style="zoom:40%;">
+
+<h3 id="原因以及解决办法"><a href="#原因以及解决办法" class="headerlink" title="原因以及解决办法"></a>原因以及解决办法</h3><ul>
+<li>欠拟合原因以及解决办法<ul>
+<li>原因：学习到数据的特征过少</li>
+<li>解决办法：<ul>
+<li><strong>1）添加其他特征项，</strong>有时候我们模型出现欠拟合的时候是因为特征项不够导致的，可以添加其他特征项来很好地解决。例如，“组合”、“泛化”、“相关性”三类特征是特征添加的重要手段，无论在什么场景，都可以照葫芦画瓢，总会得到意想不到的效果。除上面的特征之外，“上下文特征”、“平台特征”等等，都可以作为特征添加的首选项。</li>
+<li><strong>2）添加多项式特征</strong>，这个在机器学习算法里面用的很普遍，例如将线性模型通过添加二次项或者三次项使模型泛化能力更强。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>过拟合原因以及解决办法<ul>
+<li>原因：原始特征过多，存在一些嘈杂特征， 模型过于复杂是因为模型尝试去兼顾各个测试数据点</li>
+<li>解决办法：<ul>
+<li>1）重新清洗数据，导致过拟合的一个原因也有可能是数据不纯导致的，如果出现了过拟合就需要我们重新清洗数据。</li>
+<li>2）增大数据的训练量，还有一个原因就是我们用于训练的数据量太小导致的，训练数据占总数据的比例过小。</li>
+<li><strong>3）正则化</strong></li>
+<li>4）减少特征维度，防止<strong>维灾难</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><h3 id="什么是正则化"><a href="#什么是正则化" class="headerlink" title="什么是正则化"></a>什么是正则化</h3><p>在解决回归过拟合中，我们选择正则化。但是对于其他机器学习算法如分类算法来说也会出现这样的问题，除了一些算法本身作用之外（决策树、神经网络），我们更多的也是去自己做特征选择，包括之前说的删除、合并一些特征</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/2.png" style="zoom:50%;">
+
+<p><strong>在学习的时候，数据提供的特征有些影响模型复杂度或者这个特征的数据点异常较多，所以算法在学习的时候尽量减少这个特征的影响（甚至删除某个特征的影响），这就是正则化</strong></p>
+<p>注：调整时候，算法并不知道某个特征影响，而是去调整参数得出优化的结果</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/3.png" style="zoom:40%;">
+
+<h3 id="正则化类别"><a href="#正则化类别" class="headerlink" title="正则化类别"></a>正则化类别</h3><ul>
+<li><strong>L2正则化</strong><ul>
+<li>作用：可以使得其中一些W的都很小，都接近于0，削弱某个特征的影响</li>
+<li>优点：越小的参数说明模型越简单，越简单的模型则越不容易产生过拟合现象</li>
+<li><strong>Ridge回归(岭回归)</strong></li>
+</ul>
+</li>
+<li><strong>L1正则化</strong><ul>
+<li>作用：可以使得其中一些W的值直接为0，删除这个特征的影响</li>
+<li><strong>LASSO回归</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="L1-与-L2-的区别"><a href="#L1-与-L2-的区别" class="headerlink" title="L1 与 L2 的区别"></a>L1 与 L2 的区别</h3><p>L1正则化产生稀疏的权值,L2正则化产生平滑的权值<br><strong>L1正则化偏向于稀疏，它会自动进行特征选择，去掉一些没用的特征，也就是将这些特征对应的权重置为0</strong>.<br>L2主要功能是为了防止过拟合，<strong>当要求参数越小时，说明模型越简单，而模型越简单则，越趋向于平滑</strong>，从而防止过拟合。</p>
+<p><strong>正则化力度:</strong><br><strong>大: 参数趋近于0</strong><br><strong>小: 参数变化小(高阶项权重没变)</strong></p>
+<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>欠拟合与过拟合</tag>
+        <tag>L1和L2正则化</tag>
       </tags>
   </entry>
   <entry>
@@ -594,45 +594,6 @@
         <tag>机器学习</tag>
         <tag>无监督学习</tag>
         <tag>聚类</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机器学习(2)——归一化与标准化</title>
-    <url>/11448.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h2><h3 id="归一化Normalization"><a href="#归一化Normalization" class="headerlink" title="归一化Normalization"></a>归一化Normalization</h3><p>由于每一组特征数据的量纲是不同的，我们需要先将他们的量纲统一，之后再去训练学习，每一组特征数据的变化对预测结果的影响。</p>
-<p><strong>特点:通过对原始数据进行变换把数据映射到(默认为[0,1])之间</strong></p>
-<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/11448/1.png" style="zoom:50%;">
-
-<p>def MinMaxScaler(feature_range=(0, 1…))：归一化。每个特征缩放到给定范围(默认[0,1])</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mm</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    归一化处理</span></span><br><span class="line"><span class="string">    :return: NOne</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 归一化容易受极值的影响</span></span><br><span class="line">    mm = MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		</span><br><span class="line">    <span class="comment">#通过fit_transform进行转换</span></span><br><span class="line">    data = mm.fit_transform([[<span class="number">90</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">40</span>], [<span class="number">60</span>, <span class="number">4</span>, <span class="number">15</span>, <span class="number">45</span>], [<span class="number">75</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">46</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#如果使用transform进行测试集的时候，量纲还是fit_transform的</span></span><br><span class="line">    out = mm.fit_transform([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">6</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">7</span>]])</span><br><span class="line"></span><br><span class="line">    print(out)</span><br><span class="line">    <span class="comment"># [[-1.96666667 0.		-1.4		-6		]</span></span><br><span class="line">    <span class="comment">#  [-1.8				1.5		-0.4		-5.5	]]</span></span><br><span class="line">		<span class="comment"># 相当于是用 (1-90/90-60) *1 + 1 = -1.966667</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">mm()</span><br></pre></td></tr></table></figure>
-
-
-<ol>
-<li><strong>归一化的好处</strong>：容易更快地通过梯度下降找到最优解</li>
-<li>归一化的弊端：由于是使用max和min数据进行处理，会很容易受极值的影响，如果max很大，而其他数据很小，那归一化后的其他数据则很接近0</li>
-</ol>
-<p><strong>注意</strong>：在特定场景下最大值最小值是变化的，另外，最大值与最小值非常容易受<strong>异常点</strong>影响，所以这种方法鲁棒性较差，<strong>只适合传统精确小数据场景</strong>。</p>
-<h3 id="标准化Standardization"><a href="#标准化Standardization" class="headerlink" title="标准化Standardization"></a>标准化Standardization</h3><p>z-score 标准化(zero-mean normalization)，最常见的标准化方法就是Z标准化，也叫<strong>标准差标准化</strong>。通过对原始数据进行变换<strong>把数据变换到均值为0,标准差为1范围内</strong>，不是标准正态分布，只是均值为0，标准差为1的均匀分布</p>
-<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/11448/2.png" style="zoom:25%;">
-
-<p>def  StandardScaler(…)：标准化</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stand</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    标准化缩放，不是标准正太分布，只均值为0，方差为1的分布</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    std = StandardScaler()</span><br><span class="line">    data = std.fit_transform([[<span class="number">1.</span>, -<span class="number">1.</span>, <span class="number">3.</span>], [<span class="number">2.</span>, <span class="number">4.</span>, <span class="number">2.</span>], [<span class="number">4.</span>, <span class="number">6.</span>, -<span class="number">1.</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    print(std.mean_)</span><br><span class="line">    print(std.var_)</span><br><span class="line">    print(std.n_samples_seen_)  <span class="comment"># 样本数</span></span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span> * <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">stand()</span><br></pre></td></tr></table></figure>
-<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/11448/3.png" style="zoom:50%;">
-
-<ul>
-<li>对于归一化来说：如果出现异常点，影响了<strong>最大值和最小值</strong>，那么结果显然会发生改变</li>
-<li>对于标准化来说：如果出现异常点，由于具有一定数据量，少量的异常点对于<strong>平均值的影响</strong>并不大，从而方差改变<strong>较小</strong>。</li>
-</ul>
-<p><strong>注意</strong>：在已有<strong>样本足够多</strong>的情况下比较稳定，适合现代嘈杂大数据场景。</p>
-<a id="more"></a>
-
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>特征工程</tag>
       </tags>
   </entry>
   <entry>
@@ -734,6 +695,45 @@
       </tags>
   </entry>
   <entry>
+    <title>机器学习(2)——归一化与标准化</title>
+    <url>/11448.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h2><h3 id="归一化Normalization"><a href="#归一化Normalization" class="headerlink" title="归一化Normalization"></a>归一化Normalization</h3><p>由于每一组特征数据的量纲是不同的，我们需要先将他们的量纲统一，之后再去训练学习，每一组特征数据的变化对预测结果的影响。</p>
+<p><strong>特点:通过对原始数据进行变换把数据映射到(默认为[0,1])之间</strong></p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/11448/1.png" style="zoom:50%;">
+
+<p>def MinMaxScaler(feature_range=(0, 1…))：归一化。每个特征缩放到给定范围(默认[0,1])</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mm</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    归一化处理</span></span><br><span class="line"><span class="string">    :return: NOne</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 归一化容易受极值的影响</span></span><br><span class="line">    mm = MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		</span><br><span class="line">    <span class="comment">#通过fit_transform进行转换</span></span><br><span class="line">    data = mm.fit_transform([[<span class="number">90</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">40</span>], [<span class="number">60</span>, <span class="number">4</span>, <span class="number">15</span>, <span class="number">45</span>], [<span class="number">75</span>, <span class="number">3</span>, <span class="number">13</span>, <span class="number">46</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#如果使用transform进行测试集的时候，量纲还是fit_transform的</span></span><br><span class="line">    out = mm.fit_transform([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">6</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">7</span>]])</span><br><span class="line"></span><br><span class="line">    print(out)</span><br><span class="line">    <span class="comment"># [[-1.96666667 0.		-1.4		-6		]</span></span><br><span class="line">    <span class="comment">#  [-1.8				1.5		-0.4		-5.5	]]</span></span><br><span class="line">		<span class="comment"># 相当于是用 (1-90/90-60) *1 + 1 = -1.966667</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">mm()</span><br></pre></td></tr></table></figure>
+
+
+<ol>
+<li><strong>归一化的好处</strong>：容易更快地通过梯度下降找到最优解</li>
+<li>归一化的弊端：由于是使用max和min数据进行处理，会很容易受极值的影响，如果max很大，而其他数据很小，那归一化后的其他数据则很接近0</li>
+</ol>
+<p><strong>注意</strong>：在特定场景下最大值最小值是变化的，另外，最大值与最小值非常容易受<strong>异常点</strong>影响，所以这种方法鲁棒性较差，<strong>只适合传统精确小数据场景</strong>。</p>
+<h3 id="标准化Standardization"><a href="#标准化Standardization" class="headerlink" title="标准化Standardization"></a>标准化Standardization</h3><p>z-score 标准化(zero-mean normalization)，最常见的标准化方法就是Z标准化，也叫<strong>标准差标准化</strong>。通过对原始数据进行变换<strong>把数据变换到均值为0,标准差为1范围内</strong>，不是标准正态分布，只是均值为0，标准差为1的均匀分布</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/11448/2.png" style="zoom:25%;">
+
+<p>def  StandardScaler(…)：标准化</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stand</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    标准化缩放，不是标准正太分布，只均值为0，方差为1的分布</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    std = StandardScaler()</span><br><span class="line">    data = std.fit_transform([[<span class="number">1.</span>, -<span class="number">1.</span>, <span class="number">3.</span>], [<span class="number">2.</span>, <span class="number">4.</span>, <span class="number">2.</span>], [<span class="number">4.</span>, <span class="number">6.</span>, -<span class="number">1.</span>]])</span><br><span class="line"></span><br><span class="line">    print(data)</span><br><span class="line">    print(std.mean_)</span><br><span class="line">    print(std.var_)</span><br><span class="line">    print(std.n_samples_seen_)  <span class="comment"># 样本数</span></span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span> * <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">stand()</span><br></pre></td></tr></table></figure>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/11448/3.png" style="zoom:50%;">
+
+<ul>
+<li>对于归一化来说：如果出现异常点，影响了<strong>最大值和最小值</strong>，那么结果显然会发生改变</li>
+<li>对于标准化来说：如果出现异常点，由于具有一定数据量，少量的异常点对于<strong>平均值的影响</strong>并不大，从而方差改变<strong>较小</strong>。</li>
+</ul>
+<p><strong>注意</strong>：在已有<strong>样本足够多</strong>的情况下比较稳定，适合现代嘈杂大数据场景。</p>
+<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>特征工程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>机器学习-5-——转换器与估计器</title>
     <url>/6552.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="转换器（Transformer）"><a href="#转换器（Transformer）" class="headerlink" title="转换器（Transformer）"></a>转换器（Transformer）</h2><p>转换器是一种用于数据预处理的工具，它可以将原始数据转换为机器学习算法可以处理的格式。转换器通常用于特征工程，这是一种从原始数据中提取有意义特征的过程。</p>
@@ -790,6 +790,64 @@
       <tags>
         <tag>机器学习</tag>
         <tag>特征工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器学习-7-——朴素贝叶斯算法</title>
+    <url>/6552.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><p>贝叶斯公式（两个特征之间独立）：</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/1.png" style="zoom:70%;">
+
+<p>换个表达形式就会明朗很多，如下：</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/2.png" style="zoom:40%;">
+
+<p>我们最终求的p(类别|特征)即可！就相当于完成了我们的任务。</p>
+<p>公式分为三个部分：</p>
+<ul>
+<li>P(C):每个文档类别的概率(某文档类别数/总文档数</li>
+<li>P(WIC):<strong>给定某个类别</strong>下<strong>特征(被预测文档中出现的词)的概率</strong></li>
+</ul>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/3.png" style="zoom:50%;">
+
+<h3 id="拉普拉斯平滑"><a href="#拉普拉斯平滑" class="headerlink" title="拉普拉斯平滑"></a>拉普拉斯平滑</h3><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/4.png" style="zoom:50%;">
+
+<p>属于某个类别为 0， 合适吗？</p>
+<p><strong>问题</strong>： 从上面的例子我们得到娱乐概率为 0， 这是不合理的， 如果词频列表里面有很多出现次数都为 0， 很可能计算结果都为零<br><strong>解决方法</strong>： 拉普拉斯平滑系数</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/5.png" style="zoom:40%;">
+
+<p>α 为指定的系数一般为 1， m 为代表类别的数目（标签的数目） (我们分为两类,科技类与娱乐类)</p>
+<h3 id="sklearn-朴素贝叶斯实现-API"><a href="#sklearn-朴素贝叶斯实现-API" class="headerlink" title="sklearn 朴素贝叶斯实现 API"></a>sklearn 朴素贝叶斯实现 API</h3><p>sklearn.naive_bayes.MultinomialNB</p>
+<p>MultinomialNB</p>
+<ul>
+<li>sklearn.naive_bayes.MultinomialNB(alpha = 1.0)</li>
+<li>朴素贝叶斯分类</li>
+<li>alpha： 拉普拉斯平滑系数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">朴素贝叶斯进行文本分类</span></span><br><span class="line"><span class="string">:return: None</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">news = fetch_20newsgroups(subset=<span class="string">&#x27;all&#x27;</span>, data_home=<span class="string">&#x27;data&#x27;</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="built_in">len</span>(news.data))  <span class="comment">#样本数，包含的特征</span></span><br><span class="line">print(<span class="string">&#x27;-&#x27;</span>*<span class="number">50</span>)</span><br><span class="line">print(news.data[<span class="number">0</span>]) <span class="comment">#第一个样本 特征</span></span><br><span class="line">print(<span class="string">&#x27;-&#x27;</span>*<span class="number">50</span>)</span><br><span class="line">print(news.target) <span class="comment">#标签</span></span><br><span class="line">print(np.unique(news.target)) <span class="comment">#标签的类别</span></span><br><span class="line">print(news.target_names) <span class="comment">#标签的名字</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;-&#x27;</span>*<span class="number">50</span>)</span><br><span class="line"><span class="comment"># 进行数据分割</span></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(news.data, news.target, test_size=<span class="number">0.25</span>, random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对数据集进行特征抽取</span></span><br><span class="line">tf = TfidfVectorizer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以训练集当中的词的列表进行每篇文章重要性统计[&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;]</span></span><br><span class="line">x_train = tf.fit_transform(x_train)</span><br><span class="line"><span class="comment">#针对特征内容，可以自行打印，下面的打印可以得到特征数目</span></span><br><span class="line">print(<span class="built_in">len</span>(tf.get_feature_names_out()))</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="comment"># 进行朴素贝叶斯算法的预测,alpha是拉普拉斯平滑系数，分子和分母加上一个系数，分母加alpha*特征词数目</span></span><br><span class="line">mlt = MultinomialNB(alpha=<span class="number">1.0</span>)</span><br><span class="line"></span><br><span class="line">print(x_train.toarray())</span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line">start=time.time()</span><br><span class="line">mlt.fit(x_train, y_train)</span><br><span class="line">end=time.time()</span><br><span class="line">end-start <span class="comment">#统计训练时间</span></span><br><span class="line"></span><br><span class="line">x_test = tf.transform(x_test)  <span class="comment">#特征数目不发生改变</span></span><br><span class="line">print(<span class="built_in">len</span>(tf.get_feature_names_out()))</span><br><span class="line"></span><br><span class="line">start=time.time()</span><br><span class="line">y_predict = mlt.predict(x_test)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;预测的前面10篇文章类别为：&quot;</span>, y_predict[<span class="number">0</span>:<span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 得出准确率,这个是很难提高准确率，为什么呢？</span></span><br><span class="line">print(<span class="string">&quot;准确率为：&quot;</span>, mlt.score(x_test, y_test))</span><br><span class="line">end=time.time()</span><br><span class="line">end-start</span><br><span class="line"></span><br><span class="line"><span class="comment"># 目前这个场景我们不需要召回率，support是真实的为那个类别的有多少个样本</span></span><br><span class="line">print(<span class="string">&quot;每个类别的精确率和召回率：&quot;</span>,</span><br><span class="line">      classification_report(y_test, y_predict,</span><br><span class="line">      target_names=news.target_names))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="朴素贝叶斯分类优缺点"><a href="#朴素贝叶斯分类优缺点" class="headerlink" title="朴素贝叶斯分类优缺点"></a>朴素贝叶斯分类优缺点</h3><p><strong>优点：</strong></p>
+<ul>
+<li>朴素贝叶斯模型发源于古典数学理论， 有稳定的分类效率。</li>
+<li>对缺失数据不太敏感， 算法也比较简单， 常用于文本分类。</li>
+<li>分类准确度高， 速度快</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>需要知道先验概率 P(F1,F2,…|C)， 因此在某些时候会由于假设的先验模型的原因 导致预测效果不佳</li>
+<li>假设了文章当中一些词语另外一些是独立没关系—-如果有关系， 会造成不太靠谱</li>
+<li>训练集当中去进行统计词这些工作 文章收集的不好， 比如有作弊文章， 充斥某个词会对结果造成干扰</li>
+</ul>
+<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>分类算法</tag>
+        <tag>朴素贝叶斯</tag>
       </tags>
   </entry>
   <entry>
@@ -915,64 +973,6 @@
         <tag>特征工程</tag>
         <tag>K近邻</tag>
         <tag>网格搜索</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机器学习-7-——朴素贝叶斯算法</title>
-    <url>/6552.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><p>贝叶斯公式（两个特征之间独立）：</p>
-<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/1.png" style="zoom:70%;">
-
-<p>换个表达形式就会明朗很多，如下：</p>
-<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/2.png" style="zoom:40%;">
-
-<p>我们最终求的p(类别|特征)即可！就相当于完成了我们的任务。</p>
-<p>公式分为三个部分：</p>
-<ul>
-<li>P(C):每个文档类别的概率(某文档类别数/总文档数</li>
-<li>P(WIC):<strong>给定某个类别</strong>下<strong>特征(被预测文档中出现的词)的概率</strong></li>
-</ul>
-<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/3.png" style="zoom:50%;">
-
-<h3 id="拉普拉斯平滑"><a href="#拉普拉斯平滑" class="headerlink" title="拉普拉斯平滑"></a>拉普拉斯平滑</h3><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/4.png" style="zoom:50%;">
-
-<p>属于某个类别为 0， 合适吗？</p>
-<p><strong>问题</strong>： 从上面的例子我们得到娱乐概率为 0， 这是不合理的， 如果词频列表里面有很多出现次数都为 0， 很可能计算结果都为零<br><strong>解决方法</strong>： 拉普拉斯平滑系数</p>
-<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/6552/5.png" style="zoom:40%;">
-
-<p>α 为指定的系数一般为 1， m 为代表类别的数目（标签的数目） (我们分为两类,科技类与娱乐类)</p>
-<h3 id="sklearn-朴素贝叶斯实现-API"><a href="#sklearn-朴素贝叶斯实现-API" class="headerlink" title="sklearn 朴素贝叶斯实现 API"></a>sklearn 朴素贝叶斯实现 API</h3><p>sklearn.naive_bayes.MultinomialNB</p>
-<p>MultinomialNB</p>
-<ul>
-<li>sklearn.naive_bayes.MultinomialNB(alpha = 1.0)</li>
-<li>朴素贝叶斯分类</li>
-<li>alpha： 拉普拉斯平滑系数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">朴素贝叶斯进行文本分类</span></span><br><span class="line"><span class="string">:return: None</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">news = fetch_20newsgroups(subset=<span class="string">&#x27;all&#x27;</span>, data_home=<span class="string">&#x27;data&#x27;</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="built_in">len</span>(news.data))  <span class="comment">#样本数，包含的特征</span></span><br><span class="line">print(<span class="string">&#x27;-&#x27;</span>*<span class="number">50</span>)</span><br><span class="line">print(news.data[<span class="number">0</span>]) <span class="comment">#第一个样本 特征</span></span><br><span class="line">print(<span class="string">&#x27;-&#x27;</span>*<span class="number">50</span>)</span><br><span class="line">print(news.target) <span class="comment">#标签</span></span><br><span class="line">print(np.unique(news.target)) <span class="comment">#标签的类别</span></span><br><span class="line">print(news.target_names) <span class="comment">#标签的名字</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;-&#x27;</span>*<span class="number">50</span>)</span><br><span class="line"><span class="comment"># 进行数据分割</span></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(news.data, news.target, test_size=<span class="number">0.25</span>, random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对数据集进行特征抽取</span></span><br><span class="line">tf = TfidfVectorizer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以训练集当中的词的列表进行每篇文章重要性统计[&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;]</span></span><br><span class="line">x_train = tf.fit_transform(x_train)</span><br><span class="line"><span class="comment">#针对特征内容，可以自行打印，下面的打印可以得到特征数目</span></span><br><span class="line">print(<span class="built_in">len</span>(tf.get_feature_names_out()))</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="comment"># 进行朴素贝叶斯算法的预测,alpha是拉普拉斯平滑系数，分子和分母加上一个系数，分母加alpha*特征词数目</span></span><br><span class="line">mlt = MultinomialNB(alpha=<span class="number">1.0</span>)</span><br><span class="line"></span><br><span class="line">print(x_train.toarray())</span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line">start=time.time()</span><br><span class="line">mlt.fit(x_train, y_train)</span><br><span class="line">end=time.time()</span><br><span class="line">end-start <span class="comment">#统计训练时间</span></span><br><span class="line"></span><br><span class="line">x_test = tf.transform(x_test)  <span class="comment">#特征数目不发生改变</span></span><br><span class="line">print(<span class="built_in">len</span>(tf.get_feature_names_out()))</span><br><span class="line"></span><br><span class="line">start=time.time()</span><br><span class="line">y_predict = mlt.predict(x_test)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;预测的前面10篇文章类别为：&quot;</span>, y_predict[<span class="number">0</span>:<span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 得出准确率,这个是很难提高准确率，为什么呢？</span></span><br><span class="line">print(<span class="string">&quot;准确率为：&quot;</span>, mlt.score(x_test, y_test))</span><br><span class="line">end=time.time()</span><br><span class="line">end-start</span><br><span class="line"></span><br><span class="line"><span class="comment"># 目前这个场景我们不需要召回率，support是真实的为那个类别的有多少个样本</span></span><br><span class="line">print(<span class="string">&quot;每个类别的精确率和召回率：&quot;</span>,</span><br><span class="line">      classification_report(y_test, y_predict,</span><br><span class="line">      target_names=news.target_names))</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="朴素贝叶斯分类优缺点"><a href="#朴素贝叶斯分类优缺点" class="headerlink" title="朴素贝叶斯分类优缺点"></a>朴素贝叶斯分类优缺点</h3><p><strong>优点：</strong></p>
-<ul>
-<li>朴素贝叶斯模型发源于古典数学理论， 有稳定的分类效率。</li>
-<li>对缺失数据不太敏感， 算法也比较简单， 常用于文本分类。</li>
-<li>分类准确度高， 速度快</li>
-</ul>
-<p><strong>缺点：</strong></p>
-<ul>
-<li>需要知道先验概率 P(F1,F2,…|C)， 因此在某些时候会由于假设的先验模型的原因 导致预测效果不佳</li>
-<li>假设了文章当中一些词语另外一些是独立没关系—-如果有关系， 会造成不太靠谱</li>
-<li>训练集当中去进行统计词这些工作 文章收集的不好， 比如有作弊文章， 充斥某个词会对结果造成干扰</li>
-</ul>
-<a id="more"></a>
-
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>分类算法</tag>
-        <tag>朴素贝叶斯</tag>
       </tags>
   </entry>
   <entry>
@@ -1201,6 +1201,87 @@
       </tags>
   </entry>
   <entry>
+    <title>论文解读：GPipe</title>
+    <url>/58735.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a><strong>背景：</strong></h2><p>增大模型规模通常是提高模型效果的有效方案，但是更多的模型参数，更复杂的模型计算逻辑，导致模型的训练过程需要更多的内存。同时计算设备 (GPU) 的内存资源往往非常非常有限，单台设备不足以支持超大规模模型的训练，而将模型分布在多台设备上则是一种可能的解决方案。</p>
+<h2 id="简介："><a href="#简介：" class="headerlink" title="简介："></a><strong>简介：</strong></h2><p>GPipe 使用模型并行方案，将模型切分成一连串 stage，每个 stage 放在独立的设备（GPU/TPU）上，实现对超大规模模型的支持，同时利用 Pipeline 的方案，提高了模型并行模式下的设备利用率。最终 GPipe 通过更大规模的模型和更大的 batch_size，在图像和 NLP 的模型上都得到更好的模型效果。</p>
+<h2 id="方案设计"><a href="#方案设计" class="headerlink" title="方案设计"></a><strong>方案设计</strong></h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-dea46cace07195b41da36a71cfdf6169_r.jpg"></p>
+<h3 id="1-划分-stage"><a href="#1-划分-stage" class="headerlink" title="1. 划分 stage"></a><strong>1. 划分 stage</strong></h3><p>如图 1.(a) 左图所示，将模型划分为连续的几个 stage，每个 stage 各自对应一个设备。这样就使得模型的大小可以突破单个设备内存的大小，因为一台设备只需要能够容纳部分模型的参数和计算。</p>
+<h3 id="2-划分-Micro-Batch-和-Pipeline"><a href="#2-划分-Micro-Batch-和-Pipeline" class="headerlink" title="2. 划分 Micro-Batch 和 Pipeline"></a><strong>2. 划分 Micro-Batch 和 Pipeline</strong></h3><p>图 1.(b) 为一般的模型并行的运算模式，在每个时间点只有一台设备在处理计算逻辑，完成计算后将结果发送给下一台设备，其中设备空闲的时间称为 Bubble。GPipe 将 mini-batch 进一步划分成更小的 micro-batch，同时利用 pipipline 方案，每次处理一个 micro-batch 的数据，得到结果后，将该 micro-batch 的结果发送给下游设备，同时开始处理后一个 micro-batch 的数据，通过这套方案减小设备中的 Bubble。</p>
+<p>GPipe 实验发现，当增加 micro_batch 数目的时候，设备上的 bubble 可忽略 (一定条件下)，一方面是由于如图 1.(c) 所示的的运行模式导致的，另一方面是由于 Re-Materializaition 方案中，计算梯度过程中的前向计算部分可以不依赖前一部分数据的计算结果 (即在图 1.(c) 中的 Bubble 阶段执行。)</p>
+<h3 id="3-Re-Materialization"><a href="#3-Re-Materialization" class="headerlink" title="3. Re-Materialization"></a><strong>3. Re-Materialization</strong></h3><p>基于现有的训练框架，在前向计算时，训练框架会记录每一个算子的计算结果，用于 backward 时的梯度计算。在很多模型中，这部分的内存消耗可能大于模型参数，是限制模型大小（以及 batch-size）的一个重要原因。</p>
+<p>Re-Materialization 具体是指在前向计算过程中，GPipe 只记录 stage 划分处的输出，在计算梯度时，GPipe 会重新执行前向计算逻辑，从而得到各个算子的前向结果，然后再计算梯度结果。</p>
+<p>Re-Materialization 的好处是大大减少了内存需求，可以有效增大训练的 batch_size，比如正常的训练模式下 (忽略输出所占的内存，这部分一般占比较小)，内存能够支持 mini-batch=16，在 Gpipe 的模式下，可以将 micro-batch 设置为 16, 这样实际的 batch_size 就扩大了 min-batch/micor_batch 倍。</p>
+<h2 id="方案效果"><a href="#方案效果" class="headerlink" title="方案效果"></a><strong>方案效果</strong></h2><h3 id="1-更大的模型"><a href="#1-更大的模型" class="headerlink" title="1. 更大的模型"></a><strong>1. 更大的模型</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-a250b74bdb6cefb01ad66396d7d3b89c_r.jpg"></p>
+<p>Gpipe 给出的结果中，AmoebaNet-D 模型最大的是~ 25GB，使用了 8 块 GPU,</p>
+<p>对于 Transformer-L 模型，在使用 128 块 GPU 的情况下，模型最大达到 937.9GB，使用了 128 块 GPU。</p>
+<h3 id="2-更大的-batch-size"><a href="#2-更大的-batch-size" class="headerlink" title="2. 更大的 batch_size"></a><strong>2. 更大的 batch_size</strong></h3><p>Transformer Big 的训练 batch size 从之前的 400k 提高到 4M。</p>
+<h3 id="3-更好的模型效果"><a href="#3-更好的模型效果" class="headerlink" title="3. 更好的模型效果"></a><strong>3. 更好的模型效果</strong></h3><p>结合大模型和大 batch 的优势，大部分图像和 NLP 模型效果都得到了比之前更好的结果。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-9b67b5ad569d20766eb810469912c311_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-572fc0b4f52ac7b0a8a7149bab83e6cc_b.jpg"></p>
+<h3 id="4-训练效率"><a href="#4-训练效率" class="headerlink" title="4. 训练效率"></a><strong>4. 训练效率</strong></h3><p>按照 paper 所说，在增加设备个数的情况下，最优能达到接近线性的加速效果。不过没有看到与相同设备下的数据并行方案的对比。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-f2da3e9dd8fdf1cadc88bf5bd8d86d41_b.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-f655032c4a5a7cfe663b756c73405c5c_b.jpg"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>这是谷歌出品的一个可扩展的模型并行库，用于训练巨型神经网络。通过批量分隔流水线并行方法，取得了几乎线性加速，并且按照论文表述，可支持各种深度网络，有很高的可靠性（同步梯度下降模式下，无论分区数量多少，都可以保证一致的训练）。</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>毕业设计-日志</title>
+    <url>/45623.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="2021-3-3"><a href="#2021-3-3" class="headerlink" title="2021/3/3"></a>2021/3/3</h2><ul>
+<li><p>阅读论文： <strong><em>PipeDream: Fast and Effiffifficient Pipeline Parallel DNN Training</em></strong> ，</p>
+<p>​                   <strong><em>GPipe: Easy Scaling with Micro-Batch Pipeline Parallelism</em></strong></p>
+</li>
+<li><p>学习PyTorch分布式架构的使用</p>
+</li>
+</ul>
+<h2 id="2021-3-2"><a href="#2021-3-2" class="headerlink" title="2021/3/2"></a>2021/3/2</h2><ul>
+<li>配置服务器环境，安装anaconda, pytorch, 导入torchgpipe。学习其使用</li>
+<li>翻译论文：**<em>torchgpipe: On-the-ﬂy Pipeline Parallelism for Training Giant Models**</em></li>
+</ul>
+<h2 id="2021-2-2021-2-7"><a href="#2021-2-2021-2-7" class="headerlink" title="2021/2/-2021/2/7"></a>2021/2/-2021/2/7</h2><ul>
+<li><p><strong>1.查阅分布式深度学习的相关知识</strong></p>
+<p>（在对分布式深度学习有一定了解后，再研读论文，有一定的思路。）</p>
+<p>‘’它使用同步随机梯度下降和流水线并行的方式进行训练，适用于任何由多个有序的层组成的深度神经网络(Deep Neural Networks, DNN)。 Gpipe通过跨不同的加速器来分割模型，并自动将一小批训练示例划分成更小的批量。 该模型允许GPipe的加速器进行并行操作，最大限度地提高了训练过程中的可扩展性。‘’层序</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/45623/Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210115040032282.png" alt="image-20210115040032282"></p>
+<p><strong>2.阅读论文–torchgpipe: On-the-flfly Pipeline Parallelism for Training Giant Models</strong></p>
+<p>通过设置参数将一个计算划分为相同的几个小批次，实现并行。通过超参数调优，有效的将训练时间减少到一定大小的批次。</p>
+<p>文中解决的问题：</p>
+<p>每个分布式机器做完自己的任务，需要更新参数，用于同步网络参数。大量的参数需要同步时，可能会导致大量的通信负载</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/45623/Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210115041557350.png" alt="image-20210115041557350"></p>
+<p>1：</p>
+<p>​    不同任务所占据的CPU时间不定，可长可短，解决方法：引入确定性时间周期，给出任务总排序</p>
+<p>2：</p>
+<p>​    由于pytorch的特点是，需要时调用，用完即弃，所以不保存前向图逻辑，只保留计算梯度等参数。所以反馈时不一定会顺序正确，所以需要引入fork，join原语标注顺序</p>
+<p>3：</p>
+<p>​    出现双向同步的问题，导致使用不足，出现双方相互等待。所以需要使用非默认C UDA流来避免这个问题，这样副本就不会阻止计算，除非计算必须等待数据。</p>
+<p>4：</p>
+<p>​    考虑有些任务会跳过一些批次，所以放宽顺序执行，增加设计一个接口来跳过中间张量。</p>
+</li>
+</ul>
+<p>  <strong>提出的问题</strong></p>
+<p>  ​    不同批次的大小该如何划分以达到最优？</p>
+<p>  <strong>近期计划</strong></p>
+<p>  1.开始在pytorch上实践torchpipe，尽早发现问题，解决问题。前期工作主要是实现torchpipe的思想，后期再进一步优化。</p>
+<p>  2.继续研读相关论文，正确理解其含义，误解的开始</p>
+<p>  介于假期不能线下开会，计划每两周开一次小会，将有关问题汇总和研究生学长讨论。</p>
+]]></content>
+      <categories>
+        <category>日志</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>机器学习-9-——线性回归</title>
     <url>/6552.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><h3 id="定义与公式"><a href="#定义与公式" class="headerlink" title="定义与公式"></a>定义与公式</h3><p><strong>线性回归(Linear regression)**是利用</strong>回归方程(函数)<strong>对</strong>一个或多个自变量(特征值)和因变量(目标值)之间**关系进行建模的一种分析方式。</p>
@@ -1386,126 +1467,6 @@
       </tags>
   </entry>
   <entry>
-    <title>论文解读：GPipe</title>
-    <url>/58735.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
-
-<h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a><strong>背景：</strong></h2><p>增大模型规模通常是提高模型效果的有效方案，但是更多的模型参数，更复杂的模型计算逻辑，导致模型的训练过程需要更多的内存。同时计算设备 (GPU) 的内存资源往往非常非常有限，单台设备不足以支持超大规模模型的训练，而将模型分布在多台设备上则是一种可能的解决方案。</p>
-<h2 id="简介："><a href="#简介：" class="headerlink" title="简介："></a><strong>简介：</strong></h2><p>GPipe 使用模型并行方案，将模型切分成一连串 stage，每个 stage 放在独立的设备（GPU/TPU）上，实现对超大规模模型的支持，同时利用 Pipeline 的方案，提高了模型并行模式下的设备利用率。最终 GPipe 通过更大规模的模型和更大的 batch_size，在图像和 NLP 的模型上都得到更好的模型效果。</p>
-<h2 id="方案设计"><a href="#方案设计" class="headerlink" title="方案设计"></a><strong>方案设计</strong></h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-dea46cace07195b41da36a71cfdf6169_r.jpg"></p>
-<h3 id="1-划分-stage"><a href="#1-划分-stage" class="headerlink" title="1. 划分 stage"></a><strong>1. 划分 stage</strong></h3><p>如图 1.(a) 左图所示，将模型划分为连续的几个 stage，每个 stage 各自对应一个设备。这样就使得模型的大小可以突破单个设备内存的大小，因为一台设备只需要能够容纳部分模型的参数和计算。</p>
-<h3 id="2-划分-Micro-Batch-和-Pipeline"><a href="#2-划分-Micro-Batch-和-Pipeline" class="headerlink" title="2. 划分 Micro-Batch 和 Pipeline"></a><strong>2. 划分 Micro-Batch 和 Pipeline</strong></h3><p>图 1.(b) 为一般的模型并行的运算模式，在每个时间点只有一台设备在处理计算逻辑，完成计算后将结果发送给下一台设备，其中设备空闲的时间称为 Bubble。GPipe 将 mini-batch 进一步划分成更小的 micro-batch，同时利用 pipipline 方案，每次处理一个 micro-batch 的数据，得到结果后，将该 micro-batch 的结果发送给下游设备，同时开始处理后一个 micro-batch 的数据，通过这套方案减小设备中的 Bubble。</p>
-<p>GPipe 实验发现，当增加 micro_batch 数目的时候，设备上的 bubble 可忽略 (一定条件下)，一方面是由于如图 1.(c) 所示的的运行模式导致的，另一方面是由于 Re-Materializaition 方案中，计算梯度过程中的前向计算部分可以不依赖前一部分数据的计算结果 (即在图 1.(c) 中的 Bubble 阶段执行。)</p>
-<h3 id="3-Re-Materialization"><a href="#3-Re-Materialization" class="headerlink" title="3. Re-Materialization"></a><strong>3. Re-Materialization</strong></h3><p>基于现有的训练框架，在前向计算时，训练框架会记录每一个算子的计算结果，用于 backward 时的梯度计算。在很多模型中，这部分的内存消耗可能大于模型参数，是限制模型大小（以及 batch-size）的一个重要原因。</p>
-<p>Re-Materialization 具体是指在前向计算过程中，GPipe 只记录 stage 划分处的输出，在计算梯度时，GPipe 会重新执行前向计算逻辑，从而得到各个算子的前向结果，然后再计算梯度结果。</p>
-<p>Re-Materialization 的好处是大大减少了内存需求，可以有效增大训练的 batch_size，比如正常的训练模式下 (忽略输出所占的内存，这部分一般占比较小)，内存能够支持 mini-batch=16，在 Gpipe 的模式下，可以将 micro-batch 设置为 16, 这样实际的 batch_size 就扩大了 min-batch/micor_batch 倍。</p>
-<h2 id="方案效果"><a href="#方案效果" class="headerlink" title="方案效果"></a><strong>方案效果</strong></h2><h3 id="1-更大的模型"><a href="#1-更大的模型" class="headerlink" title="1. 更大的模型"></a><strong>1. 更大的模型</strong></h3><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-a250b74bdb6cefb01ad66396d7d3b89c_r.jpg"></p>
-<p>Gpipe 给出的结果中，AmoebaNet-D 模型最大的是~ 25GB，使用了 8 块 GPU,</p>
-<p>对于 Transformer-L 模型，在使用 128 块 GPU 的情况下，模型最大达到 937.9GB，使用了 128 块 GPU。</p>
-<h3 id="2-更大的-batch-size"><a href="#2-更大的-batch-size" class="headerlink" title="2. 更大的 batch_size"></a><strong>2. 更大的 batch_size</strong></h3><p>Transformer Big 的训练 batch size 从之前的 400k 提高到 4M。</p>
-<h3 id="3-更好的模型效果"><a href="#3-更好的模型效果" class="headerlink" title="3. 更好的模型效果"></a><strong>3. 更好的模型效果</strong></h3><p>结合大模型和大 batch 的优势，大部分图像和 NLP 模型效果都得到了比之前更好的结果。</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-9b67b5ad569d20766eb810469912c311_r.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-572fc0b4f52ac7b0a8a7149bab83e6cc_b.jpg"></p>
-<h3 id="4-训练效率"><a href="#4-训练效率" class="headerlink" title="4. 训练效率"></a><strong>4. 训练效率</strong></h3><p>按照 paper 所说，在增加设备个数的情况下，最优能达到接近线性的加速效果。不过没有看到与相同设备下的数据并行方案的对比。</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic2.zhimg.com/v2-f2da3e9dd8fdf1cadc88bf5bd8d86d41_b.jpg"><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://pic1.zhimg.com/v2-f655032c4a5a7cfe663b756c73405c5c_b.jpg"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>这是谷歌出品的一个可扩展的模型并行库，用于训练巨型神经网络。通过批量分隔流水线并行方法，取得了几乎线性加速，并且按照论文表述，可支持各种深度网络，有很高的可靠性（同步梯度下降模式下，无论分区数量多少，都可以保证一致的训练）。</p>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>毕设</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>毕业设计-日志</title>
-    <url>/45623.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
-
-<h2 id="2021-3-3"><a href="#2021-3-3" class="headerlink" title="2021/3/3"></a>2021/3/3</h2><ul>
-<li><p>阅读论文： <strong><em>PipeDream: Fast and Effiffifficient Pipeline Parallel DNN Training</em></strong> ，</p>
-<p>​                   <strong><em>GPipe: Easy Scaling with Micro-Batch Pipeline Parallelism</em></strong></p>
-</li>
-<li><p>学习PyTorch分布式架构的使用</p>
-</li>
-</ul>
-<h2 id="2021-3-2"><a href="#2021-3-2" class="headerlink" title="2021/3/2"></a>2021/3/2</h2><ul>
-<li>配置服务器环境，安装anaconda, pytorch, 导入torchgpipe。学习其使用</li>
-<li>翻译论文：**<em>torchgpipe: On-the-ﬂy Pipeline Parallelism for Training Giant Models**</em></li>
-</ul>
-<h2 id="2021-2-2021-2-7"><a href="#2021-2-2021-2-7" class="headerlink" title="2021/2/-2021/2/7"></a>2021/2/-2021/2/7</h2><ul>
-<li><p><strong>1.查阅分布式深度学习的相关知识</strong></p>
-<p>（在对分布式深度学习有一定了解后，再研读论文，有一定的思路。）</p>
-<p>‘’它使用同步随机梯度下降和流水线并行的方式进行训练，适用于任何由多个有序的层组成的深度神经网络(Deep Neural Networks, DNN)。 Gpipe通过跨不同的加速器来分割模型，并自动将一小批训练示例划分成更小的批量。 该模型允许GPipe的加速器进行并行操作，最大限度地提高了训练过程中的可扩展性。‘’层序</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/45623/Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210115040032282.png" alt="image-20210115040032282"></p>
-<p><strong>2.阅读论文–torchgpipe: On-the-flfly Pipeline Parallelism for Training Giant Models</strong></p>
-<p>通过设置参数将一个计算划分为相同的几个小批次，实现并行。通过超参数调优，有效的将训练时间减少到一定大小的批次。</p>
-<p>文中解决的问题：</p>
-<p>每个分布式机器做完自己的任务，需要更新参数，用于同步网络参数。大量的参数需要同步时，可能会导致大量的通信负载</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/45623/Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210115041557350.png" alt="image-20210115041557350"></p>
-<p>1：</p>
-<p>​    不同任务所占据的CPU时间不定，可长可短，解决方法：引入确定性时间周期，给出任务总排序</p>
-<p>2：</p>
-<p>​    由于pytorch的特点是，需要时调用，用完即弃，所以不保存前向图逻辑，只保留计算梯度等参数。所以反馈时不一定会顺序正确，所以需要引入fork，join原语标注顺序</p>
-<p>3：</p>
-<p>​    出现双向同步的问题，导致使用不足，出现双方相互等待。所以需要使用非默认C UDA流来避免这个问题，这样副本就不会阻止计算，除非计算必须等待数据。</p>
-<p>4：</p>
-<p>​    考虑有些任务会跳过一些批次，所以放宽顺序执行，增加设计一个接口来跳过中间张量。</p>
-</li>
-</ul>
-<p>  <strong>提出的问题</strong></p>
-<p>  ​    不同批次的大小该如何划分以达到最优？</p>
-<p>  <strong>近期计划</strong></p>
-<p>  1.开始在pytorch上实践torchpipe，尽早发现问题，解决问题。前期工作主要是实现torchpipe的思想，后期再进一步优化。</p>
-<p>  2.继续研读相关论文，正确理解其含义，误解的开始</p>
-<p>  介于假期不能线下开会，计划每两周开一次小会，将有关问题汇总和研究生学长讨论。</p>
-]]></content>
-      <categories>
-        <category>日志</category>
-      </categories>
-      <tags>
-        <tag>毕设</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>论文解读：PipeDream</title>
-    <url>/29937.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
-
-<h2 id="本文介绍了微软新提出的-PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。"><a href="#本文介绍了微软新提出的-PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。" class="headerlink" title="本文介绍了微软新提出的 PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。"></a>本文介绍了微软新提出的 PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。</h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117085931501.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"></p>
-<p>深度神经网络（DNNs：Deep Neural Networks）已经在大量应用中取得了巨大进展，这些应用包括图像分类、翻译、语言建模以及视频字幕等。但 DNN 训练极其耗时，需要多个加速器高效地并行化。</p>
-<p>在论文 “ <a href="https://www.microsoft.com/en-us/research/publication/pipedream-generalized-pipeline-parallelism-for-dnn-training/">PipeDream: Greneralized Pipeline Parallelism for DNN Training</a> ”（该论文发表于第 27 届 ACM 操作系统原理研讨会： <a href="https://sosp19.rcs.uwaterloo.ca/">SOSP 2019</a> ）中，微软系统研究小组的研究员，与来自卡内基梅隆大学和斯坦福大学的同事和学生们一起提出了一种 DNN 并行化训练的新方法。正如论文里在大量模型上展示的那样，这套被称为 PipeDream 的系统比传统的训练方法快了最多 4.3 倍。</p>
-<p>DNN 训练是在前向和后向通道计算中迭代进行的。在每轮迭代中，训练过程循环处理输入数据的一个 minibatch，并且更新模型参数。最常见的 DNN 并行化训练方法是一种被称为数据并行化的方法（见下图 1），这种方法把输入数据分散到各个 workers（加速器）中运行。</p>
-<p>不幸的是，尽管在数据并行化加速方面有一些性能优化的进展，但若要放在云基础设施上训练就会产生很大的通信开销。而且，GPU 计算速度的飞快提升，更进一步地把所有模型训练的耗时瓶颈转向了通信环节。</p>
-<p>不那么常见的并行化训练形式是模型的并行化（见下图 1），是把算子分散到各个 worker 上计算的，这在以往通常用于训练大型 DNN 模型。模型并行化也遇到了挑战：它不能高效地利用硬件资源，并且需要程序员决定怎样按照给定的硬件资源来分割特定的模型，这其实无形中加重了程序员的负担。</p>
-<p>PipeDream 是微软研究院 <a href="https://www.microsoft.com/en-us/research/project/fiddle/">Fiddle 项目</a>开发的一个系统，它引入了流水线并行化，这是一种 DNN 并行化训练的新方法，结合了传统的 batch 内并行化（模型并行化和数据并行化）和 batch 间并行化（流水线）。</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117090027132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"></p>
-<p>图 1：传统的 batch 内并行化训练方式（如数据并行化和模型并行化）对硬件利用率太低。左图中，数据并行化中的单个 worker 在交换梯度数据时不得不进行通信等待。右图是模型并行化，worker 之间只能同时处理一个 minibatch，这大大限制了硬件利用率。</p>
-<h2 id="使用流水线并行化训练来解决-batch-内的并行化限制"><a href="#使用流水线并行化训练来解决-batch-内的并行化限制" class="headerlink" title="使用流水线并行化训练来解决 batch 内的并行化限制"></a>使用流水线并行化训练来解决 batch 内的并行化限制</h2><p>PipeDream 重新审视了模型的并行化，希望以此来优化性能，这与以往的动机不同，以前模型并行化是因为训练大型模型时，训练过程受限于数据集的大小。PipeDream 使用多个输入数据的流水线作业，来克服模型并行训练时硬件效率限制的问题。典型的流水线并行化设置涉及到不同 stage 之间 layer 的分割，每个 stage 都会被复制并且并行运行数据。流水线会被注入多个 batch，以使流水线满负荷运行在稳定状态。在大部分情况下，流水线并行化训练比数据并行化训练需要通信的数据要少很多，因为它只需要在两个 stage 边界之间传输 activation 和梯度。在稳定状态下，所有的 workers 时刻都在运转，不像模型并行化训练中会有停下来等待的时候（如下图所示）。</p>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117090111768.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"></p>
-<p>图 2：左图中，我们展示了一个流水线并行化的例子，8 块 GPU 被分配到 4 个 stage 中。通信只用于 stage 边界的 actiavtion 和梯度上。stage 1,2 和 3 通过对其各自的 stage 进行复制来保证流水线的负载平衡。右图展示了具有 4 个 worker 的一个流水线，展示了启动阶段和稳定阶段。在这个例子中，后向处理花费的时间是前向处理的两倍。</p>
-<h2 id="在-PipeDream-中克服流水线并行化训练的挑战"><a href="#在-PipeDream-中克服流水线并行化训练的挑战" class="headerlink" title="在 PipeDream 中克服流水线并行化训练的挑战"></a>在 PipeDream 中克服流水线并行化训练的挑战</h2><p>为了获得流水线并行化训练的潜在收益，PipeDream 必须克服三个主要挑战：</p>
-<ul>
-<li>  首先，PipeDream 必须在不同的输入数据间，协调双向流水线的工作。</li>
-<li>  然后，PipeDream 必须管理后向通道里的权重版本，从而在数值上能够正确计算梯度，并且在后向通道里使用的权重版本必须和前向通道里使用的相同。</li>
-<li>  最后，PipeDream 需要流水线里的所有 stage 都花费大致相同的计算时间，这是为了使流水线得到最大的通量（因为最慢的 stage 会成为流水线通量的瓶颈）。</li>
-</ul>
-<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117090229924.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"> <strong>图 3：PipeDream 工作流程概览</strong></p>
-<p>图 3 展示了 PipeDream 工作流程的顶层概览。给定一个模型和硬件部署方式，PipeDream 在单个 GPU 上进行短暂的运行时性能分析后，可以自动决定怎样分割这些 DNN 算子，如何平衡不同 stage 之间的计算负载，而同时尽可能减少目标平台上的通信量。PipeDream 即使是在不同的模型（不同点体现在计算和通信方面）和不同的平台上（不同点体现在互联的网络拓扑和分层带宽上）也能够有效的均衡负载。</p>
-<p>由于 DNN 并不总是在可用的 worker 间进行均等分割，所以 PipeDream 可能在某些 stage 上使用数据并行化——多个 worker 会被分配到给定的 stage 上，并行化地处理不同的 minibatch。PipeDream 使用称作 1F1B 的调度算法来使硬件保持满负荷运转，同时还能达到类似数据并行化的语义。</p>
-<p>在 1F1B 的稳定状态下，每个 worker 为它所在的 stage 严格地切换前向和后向通道，保证资源的高利用率（可忽略的流水线暂停，没有流水线 flush），即使在常见情况下，后向通道花费的时间多于前向通道时也是如此。上面的图 2 已经通过例子展示了这一点。与数据并行化不同，1F1B 还使用不同版本的权重来维持统计有效性。最后，PipeDream 扩展了 1F1B，在数据并行 stage 上引入了循环调度策略，保证了后向通道计算的梯度被引流至前向通道对应的 worker 上。</p>
-<p>PipeDream 是基于 PyTorch（PipeDream 的<a href="https://arxiv.org/pdf/1806.03377.pdf">早期版本</a>使用 Caffe）构建出来的。我们的评估围绕着 DNN 模型、数据集和硬件配置的不同组合进行，证实了 PipeDream 流水线并行化所带来的训练时间上的收益。相比于数据并行化训练，PipeDream 在多 GPU 机器上达到了很高的精确度，性能方面，在图像分类上有 5.3 倍提升，机器翻译上 3.1 倍提升，语言建模任务有 4.3 倍提升，视频字幕模型则有 3 倍提升。PipeDream 比模型并行化有 2.6 至 15 倍的性能提升，相比混合并行化有 1.9 倍提升。</p>
-<p>如果你对 PipeDream 更多细节感兴趣，可以在 GitHub 上找到<a href="https://github.com/msr-fiddle/pipedream">源码</a>。</p>
-<p><strong>原文链接：</strong></p>
-<p>[<a href="https://www.microsoft.com/en-us/research/blog/pipedream-a-more-effective-way-to-train-deep-neural-networks-using-pipeline-parallelism/]">https://www.microsoft.com/en-us/research/blog/pipedream-a-more-effective-way-to-train-deep-neural-networks-using-pipeline-parallelism/]</a>(</p>
-]]></content>
-      <categories>
-        <category>论文</category>
-      </categories>
-      <tags>
-        <tag>毕设</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>论文解读：MuCGEC</title>
     <url>/42505.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="MuCGEC-a-Multi-Reference-Multi-Source-Evaluation-Dataset-for-Chinese-Grammatical-Error-Correction"><a href="#MuCGEC-a-Multi-Reference-Multi-Source-Evaluation-Dataset-for-Chinese-Grammatical-Error-Correction" class="headerlink" title="MuCGEC- a Multi-Reference Multi-Source Evaluation Dataset for Chinese Grammatical Error Correction"></a>MuCGEC- a Multi-Reference Multi-Source Evaluation Dataset for Chinese Grammatical Error Correction</h2><hr>
@@ -1646,6 +1607,45 @@
       </categories>
       <tags>
         <tag>GEC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>论文解读：PipeDream</title>
+    <url>/29937.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+
+<h2 id="本文介绍了微软新提出的-PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。"><a href="#本文介绍了微软新提出的-PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。" class="headerlink" title="本文介绍了微软新提出的 PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。"></a>本文介绍了微软新提出的 PipeDream，旨在使深度学习网络训练并行化水平更高，进而提高训练效率。</h2><p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117085931501.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"></p>
+<p>深度神经网络（DNNs：Deep Neural Networks）已经在大量应用中取得了巨大进展，这些应用包括图像分类、翻译、语言建模以及视频字幕等。但 DNN 训练极其耗时，需要多个加速器高效地并行化。</p>
+<p>在论文 “ <a href="https://www.microsoft.com/en-us/research/publication/pipedream-generalized-pipeline-parallelism-for-dnn-training/">PipeDream: Greneralized Pipeline Parallelism for DNN Training</a> ”（该论文发表于第 27 届 ACM 操作系统原理研讨会： <a href="https://sosp19.rcs.uwaterloo.ca/">SOSP 2019</a> ）中，微软系统研究小组的研究员，与来自卡内基梅隆大学和斯坦福大学的同事和学生们一起提出了一种 DNN 并行化训练的新方法。正如论文里在大量模型上展示的那样，这套被称为 PipeDream 的系统比传统的训练方法快了最多 4.3 倍。</p>
+<p>DNN 训练是在前向和后向通道计算中迭代进行的。在每轮迭代中，训练过程循环处理输入数据的一个 minibatch，并且更新模型参数。最常见的 DNN 并行化训练方法是一种被称为数据并行化的方法（见下图 1），这种方法把输入数据分散到各个 workers（加速器）中运行。</p>
+<p>不幸的是，尽管在数据并行化加速方面有一些性能优化的进展，但若要放在云基础设施上训练就会产生很大的通信开销。而且，GPU 计算速度的飞快提升，更进一步地把所有模型训练的耗时瓶颈转向了通信环节。</p>
+<p>不那么常见的并行化训练形式是模型的并行化（见下图 1），是把算子分散到各个 worker 上计算的，这在以往通常用于训练大型 DNN 模型。模型并行化也遇到了挑战：它不能高效地利用硬件资源，并且需要程序员决定怎样按照给定的硬件资源来分割特定的模型，这其实无形中加重了程序员的负担。</p>
+<p>PipeDream 是微软研究院 <a href="https://www.microsoft.com/en-us/research/project/fiddle/">Fiddle 项目</a>开发的一个系统，它引入了流水线并行化，这是一种 DNN 并行化训练的新方法，结合了传统的 batch 内并行化（模型并行化和数据并行化）和 batch 间并行化（流水线）。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117090027132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"></p>
+<p>图 1：传统的 batch 内并行化训练方式（如数据并行化和模型并行化）对硬件利用率太低。左图中，数据并行化中的单个 worker 在交换梯度数据时不得不进行通信等待。右图是模型并行化，worker 之间只能同时处理一个 minibatch，这大大限制了硬件利用率。</p>
+<h2 id="使用流水线并行化训练来解决-batch-内的并行化限制"><a href="#使用流水线并行化训练来解决-batch-内的并行化限制" class="headerlink" title="使用流水线并行化训练来解决 batch 内的并行化限制"></a>使用流水线并行化训练来解决 batch 内的并行化限制</h2><p>PipeDream 重新审视了模型的并行化，希望以此来优化性能，这与以往的动机不同，以前模型并行化是因为训练大型模型时，训练过程受限于数据集的大小。PipeDream 使用多个输入数据的流水线作业，来克服模型并行训练时硬件效率限制的问题。典型的流水线并行化设置涉及到不同 stage 之间 layer 的分割，每个 stage 都会被复制并且并行运行数据。流水线会被注入多个 batch，以使流水线满负荷运行在稳定状态。在大部分情况下，流水线并行化训练比数据并行化训练需要通信的数据要少很多，因为它只需要在两个 stage 边界之间传输 activation 和梯度。在稳定状态下，所有的 workers 时刻都在运转，不像模型并行化训练中会有停下来等待的时候（如下图所示）。</p>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117090111768.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"></p>
+<p>图 2：左图中，我们展示了一个流水线并行化的例子，8 块 GPU 被分配到 4 个 stage 中。通信只用于 stage 边界的 actiavtion 和梯度上。stage 1,2 和 3 通过对其各自的 stage 进行复制来保证流水线的负载平衡。右图展示了具有 4 个 worker 的一个流水线，展示了启动阶段和稳定阶段。在这个例子中，后向处理花费的时间是前向处理的两倍。</p>
+<h2 id="在-PipeDream-中克服流水线并行化训练的挑战"><a href="#在-PipeDream-中克服流水线并行化训练的挑战" class="headerlink" title="在 PipeDream 中克服流水线并行化训练的挑战"></a>在 PipeDream 中克服流水线并行化训练的挑战</h2><p>为了获得流水线并行化训练的潜在收益，PipeDream 必须克服三个主要挑战：</p>
+<ul>
+<li>  首先，PipeDream 必须在不同的输入数据间，协调双向流水线的工作。</li>
+<li>  然后，PipeDream 必须管理后向通道里的权重版本，从而在数值上能够正确计算梯度，并且在后向通道里使用的权重版本必须和前向通道里使用的相同。</li>
+<li>  最后，PipeDream 需要流水线里的所有 stage 都花费大致相同的计算时间，这是为了使流水线得到最大的通量（因为最慢的 stage 会成为流水线通量的瓶颈）。</li>
+</ul>
+<p><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="https://img-blog.csdnimg.cn/20191117090229924.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pkYmM=,size_16,color_FFFFFF,t_70"> <strong>图 3：PipeDream 工作流程概览</strong></p>
+<p>图 3 展示了 PipeDream 工作流程的顶层概览。给定一个模型和硬件部署方式，PipeDream 在单个 GPU 上进行短暂的运行时性能分析后，可以自动决定怎样分割这些 DNN 算子，如何平衡不同 stage 之间的计算负载，而同时尽可能减少目标平台上的通信量。PipeDream 即使是在不同的模型（不同点体现在计算和通信方面）和不同的平台上（不同点体现在互联的网络拓扑和分层带宽上）也能够有效的均衡负载。</p>
+<p>由于 DNN 并不总是在可用的 worker 间进行均等分割，所以 PipeDream 可能在某些 stage 上使用数据并行化——多个 worker 会被分配到给定的 stage 上，并行化地处理不同的 minibatch。PipeDream 使用称作 1F1B 的调度算法来使硬件保持满负荷运转，同时还能达到类似数据并行化的语义。</p>
+<p>在 1F1B 的稳定状态下，每个 worker 为它所在的 stage 严格地切换前向和后向通道，保证资源的高利用率（可忽略的流水线暂停，没有流水线 flush），即使在常见情况下，后向通道花费的时间多于前向通道时也是如此。上面的图 2 已经通过例子展示了这一点。与数据并行化不同，1F1B 还使用不同版本的权重来维持统计有效性。最后，PipeDream 扩展了 1F1B，在数据并行 stage 上引入了循环调度策略，保证了后向通道计算的梯度被引流至前向通道对应的 worker 上。</p>
+<p>PipeDream 是基于 PyTorch（PipeDream 的<a href="https://arxiv.org/pdf/1806.03377.pdf">早期版本</a>使用 Caffe）构建出来的。我们的评估围绕着 DNN 模型、数据集和硬件配置的不同组合进行，证实了 PipeDream 流水线并行化所带来的训练时间上的收益。相比于数据并行化训练，PipeDream 在多 GPU 机器上达到了很高的精确度，性能方面，在图像分类上有 5.3 倍提升，机器翻译上 3.1 倍提升，语言建模任务有 4.3 倍提升，视频字幕模型则有 3 倍提升。PipeDream 比模型并行化有 2.6 至 15 倍的性能提升，相比混合并行化有 1.9 倍提升。</p>
+<p>如果你对 PipeDream 更多细节感兴趣，可以在 GitHub 上找到<a href="https://github.com/msr-fiddle/pipedream">源码</a>。</p>
+<p><strong>原文链接：</strong></p>
+<p>[<a href="https://www.microsoft.com/en-us/research/blog/pipedream-a-more-effective-way-to-train-deep-neural-networks-using-pipeline-parallelism/]">https://www.microsoft.com/en-us/research/blog/pipedream-a-more-effective-way-to-train-deep-neural-networks-using-pipeline-parallelism/]</a>(</p>
+]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>毕设</tag>
       </tags>
   </entry>
 </search>
