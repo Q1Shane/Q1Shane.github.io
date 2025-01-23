@@ -1,0 +1,551 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>论文解读：MuCGEC | Shane 's Blog</title><meta name="keywords" content="GEC"><meta name="author" content="Shane"><meta name="copyright" content="Shane"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="默认">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文解读：MuCGEC">
+<meta property="og:url" content="https://hexo.ml/42505.html">
+<meta property="og:site_name" content="Shane &#39;s Blog">
+<meta property="og:description" content="默认">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.ibb.co/WWjVRYs/12.jpg">
+<meta property="article:published_time" content="2023-05-17T00:11:23.000Z">
+<meta property="article:modified_time" content="2023-05-17T00:11:23.000Z">
+<meta property="article:author" content="Shane">
+<meta property="article:tag" content="GEC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.ibb.co/WWjVRYs/12.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121000054.png"><link rel="canonical" href="https://hexo.ml/42505"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"本文修改于","messageNext":"天前，如果本文有一定的时效性，那么本文可能已经失效~"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":10,"languages":{"author":"作者: Shane","link":"链接: ","source":"来源: Shane 's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-17 08:11:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/hexo.min.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Shane 's Blog" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://i.ibb.co/Qnww6rp/20210209231648.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://i.ibb.co/WWjVRYs/12.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Shane 's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">论文解读：MuCGEC</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-17T00:11:23.000Z" title="发表于 2023-05-17 08:11:23">2023-05-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-17T00:11:23.000Z" title="更新于 2023-05-17 08:11:23">2023-05-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BA%E6%96%87/">论文</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><link rel="stylesheet external nofollow noreferrer" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="MuCGEC-a-Multi-Reference-Multi-Source-Evaluation-Dataset-for-Chinese-Grammatical-Error-Correction"><a href="#MuCGEC-a-Multi-Reference-Multi-Source-Evaluation-Dataset-for-Chinese-Grammatical-Error-Correction" class="headerlink" title="MuCGEC- a Multi-Reference Multi-Source Evaluation Dataset for Chinese Grammatical Error Correction"></a>MuCGEC- a Multi-Reference Multi-Source Evaluation Dataset for Chinese Grammatical Error Correction</h2><hr>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><ul>
+<li>用于中文语法纠错（CGEC）的多参考多源评估数据集,包含收录自CSL中的7063个句子。其中每个句子由三名annotator更正，他们的更正由senior annotator仔细审查，每个句子产生 2.3 条参考。</li>
+<li>使用两个主流CGEC模型进行实验，并用一个大规模预训练模型进行提升，在数据集上达到了有竞争力的基准表现</li>
+<li>使用基于字符的指标。</li>
+</ul>
+<h3 id="1-introduction"><a href="#1-introduction" class="headerlink" title="1. introduction"></a>1. introduction</h3><ul>
+<li>GEC：表示对有可能有语法错误的输入文字句子（生句子）进行检测以及纠正所有的错误并且生成正确干净的句子。</li>
+<li>英文数据集(EGEC)有着丰富的高质量人工标注评估数据，但中文数据集(CGEC)相对欠缺。主流的CGEC是NLPCC18和CGED。</li>
+<li>现存的CGEC缺少多参考的数据，大部分来自上述两个数据集，这可能是由于采用了不同的标注工作流。</li>
+</ul>
+<p>MuCGEC：解决下述的两个问题：单参考问题和单文本源问题</p>
+<ul>
+<li><p><strong>多参考的标注</strong>对整个<strong>GEC模型以及GEC数据标注</strong>都很重，因为对于一个不正确的句子，通常存在不止一个具有相似含义的可接受引用。</p>
+</li>
+<li><ol>
+<li>如果 GEC 模型输出正确的参考，但与评估数据中给出的参考不同，那么模型性能将被不公平地低估 –&gt;增加引用数量</li>
+<li>施加单引用约束会使数据标注出现问题，比如annotator提交不同的但同样是可以接受的修正，senior不知道如何决定哪个更好</li>
+</ol>
+<p>（认为是一句话的歧义问题以及更改在单参考的环境下会出现错误评估以及评估失效）</p>
+</li>
+<li><p>现有的 CGEC 数据集还从单一文本源收集句子，这可能不足以进行稳健的模型评估</p>
+</li>
+</ul>
+<p>总结：基于基于浏览器的在线标注工具，每个句子分配给三名标注员进行独立批改，并分配给一名高级标注员进行终审。 标注者可以提交多个引用，高级标注者除了拒绝不正确的提交外，还可以补充新的引用。 通过这种方式，我们的目标是产生尽可能多的参考资料。 总之，这项工作做出了以下贡献。</p>
+<p>1）我们新构建的 MuCGEC 由 7,063 个句子组成，这些句子来自CSL文本的三个代表性来源。 每个句子平均获得 2.3 个参考。 我们对新数据集进行详细分析以获得更多见解。</p>
+<p>2）我们使用Seq2Edit和Seq2Seq模型进行基准实验，这两种模型都通过预训练语言模型 (PLM) 进行了增强，我们还尝试了一种非常有效的集成策略。使用比基于单词的评估指标更简单的基于字符的评估指标。</p>
+<h3 id="2-Data-Annotation"><a href="#2-Data-Annotation" class="headerlink" title="2. Data Annotation"></a>2. Data Annotation</h3><h4 id="2-1-Multi-Source-Data-Selection"><a href="#2-1-Multi-Source-Data-Selection" class="headerlink" title="2.1 Multi-Source Data Selection"></a>2.1 Multi-Source Data Selection</h4><p>在CSL学习者文本上调查各种各样的中文语法错误。</p>
+<ul>
+<li>数据源：<ol>
+<li>重新标注NLPCC18(包含北大语料库)</li>
+<li>重新标注CGED-2018 和 CGED-2020 测试数据集(来自HSK的写作章节)，从总共 5,006 个句子中删除标记为正确的句子后，我们获得了 3,137 个可能错误的句子用于重新标注。</li>
+<li>NLPCC2018 共享任务组织者从 Lang8 收集了约 717,000 个中文句子及其更正。我们随机选择 2,000 个 30 到 60 个字符的句子进行重新标注。</li>
+</ol>
+</li>
+</ul>
+<p>放弃所有原始更正，并按照我们新的标注指南和工作流程直接从头开始重新标注。</p>
+<h4 id="2-2-Annotation-Paradigm-Direct-Rewriting"><a href="#2-2-Annotation-Paradigm-Direct-Rewriting" class="headerlink" title="2.2 Annotation Paradigm: Direct Rewriting"></a>2.2 Annotation Paradigm: Direct Rewriting</h4><p>构建 GEC 数据的标注范式主要有两种类型，即<strong>错误编码</strong>和<strong>直接重写</strong>。</p>
+<ol>
+<li>错误编码范式：要求标注者明确标记原始句子中的错误跨度，然后选择其错误类型，最后进行更正。(单词纠正)</li>
+</ol>
+<p>存在的问题：</p>
+<ul>
+<li>不同的标注者很难就错误跨度的边界及其错误类型达成一致，尤其是当有许多类别需要考虑时-&gt;导致标注工作量的增加和 标注质量下降</li>
+<li>在复杂的标注范式下，标注者忽视结果引用的流畅性，有时甚至会导致表达不自然。</li>
+</ul>
+<ol start="2">
+<li>直接重写范式：要求标注者直接重写输入句子并生成相应的语法正确的句子，而不改变原始含义。这种标注范式已被证明是高效且具有成本效益的（全句重写）</li>
+</ol>
+<p>我们采用直接重写范式。 除了上述优点外，我们相信这种范式可以帮助提高引用的多样性，因为标注者可以更自由地纠正错误。</p>
+<h4 id="2-3-Annotation-Guidelines"><a href="#2-3-Annotation-Guidelines" class="headerlink" title="2.3 Annotation Guidelines"></a>2.3 Annotation Guidelines</h4><p>编写了 30 页的 CGEC 标注综合指南，并根据反馈逐步完善。指南采用了两层层次的错误分类法，包括5种主要错误类型和14种次要错误类型</p>
+<ul>
+<li>标点：丢失; 冗余; 滥用</li>
+<li>拼写：拼音混乱； 字形混乱； 语无伦次</li>
+<li>单词：丢失; 冗余; 滥用</li>
+<li>句法：词序；混合语法模式</li>
+<li>语用学：逻辑不一致； 歧义； 常识性错误</li>
+</ul>
+<p><strong>处理word-missing errors遇到的问题</strong>：以往的CGEC 数据集会直接插入特定词，但漏词本身是与上下文有关的。导致语义错误，能会给 GEC 模型评估带来麻烦，因为还有很多其他可接受的候选词。-&gt; 使用missing components (MC)标签标注，因为“[MC]”不包含在现有的训练数据和词汇表中。 我们将这个问题留作未来的工作。</p>
+<h4 id="2-4-Annotation-Workflow-and-Tool"><a href="#2-4-Annotation-Workflow-and-Tool" class="headerlink" title="2.4 Annotation Workflow and Tool"></a>2.4 Annotation Workflow and Tool</h4><ul>
+<li><p>将每个句子分配给三个随机标注者进行独立标注。 然后将他们提交的内容汇总并发送给随机的高级标注者（审阅者）进行审阅。</p>
+</li>
+<li><p>高级标注者的工作包括： 1）将不正确的引用修改为正确的引用（有时只是拒绝它们）； 2）根据指南添加新的正确引用。</p>
+</li>
+<li><p>评审后，被接受的引用被定义为<strong>最终黄金饮用</strong></p>
+</li>
+<li><p>采用一种自学机制，允许标注者在提交不正确的引用时从错误中吸取教训。：简而言之，就是标注者提交的引用不是黄金引用，则可以对其进行修改成一个正确的引用。另加上投诉机制，对自学机制进行优化。我们发现自学和投诉机制可以引发非常有益的讨论。</p>
+</li>
+</ul>
+<h4 id="2-5-Annotation-Process"><a href="#2-5-Annotation-Process" class="headerlink" title="2.5 Annotation Process"></a>2.5 Annotation Process</h4><p>聘请了21名母语为汉语、熟悉汉语语法的本科生作为兼职标注员。所有参与者都被要求每天至少标注 1 小时。 整个标注过程历时约3个月。</p>
+<h4 id="2-6-Ethical-Issues"><a href="#2-6-Ethical-Issues" class="headerlink" title="2.6 Ethical Issues"></a>2.6 Ethical Issues</h4><p>这三个来源的所有数据都是公开的。 同时，我们已获得 NLPCC-2018 和 CGED 共享任务的组织者的许可</p>
+<h3 id="3-Analysis-of-Our-Annotated-Data"><a href="#3-Analysis-of-Our-Annotated-Data" class="headerlink" title="3 Analysis of Our Annotated Data"></a>3 Analysis of Our Annotated Data</h3><ol>
+<li>与原标注相比，新标注中的错句比例有一定减少，体现了我们对<strong>过度修正现象</strong>的严格控制。</li>
+<li>关于句子长度，NLPCC18 的句子最短，而 CGED 的句子要长得多。因为考生喜欢写长句子…</li>
+<li>重新标注的 NLPCC18 中的每个句子平均收到 2.5 个引用，这是原始 NLPCC18 数据中的两倍多。可以使我们的数据集在评估时更可靠</li>
+<li>比较不同数据集中每个引用的基于字符的编辑数量。我们可以看到编辑次数与句子长度密切相关。平均句子长度和编辑次数的差异表明三个数据源在质量和难度上可能存在系统性差异，我们认为这有助于评估模型的泛化能力。</li>
+<li>标注者更倾向于提供单一引用，因为更经济，他们觉得应该让更多标注着提供他们的最佳饮用。</li>
+<li>我们通过根据最终的黄金参考评估所有标注提交来计算基于字符的 F0.5 分数。平均 F0.5 为 72.12。</li>
+<li>最佳标注者获得 82.34 F0.5 分数，而完成最多任务的标注者仅获得 68.32 分。 这表明我们在计算工资时应该更加关注标注质量，避免标注者过于关注标注速度。</li>
+<li>标注者常犯的错误：最常见的错误是由于更正不完整造成的，占无效引用的 56.7%。很难无遗漏地纠正所有错误，第二类错误是错误更正，即旧错误的更正导致新错误，此外，有 11.0% 的投稿因意思改变而被拒绝。</li>
+</ol>
+<h3 id="4-Benchmark-Models"><a href="#4-Benchmark-Models" class="headerlink" title="4 Benchmark Models"></a>4 Benchmark Models</h3><p>为了了解前沿的 GEC 模型在我们的数据上的表现如何，我们采用了两种主流的 GEC 方法，即 Seq2Edit 和 Seq2Seq。</p>
+<ul>
+<li><p><strong>Seq2Edit 模型</strong>将 GEC 视为序列标记任务，并通过一系列令牌级别的编辑（包括插入、删除和替换）执行错误更正（Malmi 等人，2019）。 一个token在英文中对应一个词或子词，在中文中对应一个字。 我们采用 GECToR（Omelianchuk 等人，2020 年）进行微小修改以适应中文，从而在 EGEC 数据集上实现了最好的表现(SOTA)。</p>
+</li>
+<li><p>使用StructBERT （流行的PLM，因为它在微调后具有优越的性能）作为encoder以提升GECToR</p>
+</li>
+<li><p><strong>Seq2Seq 模型</strong>直接将 GEC 视为单语翻译任务。 最近的工作建议使用 T5 或 BART 等 PLM 来增强基于 Transformer 的 Seq2Seq EGEC 模型。 与 BERT不同，T5 和 BART 是专门为文本生成而设计的。 因此，继续使用 GEC 数据对它们进行培训很简单。 我们遵循这些工作并利用 Shao 等人最近提出的中文 BART。初始化我们的 Seq2Seq 模型。</p>
+</li>
+<li><p><strong>集成模型</strong>。 之前的几项工作已经证明了模型集成对 CGEC 的有效性。 在这项工作中，我们清楚地观察到上述两个模型在修复不同错误类型方面的互补能力，因此尝试将它们结合起来。<strong>Seq2Seq 模型 善于处理 词序 错误 ，而Seq2Edit 模型 在 冗余错误上表现较好</strong></p>
+</li>
+<li><p>我们用两种集成设定进行实验：</p>
+<p>1）一个 Seq2Edit 和一个 Seq2Seq，用“1×Seq2Edit+1×Seq2Seq”表示</p>
+<p>2）三个 Seq2Edit 和三个 Seq2Seq，用“3×Seq2Edit+3×Seq2Seq”表示。</p>
+<p>这三个 Seq2Edit模型是使用不同的随机种子进行初始化得到的，Seq2Seq也是如此。</p>
+</li>
+</ul>
+<ul>
+<li><strong>其他设置</strong>。 为了获得两种模型的单模型性能，我们使用不同的随机种子分别运行它们三次进行初始化并计算平均指标。 对于“1×Seq2Edit+1×Seq2Seq”，我们随机选择一对单一模型。 对于“3×Seq2Edit+3×Seq2Seq”，我们汇总了所有六个单一模型的结果。</li>
+</ul>
+<h3 id="5-Experiments-on-NLPCC18-Orig-Data"><a href="#5-Experiments-on-NLPCC18-Orig-Data" class="headerlink" title="5 Experiments on NLPCC18-Orig Data"></a>5 Experiments on NLPCC18-Orig Data</h3><p>训练数据：将训练数据严格限制为公共资源，即 Lang8 数据 和 HSK 数据，<strong>按照 Junczys-Dowmunt 等人 (2018) 的重新加权程序，我们将 HSK 数据复制五次，并将它们与 Lang8 数据合并。</strong> 问题？？</p>
+<ul>
+<li>当仅使用 Lang8 进行训练时，我们的单个 Seq2Seq 模型已经具有相当的竞争力。 它的性能在 F0.5 中仅比 MaskGEC (Zhao and Wang, 2020) 低 1 个百分点。</li>
+<li>添加 HSK 训练数据可将我们所有模型的性能提高约 4 个百分点。 我们的两个基准模型已经在单模型设置下实现了 SOTA 性能。</li>
+<li>与单个模型相比，模型集成技术带来了明显的性能提升（超过 5 分）。 然而，增加组件模型数量的收益似乎相当小。</li>
+</ul>
+<h3 id="6-Experiments-on-MuCGEC"><a href="#6-Experiments-on-MuCGEC" class="headerlink" title="6 Experiments on MuCGEC"></a>6 Experiments on MuCGEC</h3><h4 id="6-1-Data-Splits"><a href="#6-1-Data-Splits" class="headerlink" title="6.1 Data Splits"></a>6.1 Data Splits</h4><p>在这项工作中，我们建议通过从 CGED 源中随机选择 1,125 个句子，为我们新标注的数据集提供一个固定的开发集，表示为 CGED-dev。 剩下的5938个句子作为测试集，其中每个数据源的句子数量大致相等，即NLPCC18-test 1996个句子，CGED-test 2000个句子，Lang8-test 1942个句子。（以往是随机选择）</p>
+<h4 id="6-2-Evaluation-Metrics"><a href="#6-2-Evaluation-Metrics" class="headerlink" title="6.2 Evaluation Metrics"></a>6.2 Evaluation Metrics</h4><ul>
+<li><strong>基于单词的指标存在问题：</strong>以前的 CGEC 数据集是根据单词序列进行标注的，并采用基于单词的度量标准进行评估。 在标注和评估之前，需要使用中文分词 (CWS) 模型将句子分割成单词。因为1）CWS 模型不可避免地会产生分词错误。 2）存在多种异构的CWS标准。3）我们发现正确的编辑可能会因为词边界不匹配而被判断为错误的。</li>
+</ul>
+<p>这项工作改为采用基于字符的跨度级别评估指标。 首先，给定一个输入句子和一个修正，我们获得了具有最小编辑距离的最佳字符级编辑序列。 我们考虑三种类型的字符级编辑，对应三种错误类型：<br>• 为冗余错误，删除一个字符；<br>• 为缺失的错误，插入一个字符；<br>• 为替换错误，将一个字符替换为另一个；</p>
+<p>然后，我们按照之前在 EGEC 和 CGEC 中的做法，通过合并相同类型的连续编辑，将所有字符级别的编辑转换为跨度级别。上述两个步骤应用于系统输出序列和黄金饮用，将它们转换为跨度级编辑集。 最后，我们可以通过比较它们来计算P/R/F值。 如果有多个黄金饮用，我们会选择 F-score 最高的那个。</p>
+<ul>
+<li>跨度级词序错误：<strong>在计算整体指标时</strong>，我们只考虑以上三类错误。 <strong>在分析时</strong>，我们区分了第四种错误类型——词序错误。 跨度级词序错误通常由冗余错误和缺失错误组成，其中删除的跨度与插入的跨度相同。 我们使用简单的启发式规则来识别此类错误</li>
+</ul>
+<h4 id="6-3-Results-and-Analysis"><a href="#6-3-Results-and-Analysis" class="headerlink" title="6.3 Results and Analysis"></a>6.3 Results and Analysis</h4><ul>
+<li><p>性能变化的总体趋势与表 5 中原始 NLPCC18 数据集上的基本一致。首先，Seq2Seq 和 Seq2Edit 模型在 F0.5 上表现相当接近，但在精度和召回率上明显表现出不同的强度，其次，模型集成方法大大提高了性能。</p>
+</li>
+<li><p>一个有趣的观察是，在 MuCGEC 上，“3×Seq2Edit+3×Seq2Seq”在 All-test 和所有三个子集上明显优于“1×Seq2Edit+1×Seq2Seq”。 相比之下，原始 NLPCC18 测试数据中两者的改进并不大。 我们怀疑这可能表明多参考数据集可以更准确地评估模型性能。 然而，它可能需要进一步的人类调查以获得更多见解。</p>
+</li>
+<li><p>最后，模型和人类之间仍然存在巨大的性能差距，表明 CGEC 研究还有很长的路要走。</p>
+</li>
+<li><p><strong>四种错误类型的表现</strong>：表 7 显示了对四种错误类型的更细粒度的评估结果</p>
+<p>1）Seq2Edit 模型更擅长处理冗余错误，而 Seq2Seq 模型更擅长处理替换和词序错误。 对于遗漏错误，两者表现相似。</p>
+<p>2）可以在考虑底层模型架构后理解。 一方面，为了纠正冗余错误，Seq2Edit 模型只需要执行固定的删除操作，这对于 Seq2Seq 模型来说是一个隐含得多的选择（<strong>问题？？</strong>），因为它的目标是重写整个句子。 另一方面，Seq2Seq 由于其利用语言模型信息的天然能力，特别是在 BART 的增强下，适合替换或重新排序单词</p>
+<p>3）同样，模型集成方法显着提高了所有错误类型的性能。 集成模型在冗余错误方面最接近人类，可能是因为它们最容易纠正。 最大的差距出现在词序错误中，这需要全局结构知识来纠正并且极具挑战性。</p>
+<p>4）当最大引用数增加时，模型和人类的性能都会不断提高，尤其是人类。 由于只有少数句子有超过 3 个引用，因此当最大引用数从 3 增加到 All 时，改进非常小。 这一趋势表明，与单参考数据集相比，多参考数据集降低了低估表现的风险，因此对于模型评估更可靠。</p>
+</li>
+</ul>
+<h3 id="8-Conclusions"><a href="#8-Conclusions" class="headerlink" title="8. Conclusions"></a>8. Conclusions</h3><p>本文介绍了 MuCGEC，这是一个新标注的 CGEC 评估数据集，由 CSL 学习者编写的 7,063 个句子组成。 与现有的 CGEC 数据集相比，由于三个重要特征，我们的数据集可以支持更可靠的评估：1）提供多个参考； 2）涵盖三个文本源； 3) 采用严格的质量控制（即标注指南和工作流程）。 在描述了数据构建过程之后，我们对我们的数据进行了详细的分析。 然后，我们采用两种主流且有竞争力的 CGEC 模型，即 Seq2Seq 和 Seq2Edit，并进行基准实验。 我们还建议采用基于字符的评估指标来取代以前使用的基于单词的评估指标。</p>
+<a id="more"></a>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">Shane</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://hexo.ml/42505.html">https://hexo.ml/42505.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hexo.ml" target="_blank">Shane 's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/GEC/">GEC</a></div><div class="post_share"><div class="social-share" data-image="https://i.ibb.co/WWjVRYs/12.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://i.ibb.co/RgwjvsV/image.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://i.ibb.co/RgwjvsV/image.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://i.ibb.co/mCHCLBz/image.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://i.ibb.co/mCHCLBz/image.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/27590.html"><img class="next-cover" data-lazy-src="https://i.ibb.co/WWjVRYs/12.jpg" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">机器学习-12-——聚类</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://i.ibb.co/Qnww6rp/20210209231648.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Shane</div><div class="author-info__description">一个收藏回忆与分享技术的地方！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Q1Shane"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MuCGEC-a-Multi-Reference-Multi-Source-Evaluation-Dataset-for-Chinese-Grammatical-Error-Correction"><span class="toc-number">1.</span> <span class="toc-text">MuCGEC- a Multi-Reference Multi-Source Evaluation Dataset for Chinese Grammatical Error Correction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract"><span class="toc-number">1.1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-introduction"><span class="toc-number">1.2.</span> <span class="toc-text">1. introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Data-Annotation"><span class="toc-number">1.3.</span> <span class="toc-text">2. Data Annotation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-Multi-Source-Data-Selection"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.1 Multi-Source Data Selection</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-Annotation-Paradigm-Direct-Rewriting"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.2 Annotation Paradigm: Direct Rewriting</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-Annotation-Guidelines"><span class="toc-number">1.3.3.</span> <span class="toc-text">2.3 Annotation Guidelines</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-Annotation-Workflow-and-Tool"><span class="toc-number">1.3.4.</span> <span class="toc-text">2.4 Annotation Workflow and Tool</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-Annotation-Process"><span class="toc-number">1.3.5.</span> <span class="toc-text">2.5 Annotation Process</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-Ethical-Issues"><span class="toc-number">1.3.6.</span> <span class="toc-text">2.6 Ethical Issues</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Analysis-of-Our-Annotated-Data"><span class="toc-number">1.4.</span> <span class="toc-text">3 Analysis of Our Annotated Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Benchmark-Models"><span class="toc-number">1.5.</span> <span class="toc-text">4 Benchmark Models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Experiments-on-NLPCC18-Orig-Data"><span class="toc-number">1.6.</span> <span class="toc-text">5 Experiments on NLPCC18-Orig Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Experiments-on-MuCGEC"><span class="toc-number">1.7.</span> <span class="toc-text">6 Experiments on MuCGEC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-Data-Splits"><span class="toc-number">1.7.1.</span> <span class="toc-text">6.1 Data Splits</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-Evaluation-Metrics"><span class="toc-number">1.7.2.</span> <span class="toc-text">6.2 Evaluation Metrics</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-3-Results-and-Analysis"><span class="toc-number">1.7.3.</span> <span class="toc-text">6.3 Results and Analysis</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Conclusions"><span class="toc-number">1.8.</span> <span class="toc-text">8. Conclusions</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/42505.html" title="论文解读：MuCGEC"><img data-lazy-src="https://i.ibb.co/WWjVRYs/12.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="论文解读：MuCGEC"/></a><div class="content"><a class="title" href="/42505.html" title="论文解读：MuCGEC">论文解读：MuCGEC</a><time datetime="2023-05-17T00:11:23.000Z" title="发表于 2023-05-17 08:11:23">2023-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/27590.html" title="机器学习-12-——聚类"><img data-lazy-src="https://i.ibb.co/WWjVRYs/12.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-12-——聚类"/></a><div class="content"><a class="title" href="/27590.html" title="机器学习-12-——聚类">机器学习-12-——聚类</a><time datetime="2021-12-10T13:56:08.000Z" title="发表于 2021-12-10 21:56:08">2021-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/30190.html" title="机器学习-11-——逻辑回归"><img data-lazy-src="https://i.ibb.co/WWjVRYs/12.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-11-——逻辑回归"/></a><div class="content"><a class="title" href="/30190.html" title="机器学习-11-——逻辑回归">机器学习-11-——逻辑回归</a><time datetime="2021-12-09T14:56:08.000Z" title="发表于 2021-12-09 22:56:08">2021-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/6552.html" title="机器学习-10-——拟合与正则化"><img data-lazy-src="https://i.ibb.co/zPS3z28/20210103181032.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-10-——拟合与正则化"/></a><div class="content"><a class="title" href="/6552.html" title="机器学习-10-——拟合与正则化">机器学习-10-——拟合与正则化</a><time datetime="2021-12-08T14:56:08.000Z" title="发表于 2021-12-08 22:56:08">2021-12-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/6552.html" title="机器学习-9-——线性回归"><img data-lazy-src="https://i.ibb.co/LnJ3TPp/index.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-9-——线性回归"/></a><div class="content"><a class="title" href="/6552.html" title="机器学习-9-——线性回归">机器学习-9-——线性回归</a><time datetime="2021-11-07T14:56:08.000Z" title="发表于 2021-11-07 22:56:08">2021-11-07</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Shane</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'DLtC6dHfP11bGkqkjUFWnD00-MdYXbMMI',
+      appKey: 'uA7SpdGiCWi0BpIigPRpsHsN',
+      placeholder: '大佬们，踩一脚？',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.17.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+    content = content.replace(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webp)/g, '') // remove image link
+    content = content.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi, '') // remove url
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    
+    let defaultIcon = ''
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          let name = 'src'
+          if(true) {
+            name = 'data-lazy-src'
+          }
+          result += `<a href='${array[i].url}' class="thumbnail"><img ${name}='${getIcon(array[i].avatar, array[i].mail)}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick}</span><time> / ${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+      let serverURL = ''
+      if (false) {
+        serverURL = ''
+      } else {
+        serverURL = 'https://DLtC6dHf.api.lncldglobal.com'
+      }
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'DLtC6dHfP11bGkqkjUFWnD00-MdYXbMMI',
+        "X-LC-Key": 'uA7SpdGiCWi0BpIigPRpsHsN',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': e.QQAvatar,
+            'content': changeContent(e.comment),
+            'mail': e.mail,
+            'nick': e.nick,
+            'url': e.url,
+            'date': e.createdAt,
+          }
+        })
+        saveToLocal.set('leancloud-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('leancloud-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="000PeZCQ1i4XVs" data-server="tencent" data-type="artist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})</script></div><script src="https://cdn.jsdelivr.net/npm/live2d-widget@^3.1.3/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>

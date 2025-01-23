@@ -1,0 +1,585 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shane 's Blog</title><meta name="author" content="Shane"><meta name="copyright" content="Shane"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta property="og:type" content="website">
+<meta property="og:title" content="Shane &#39;s Blog">
+<meta property="og:url" content="https://hexo.ml/index.html">
+<meta property="og:site_name" content="Shane &#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.ibb.co/Qnww6rp/20210209231648.jpg">
+<meta property="article:author" content="Shane">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.ibb.co/Qnww6rp/20210209231648.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121000054.png"><link rel="canonical" href="https://hexo.ml/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"本文修改于","messageNext":"天前，如果本文有一定的时效性，那么本文可能已经失效~"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":10,"languages":{"author":"作者: Shane","link":"链接: ","source":"来源: Shane 's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2025-01-23 22:03:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/hexo.min.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Shane 's Blog" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://i.ibb.co/Qnww6rp/20210209231648.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://i.ibb.co/xG7jGwW/7.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Shane 's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Shane 's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/42505.html" title="论文解读：MuCGEC">     <img class="post_bg" data-lazy-src="https://i.ibb.co/WWjVRYs/12.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="论文解读：MuCGEC"></a></div><div class="recent-post-info"><a class="article-title" href="/42505.html" title="论文解读：MuCGEC">论文解读：MuCGEC</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack article-meta__icon sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-17T00:11:23.000Z" title="发表于 2023-05-17 08:11:23">2023-05-17</time><span class="article-meta__separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-17T00:11:23.000Z" title="更新于 2023-05-17 08:11:23">2023-05-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E8%AE%BA%E6%96%87/">论文</a></span></div><div class="content">MuCGEC- a Multi-Reference Multi-Source Evaluation Dataset for Chinese Grammatical Error Correction
+Abstract
+用于中文语法纠错（CGEC）的多参考多源评估数据集,包含收录自CSL中的7063个句子。其中每个句子由三名annotator更正，他们的更正由senior annotator仔细审查，每个句子产生 2.3 条参考。
+使用两个主流CGEC模型进行实验，并用一个大规模预训练模型进行提升，在数据集上达到了有竞争力的基准表现
+使用基于字符的指标。
+
+1. introduction
+GEC：表示对有可能有语法错误的输入文字句子（生句子）进行检测以及纠正所有的错误并且生成正确干净的句子。
+英文数据集(EGEC)有着丰富的高质量人工标注评估数据，但中文数据集(CGEC)相对欠缺。主流的CGEC是NLPCC18和CGED。
+现存的CGEC缺少多参考的数据，大部分来自上述两个数据集，这可能是由于采用了不同的标注工作流。
+
+MuCGEC：解决下述的两个问题：单参考问题和单文本源问题
+
+多参考的 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/27590.html" title="机器学习-12-——聚类">     <img class="post_bg" data-lazy-src="https://i.ibb.co/WWjVRYs/12.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-12-——聚类"></a></div><div class="recent-post-info"><a class="article-title" href="/27590.html" title="机器学习-12-——聚类">机器学习-12-——聚类</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack article-meta__icon sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-10T13:56:08.000Z" title="发表于 2021-12-10 21:56:08">2021-12-10</time><span class="article-meta__separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-10T14:56:08.000Z" title="更新于 2021-12-10 22:56:08">2021-12-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">聚类聚类算法的概念一种典型的无监督学习算法，主要用于将相似的样本自动归到一个类别中。
+在聚类算法中根据样本之间的相似性，将样本划分到不同的类别中，对于不同的相似度计算方法，会得到不同的聚类结果，常用的相似度计算方法有欧式距离法。
+聚类算法实现流程k-means其实包含两层内容：
+ K : 初始中心点个数（计划聚类数）means：求中心点到其他数据点距离的平均值
+k-means聚类步骤：
+
+1、随机设置K个特征空间内的点作为初始的聚类中心
+2、对于其他每个点计算到K个中心的距离，未知的点选择最近的一个聚类中心点作为标记类别
+3、接着对着标记的聚类中心之后，重新计算出每个聚类的新中心点（平均值）
+4、如果计算得出的新中心点与原中心点一样（质心不再移动），那么结束，否则重新进行第二步过程
+
+
+
+案例练习
+
+1、随机设置K个特征空间内的点作为初始的聚类中心（本案例中设置p1和p2）
+
+
+2、对于其他每个点计算到K个中心的距离，未知的点选择最近的一个聚类中心点作为标记类别
+
+
+3、接着对着标记的聚类中心之后，重新计算出每个聚类的新中心点（平均值）
+
+
+4、如果计算得出的新中心点与原中心点一样（质 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/30190.html" title="机器学习-11-——逻辑回归">     <img class="post_bg" data-lazy-src="https://i.ibb.co/WWjVRYs/12.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-11-——逻辑回归"></a></div><div class="recent-post-info"><a class="article-title" href="/30190.html" title="机器学习-11-——逻辑回归">机器学习-11-——逻辑回归</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack article-meta__icon sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-09T14:56:08.000Z" title="发表于 2021-12-09 22:56:08">2021-12-09</time><span class="article-meta__separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-09T14:56:08.000Z" title="更新于 2021-12-09 22:56:08">2021-12-09</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">逻辑回归逻辑回归（Logistic Regression）是机器学习中的一种分类模型，逻辑回归是一种分类算法，虽然名字中带有回归，但是它与回归之间有一定的联系。由于算法的简单和高效，在实际中应用非常广泛。是解决二分类问题的利器。
+输入
+
+逻辑回归的输入就是一个线性回归的结果。
+激活函数sigmoid函数
+
+
+逻辑回归公式：
+
+
+输出：[0,1]区间的概率值，默认0.5作为阀值注：g(z)为sigmoid函数e: 2.71Z =回归的结果
+逻辑回归即使用线性回归的思想去做二分类问题，也即将分类问题转化为概率问题，用sigmoid的目的是为了保证每一处都是连续可导的。
+输出结果解释(重要)：假设有两个类别A，B，并且假设我们的概率值为属于A(1)这个类别的概率值。现在有一个样本的输入到逻辑回归输出结果0.6，那么这个概率值超过0.5，意味着我们训练或者预测的结果就是A(1)类别。那么反之，如果得出结果为0.3那么，训练或者预测结果就为B(0)类别。
+所以接下来我们回忆之前的线性回归预测结果我们用均方误差衡量，那如果对于逻辑回归，我们预测的结果不对该怎么去衡量这个损失呢？我们来看这样一张图
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/6552.html" title="机器学习-10-——拟合与正则化">     <img class="post_bg" data-lazy-src="https://i.ibb.co/zPS3z28/20210103181032.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-10-——拟合与正则化"></a></div><div class="recent-post-info"><a class="article-title" href="/6552.html" title="机器学习-10-——拟合与正则化">机器学习-10-——拟合与正则化</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack article-meta__icon sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-08T14:56:08.000Z" title="发表于 2021-12-08 22:56:08">2021-12-08</time><span class="article-meta__separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-08T14:56:08.000Z" title="更新于 2021-12-08 22:56:08">2021-12-08</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">欠拟合和过拟合定义
+过拟合：一个假设在训练数据上能够获得比其他假设更好的拟合， 但是在测试数据集上却不能很好地拟合数据，此时认为这个假设出现了过拟合的现象。(模型过于复杂)
+欠拟合：一个假设在训练数据上不能获得更好的拟合，并且在测试数据集上也不能很好地拟合数据，此时认为这个假设出现了欠拟合的现象。(模型过于简单)
+
+
+
+原因以及解决办法
+欠拟合原因以及解决办法
+原因：学习到数据的特征过少
+解决办法：
+1）添加其他特征项，有时候我们模型出现欠拟合的时候是因为特征项不够导致的，可以添加其他特征项来很好地解决。例如，“组合”、“泛化”、“相关性”三类特征是特征添加的重要手段，无论在什么场景，都可以照葫芦画瓢，总会得到意想不到的效果。除上面的特征之外，“上下文特征”、“平台特征”等等，都可以作为特征添加的首选项。
+2）添加多项式特征，这个在机器学习算法里面用的很普遍，例如将线性模型通过添加二次项或者三次项使模型泛化能力更强。
+
+
+
+
+过拟合原因以及解决办法
+原因：原始特征过多，存在一些嘈杂特征， 模型过于复杂是因为模型尝试去兼顾各个测试数据点
+解决办法：
+1）重新清洗数据，导致过拟合的一个原因 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/6552.html" title="机器学习-9-——线性回归">     <img class="post_bg" data-lazy-src="https://i.ibb.co/LnJ3TPp/index.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-9-——线性回归"></a></div><div class="recent-post-info"><a class="article-title" href="/6552.html" title="机器学习-9-——线性回归">机器学习-9-——线性回归</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack article-meta__icon sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-07T14:56:08.000Z" title="发表于 2021-11-07 22:56:08">2021-11-07</time><span class="article-meta__separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-07T14:56:08.000Z" title="更新于 2021-11-07 22:56:08">2021-11-07</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">线性回归定义与公式线性回归(Linear regression)**是利用回归方程(函数)对一个或多个自变量(特征值)和因变量(目标值)之间**关系进行建模的一种分析方式。
+
+特点：只有一个自变量的情况称为单变量回归，多于一个自变量情况的叫做多元回归
+
+
+
+
+线性回归用矩阵表示举例
+
+
+
+那么怎么理解呢？我们来看几个例子
+
+期末成绩：0.7×考试成绩+0.3×平时成绩
+房子价格 = 0.02×中心区域的距离 + 0.04×城市一氧化氮浓度 + (-0.12×自住房平均房价) + 0.254×城镇犯罪率
+
+上面两个例子，我们看到特征值与目标值之间建立了一个关系，这个关系可以理解为线性模型。
+线性回归的损失和优化假设刚才的房子例子，真实的数据之间存在这样的关系
+1真实关系：真实房子价格 = 0.02×中心区域的距离 + 0.04×城市一氧化氮浓度 + (-0.12×自住房平均房价) + 0.254×城镇犯罪率
+那么现在呢，我们随意指定一个关系（猜测）
+1随机指定关系：预测房子价格 = 0.25×中心区域的距离 + 0.14×城市一氧化氮浓度 + 0.42×自住房平均房价 + 0.34×城镇 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/6552.html" title="机器学习-8-——决策树算法">     <img class="post_bg" data-lazy-src="https://i.ibb.co/m0D7nYq/image.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-8-——决策树算法"></a></div><div class="recent-post-info"><a class="article-title" href="/6552.html" title="机器学习-8-——决策树算法">机器学习-8-——决策树算法</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack article-meta__icon sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-06T14:56:08.000Z" title="发表于 2021-11-06 22:56:08">2021-11-06</time><span class="article-meta__separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-06T14:56:08.000Z" title="更新于 2021-11-06 22:56:08">2021-11-06</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">决策树算法决策树：是一种树形结构，其中每个内部节点表示一个属性上的判断，每个分支代表一个判断结果的输出，最后每个叶节点代表一种分类结果，本质是一颗由多个判断节点组成的树。
+
+
+树的节点如何划分？很明显，从图中是按照重要程度进行，逐个划分，越往上重要程度更高，但如何定义重要程度呢？这就需要引入信息熵的概念
+熵物理学上，熵 Entropy 是“混乱”程度的量度。
+系统越有序，熵值越低；系统越混乱或者分散，熵值越高。
+
+信息理论：
+
+1、从信息的完整性上进行的描述:
+当系统的有序状态一致时，**数据越集中的地方熵值越小，数据越分散的地方熵值越大。
+2、从信息的有序性上进行的描述:
+当数据量一致时，系统越有序，熵值越低；系统越混乱或者分散，熵值越高。
+1948年香农提出了信息熵（Entropy）的概念。
+假如事件A的分类划分是（A1,A2,…,An），每部分发生的概率是(p1,p2,…,pn)，那信息熵定义为公式如下：（log是以2为底，lg是以10为底）
+
+
+案例12345课堂案例1：如果一颗骰子的六个面都是1 ，投掷它不会给你带来任何新信息，因为你知道它的结果肯定是1，它的信息熵为？？答案 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/6552.html" title="机器学习-7-——朴素贝叶斯算法">     <img class="post_bg" data-lazy-src="https://i.ibb.co/LnJ3TPp/index.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-7-——朴素贝叶斯算法"></a></div><div class="recent-post-info"><a class="article-title" href="/6552.html" title="机器学习-7-——朴素贝叶斯算法">机器学习-7-——朴素贝叶斯算法</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack article-meta__icon sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-05T14:56:08.000Z" title="发表于 2021-11-05 22:56:08">2021-11-05</time><span class="article-meta__separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-05T14:56:08.000Z" title="更新于 2021-11-05 22:56:08">2021-11-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">朴素贝叶斯贝叶斯公式（两个特征之间独立）：
+
+
+换个表达形式就会明朗很多，如下：
+
+
+我们最终求的p(类别|特征)即可！就相当于完成了我们的任务。
+公式分为三个部分：
+
+P(C):每个文档类别的概率(某文档类别数/总文档数
+P(WIC):给定某个类别下特征(被预测文档中出现的词)的概率
+
+
+
+拉普拉斯平滑
+
+属于某个类别为 0， 合适吗？
+问题： 从上面的例子我们得到娱乐概率为 0， 这是不合理的， 如果词频列表里面有很多出现次数都为 0， 很可能计算结果都为零解决方法： 拉普拉斯平滑系数
+
+
+α 为指定的系数一般为 1， m 为代表类别的数目（标签的数目） (我们分为两类,科技类与娱乐类)
+sklearn 朴素贝叶斯实现 APIsklearn.naive_bayes.MultinomialNB
+MultinomialNB
+
+sklearn.naive_bayes.MultinomialNB(alpha = 1.0)
+朴素贝叶斯分类
+alpha： 拉普拉斯平滑系数
+
+123456789101112131415161718192021222324252627282930313233343 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/6552.html" title="机器学习-5-——转换器与估计器">     <img class="post_bg" data-lazy-src="https://i.ibb.co/8gtHSVd/10.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-5-——转换器与估计器"></a></div><div class="recent-post-info"><a class="article-title" href="/6552.html" title="机器学习-5-——转换器与估计器">机器学习-5-——转换器与估计器</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack article-meta__icon sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-04T14:56:08.000Z" title="发表于 2021-11-04 22:56:08">2021-11-04</time><span class="article-meta__separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-04T14:56:08.000Z" title="更新于 2021-11-04 22:56:08">2021-11-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">转换器（Transformer）转换器是一种用于数据预处理的工具，它可以将原始数据转换为机器学习算法可以处理的格式。转换器通常用于特征工程，这是一种从原始数据中提取有意义特征的过程。
+在sklearn中，转换器通常实现了一个名为fit_transform的方法。这个方法首先通过fit步骤学习数据的特性（如平均值、标准差等），然后通过transform步骤应用这些学习到的特性来转换数据。
+转换器是一种实现特征工程操作的一组API，可以较方便的完成常用的特征工程操作，包括：
+
+fit：计算一些数据的平均数、方差等
+transform：进行一些数据转换
+fit_transform：相当于fit+transform，既实现了fit的功能，又实现了transform的功能。
+
+1234567891011121314from sklearn.preprocessing import StandardScalerstd1=StandardScaler()a=[[1,2,3],[4,5,6]]std1.fit_transform(a)# 结果如下array([[-1., -1., -1.], [ 1. ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/6552.html" title="机器学习-6-——K近邻算法">     <img class="post_bg" data-lazy-src="https://i.ibb.co/fGF1rjY/123.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-6-——K近邻算法"></a></div><div class="recent-post-info"><a class="article-title" href="/6552.html" title="机器学习-6-——K近邻算法">机器学习-6-——K近邻算法</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack article-meta__icon sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-04T14:56:08.000Z" title="发表于 2021-11-04 22:56:08">2021-11-04</time><span class="article-meta__separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-04T14:56:08.000Z" title="更新于 2021-11-04 22:56:08">2021-11-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">k近邻（k-NN）算法k近邻算法是一种基本分类和回归方法。K近邻算法，即是给定一个训练数据集，对新的输入实例，在训练数据集中找到与该实例最邻近的K个实例，这K个实例的多数属于某个类，就把该输入实例分类到这个类中。（这就类似于现实生活中少数服从多数的思想）根据这个说法，咱们来看下引自维基百科上的一幅图：
+
+
+如上图所示，有两类不同的样本数据，分别用蓝色的小正方形和红色的小三角形表示，而图正中间的那个绿色的圆所标示的数据则是待分类的数据。这也就是我们的目的，来了一个新的数据点，我要得到它的类别是什么？好的，下面我们根据k近邻的思想来给绿色圆点进行分类。
+
+如果K=3，绿色圆点的最邻近的3个点是2个红色小三角形和1个蓝色小正方形，少数从属于多数，基于统计的方法，判定绿色的这个待分类点属于红色的三角形一类。
+如果K=5，绿色圆点的最邻近的5个邻居是2个红色三角形和3个蓝色的正方形，还是少数从属于多数，基于统计的方法，判定绿色的这个待分类点属于蓝色的正方形一类。
+
+sklearn k-近邻算法 API
+sklearn.neighbors.KNeighborsClassifier(n_neighb ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/6552.html" title="机器学习(4)——算法">     <img class="post_bg" data-lazy-src="https://i.ibb.co/fGF1rjY/123.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习(4)——算法"></a></div><div class="recent-post-info"><a class="article-title" href="/6552.html" title="机器学习(4)——算法">机器学习(4)——算法</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack article-meta__icon sticky"></i><span class="sticky">置顶</span><span class="article-meta__separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-03T14:56:08.000Z" title="发表于 2021-11-03 22:56:08">2021-11-03</time><span class="article-meta__separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-03T14:56:08.000Z" title="更新于 2021-11-03 22:56:08">2021-11-03</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">机器学习算法分类
+监督学习：（英语：Supervised learning），可以由输入数据中学到或建立一个模型，并依此模式推测新的结果。输入数据是由输入特征值和目标值所组成。函数的输出可以是一个连续的值（称为回归），或是输出是有限个离散值（称作分类）分为：
+分类：k-近邻算法、贝叶斯分类、决策树与随机森林、逻辑回归、神经网络
+回归：线性回归、岭回归、神经网络
+
+
+无监督学习：（英语：Supervised learning），可以由输入数据中学到或建立一个模型，并依此模式推测新的结果。输入数据是由输入特征值所组成。
+聚类：k-means（有几十种聚类）
+
+
+
+监督学习与非监督学习区别：
+
+监督学习:特征值+目标值
+非监督学习:特征值1000个样本
+
+分类与回归的区别：
+
+分类:目标值离散型
+
+回归:目标值连续型
+
+
+分类模型评估指标
+
+
+
+精确率(Precision)与召回率(Recall)精确率： 预测结果为正例样本中真实为正例的比例（查得准） TP/(TP+FP)
+召回率： 真实为正例的样本中预测结果为正例的比例（查的全， 对正样本的区分能力）TP/(TP+FN)， 医院非常重视  ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://i.ibb.co/Qnww6rp/20210209231648.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Shane</div><div class="author-info__description">一个收藏回忆与分享技术的地方！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Q1Shane"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/42505.html" title="论文解读：MuCGEC"><img data-lazy-src="https://i.ibb.co/WWjVRYs/12.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="论文解读：MuCGEC"/></a><div class="content"><a class="title" href="/42505.html" title="论文解读：MuCGEC">论文解读：MuCGEC</a><time datetime="2023-05-17T00:11:23.000Z" title="发表于 2023-05-17 08:11:23">2023-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/27590.html" title="机器学习-12-——聚类"><img data-lazy-src="https://i.ibb.co/WWjVRYs/12.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-12-——聚类"/></a><div class="content"><a class="title" href="/27590.html" title="机器学习-12-——聚类">机器学习-12-——聚类</a><time datetime="2021-12-10T13:56:08.000Z" title="发表于 2021-12-10 21:56:08">2021-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/30190.html" title="机器学习-11-——逻辑回归"><img data-lazy-src="https://i.ibb.co/WWjVRYs/12.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-11-——逻辑回归"/></a><div class="content"><a class="title" href="/30190.html" title="机器学习-11-——逻辑回归">机器学习-11-——逻辑回归</a><time datetime="2021-12-09T14:56:08.000Z" title="发表于 2021-12-09 22:56:08">2021-12-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/6552.html" title="机器学习-10-——拟合与正则化"><img data-lazy-src="https://i.ibb.co/zPS3z28/20210103181032.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-10-——拟合与正则化"/></a><div class="content"><a class="title" href="/6552.html" title="机器学习-10-——拟合与正则化">机器学习-10-——拟合与正则化</a><time datetime="2021-12-08T14:56:08.000Z" title="发表于 2021-12-08 22:56:08">2021-12-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/6552.html" title="机器学习-9-——线性回归"><img data-lazy-src="https://i.ibb.co/LnJ3TPp/index.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="机器学习-9-——线性回归"/></a><div class="content"><a class="title" href="/6552.html" title="机器学习-9-——线性回归">机器学习-9-——线性回归</a><time datetime="2021-11-07T14:56:08.000Z" title="发表于 2021-11-07 22:56:08">2021-11-07</time></div></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="card-content"><div class="item-headline"><i class="fas fa-bolt"></i><span>最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Anaconda/"><span class="card-category-list-name">Anaconda</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Go/"><span class="card-category-list-name">Go</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Hexo/"><span class="card-category-list-name">Hexo</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Numpy/"><span class="card-category-list-name">Numpy</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%97%A5%E5%BF%97/"><span class="card-category-list-name">日志</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">机器学习</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%BA%E6%96%87/"><span class="card-category-list-name">论文</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%BB%98%E8%AE%A4/"><span class="card-category-list-name">默认</span><span class="card-category-list-count">2</span></a></li>
+            
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E9%BB%98%E8%AE%A4/" style="font-size: 1.2em; color: rgb(168, 35, 90)">默认</a><a href="/tags/Blog/" style="font-size: 1.1em; color: rgb(183, 132, 16)">Blog</a><a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 1.3em; color: rgb(83, 165, 156)">毕设</a><a href="/tags/Go/" style="font-size: 1.1em; color: rgb(162, 189, 116)">Go</a><a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 1.5em; color: rgb(153, 73, 159)">机器学习</a><a href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/" style="font-size: 1.4em; color: rgb(73, 41, 46)">特征工程</a><a href="/tags/%E6%AC%A0%E6%8B%9F%E5%90%88%E4%B8%8E%E8%BF%87%E6%8B%9F%E5%90%88/" style="font-size: 1.1em; color: rgb(69, 109, 12)">欠拟合与过拟合</a><a href="/tags/L1%E5%92%8CL2%E6%AD%A3%E5%88%99%E5%8C%96/" style="font-size: 1.1em; color: rgb(66, 83, 49)">L1和L2正则化</a><a href="/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/" style="font-size: 1.1em; color: rgb(20, 99, 82)">逻辑回归</a><a href="/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: rgb(173, 164, 176)">无监督学习</a><a href="/tags/%E8%81%9A%E7%B1%BB/" style="font-size: 1.1em; color: rgb(21, 104, 53)">聚类</a><a href="/tags/%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/" style="font-size: 1.1em; color: rgb(105, 188, 100)">评估指标</a><a href="/tags/ROC/" style="font-size: 1.1em; color: rgb(6, 117, 169)">ROC</a><a href="/tags/K%E8%BF%91%E9%82%BB/" style="font-size: 1.1em; color: rgb(131, 28, 46)">K近邻</a><a href="/tags/%E7%BD%91%E6%A0%BC%E6%90%9C%E7%B4%A2/" style="font-size: 1.1em; color: rgb(62, 178, 109)">网格搜索</a><a href="/tags/%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/" style="font-size: 1.2em; color: rgb(110, 88, 107)">分类算法</a><a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" style="font-size: 1.1em; color: rgb(144, 182, 173)">朴素贝叶斯</a><a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" style="font-size: 1.1em; color: rgb(58, 155, 72)">决策树</a><a href="/tags/%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: rgb(97, 95, 10)">回归算法</a><a href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" style="font-size: 1.1em; color: rgb(4, 163, 182)">线性回归</a><a href="/tags/GEC/" style="font-size: 1.1em; color: rgb(39, 2, 190)">GEC</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">十二月 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/11/"><span class="card-archive-list-date">十一月 2021</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">五月 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">三月 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">二月 2021</span><span class="card-archive-list-count">4</span></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">22</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2019-12-31T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">30k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-01-23T14:03:37.498Z"></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Shane</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        var from = '出自 ' + data.from
+        var sub = "".length == 0 ? new Array() : "".split(',')
+        var both = sub.unshift(data.hitokoto, from)
+        var typed = new Typed('#subtitle', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('subtitle').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.17.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+    content = content.replace(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webp)/g, '') // remove image link
+    content = content.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi, '') // remove url
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    
+    let defaultIcon = ''
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          let name = 'src'
+          if(true) {
+            name = 'data-lazy-src'
+          }
+          result += `<a href='${array[i].url}' class="thumbnail"><img ${name}='${getIcon(array[i].avatar, array[i].mail)}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick}</span><time> / ${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+      let serverURL = ''
+      if (false) {
+        serverURL = ''
+      } else {
+        serverURL = 'https://DLtC6dHf.api.lncldglobal.com'
+      }
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'DLtC6dHfP11bGkqkjUFWnD00-MdYXbMMI',
+        "X-LC-Key": 'uA7SpdGiCWi0BpIigPRpsHsN',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': e.QQAvatar,
+            'content': changeContent(e.comment),
+            'mail': e.mail,
+            'nick': e.nick,
+            'url': e.url,
+            'date': e.createdAt,
+          }
+        })
+        saveToLocal.set('leancloud-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('leancloud-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="000PeZCQ1i4XVs" data-server="tencent" data-type="artist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})</script></div><script src="https://cdn.jsdelivr.net/npm/live2d-widget@^3.1.3/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>
