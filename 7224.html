@@ -1,0 +1,590 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>循环神经网络 | Shane 's Blog</title><meta name="keywords" content="深度学习,大模型,RNN"><meta name="author" content="Shane"><meta name="copyright" content="Shane"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="默认">
+<meta property="og:type" content="article">
+<meta property="og:title" content="循环神经网络">
+<meta property="og:url" content="https://hexo.ml/7224.html">
+<meta property="og:site_name" content="Shane &#39;s Blog">
+<meta property="og:description" content="默认">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.ibb.co/s2pR2LB/58367946742189816.webp">
+<meta property="article:published_time" content="2022-04-25T12:24:15.000Z">
+<meta property="article:modified_time" content="2022-04-25T12:24:15.000Z">
+<meta property="article:author" content="Shane">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="大模型">
+<meta property="article:tag" content="RNN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.ibb.co/s2pR2LB/58367946742189816.webp"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121000054.png"><link rel="canonical" href="https://hexo.ml/7224"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"本文修改于","messageNext":"天前，如果本文有一定的时效性，那么本文可能已经失效~"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":10,"languages":{"author":"作者: Shane","link":"链接: ","source":"来源: Shane 's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-25 20:24:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/hexo.min.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Shane 's Blog" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://i.ibb.co/Qnww6rp/20210209231648.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">31</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://i.ibb.co/s2pR2LB/58367946742189816.webp)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Shane 's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">循环神经网络</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-25T12:24:15.000Z" title="发表于 2022-04-25 20:24:15">2022-04-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-25T12:24:15.000Z" title="更新于 2022-04-25 20:24:15">2022-04-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RNN/">RNN</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><link rel="stylesheet external nofollow noreferrer" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="循环神经网络-RNN"><a href="#循环神经网络-RNN" class="headerlink" title="循环神经网络(RNN)"></a>循环神经网络(RNN)</h2><h3 id="为什么需要RNN"><a href="#为什么需要RNN" class="headerlink" title="为什么需要RNN"></a>为什么需要RNN</h3><p>合并+ padding 的缺点</p>
+<ul>
+<li>信息丢失<ul>
+<li>多个 embedding 合并 （求均值）</li>
+<li>Pad 噪音、 无主次 （padding 太多， 即便没有 padding， 一些重要的表达情感的词语， 没有主次）</li>
+</ul>
+</li>
+<li>无效计算太多,低效<ul>
+<li>太多的 padding</li>
+</ul>
+</li>
+<li>序列问题：由于普通的神经网络(比如Embedding)是将多个句子词语通过全局平均池化合并成一个向量，来表示文章的积极和消极，这就导致信息丢失，除此之外，全局平均池化也没有考虑句子的语序问题，一个词语出现的先后效果也是不同的。</li>
+</ul>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/1.png" style="zoom:40%;">
+
+<ul>
+<li>图 1： 普通神经网络( Vanilla Neural Networks ) 一个样本对应一个输出（卷积神经网络，全连接神经网络）</li>
+<li>图 2： 1 对多:图片 生成描述</li>
+<li>图 3： 多对 1:文本分类(文本情感分析)</li>
+<li>图 4： 多对多: encoding-decoding,机器翻译， 需要在输入最后一个结束后， 才能进行输出，是非实时的</li>
+<li>图 5： 实时多对多:视频解说</li>
+</ul>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/2.png" style="zoom:40%;">
+
+<p>核心： 维护一个状态作为下一步的额外输入<br>每一步使用同样的激活函数和参数 也就是 RNN 的 w 是不变的， 如下图所示</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/3.png" style="zoom:30%;">
+
+<p>这里有知乎的解释 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhuanlan.zhihu.com/p/30844905">https://zhuanlan.zhihu.com/p/30844905</a></p>
+<h3 id="SimpleRNN"><a href="#SimpleRNN" class="headerlink" title="SimpleRNN"></a>SimpleRNN</h3><p>是一个单向单层循环神经网络</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/4.png" style="zoom:40%;">
+
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/5.png" style="zoom:80%;">
+
+<ul>
+<li>这里的<strong>（16,64）</strong>就是对应的<strong>（embedding dim, hidden dim）</strong></li>
+<li><strong>W就是（64，64），U就是（16，64）这两部份就是RNN的参数</strong></li>
+</ul>
+<h3 id="单向双层RNN"><a href="#单向双层RNN" class="headerlink" title="单向双层RNN"></a>单向双层RNN</h3><img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/8.png" style="zoom:55%;">
+
+<ul>
+<li>RNN(num_layers=2)：num_layers置为2</li>
+</ul>
+<h3 id="双向单层RNN"><a href="#双向单层RNN" class="headerlink" title="双向单层RNN"></a>双向单层RNN</h3><p>单向进行的时候，最前面的词往往遗忘的更快，也即衰减的更多，所以为了保持前后的影响一致，从后到前再做一个</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/7.png" style="zoom:50%;">
+
+<ul>
+<li>RNN(bidirectional=True)，bidirectional参数置为True</li>
+<li>双向参数量翻倍， 用另外一组参数做逆向</li>
+<li>因为是相当于使用同样的一层的参数做了一次逆向，然后将他们二者concat在一起，所以输出层就为两倍的hidden_dim</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">self.rnn = nn.RNN(embedding_dim, hidden_dim, num_layers=num_layers, batch_first=<span class="literal">True</span>, bidirectional=bidirectional)</span><br><span class="line">        self.layer = nn.Linear(hidden_dim * (<span class="number">2</span> <span class="keyword">if</span> bidirectional <span class="keyword">else</span> <span class="number">1</span>), hidden_dim)</span><br></pre></td></tr></table></figure>
+<h3 id="双向双层RNN"><a href="#双向双层RNN" class="headerlink" title="双向双层RNN"></a>双向双层RNN</h3><ul>
+<li>上面的情况相加：bidirectional参数置为True ，同时num_layers置为2</li>
+</ul>
+<h3 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h3><ul>
+<li>这里的seq_output, final_hidden = self.rnn(x)：<ul>
+<li> final_hidden为最后一个的状态输出即（1，128，64）（这里为了进行上述的矩阵相乘，是先将（128，500，16）–&gt; （500，128，16）之后进行的运算，所以最后一个状态即为（1，128，64））</li>
+<li>seq_output：是上述每个过程的所有状态，即Yt-1，Yt和Yt+1所有的都在，所以其最后一个就是final_hidden，为（128，500，64）即：seq_output[:，-1，:].squeeze() == final_hidden.squeeze() </li>
+<li>batch_first=True参数表示当前输入为（batch, seq，feature）,如果输入做了交换，输入为（seq，batch，feature）则应为False</li>
+<li>bidirectional=False</li>
+<li>num_layers=1</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RNN</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, embedding_dim=<span class="number">16</span>, hidden_dim=<span class="number">64</span>, vocab_size=vocab_size, num_layers=<span class="number">1</span>, bidirectional=<span class="literal">False</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>(RNN, self).__init__()</span><br><span class="line">        self.embeding = nn.Embedding(vocab_size, embedding_dim)</span><br><span class="line">        self.rnn = nn.RNN(embedding_dim, hidden_dim, num_layers=num_layers, batch_first=<span class="literal">True</span>, bidirectional=bidirectional)</span><br><span class="line">        self.layer = nn.Linear(hidden_dim * (<span class="number">2</span> <span class="keyword">if</span> bidirectional <span class="keyword">else</span> <span class="number">1</span>), hidden_dim)</span><br><span class="line">        self.fc = nn.Linear(hidden_dim, <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="comment"># [bs, seq length]</span></span><br><span class="line">        x = self.embeding(x)</span><br><span class="line">        <span class="comment"># [bs, seq length, embedding_dim] -&gt; shape [bs, embedding_dim, seq length]</span></span><br><span class="line">        seq_output, final_hidden = self.rnn(x)</span><br><span class="line">        <span class="comment"># [bs, seq length, hidden_dim], [*, bs, hidden_dim]</span></span><br><span class="line">        x = seq_output[:, -<span class="number">1</span>, :]</span><br><span class="line">        <span class="comment"># 取最后一个时间步的输出 (这也是为什么要设置padding_first=True的原因)</span></span><br><span class="line">        x = self.layer(x)</span><br><span class="line">        x = self.fc(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    </span><br><span class="line">sample_inputs = torch.randint(<span class="number">0</span>, vocab_size, (<span class="number">2</span>, <span class="number">128</span>))</span><br><span class="line">    </span><br><span class="line">print(<span class="string">&quot;&#123;:=^80&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot; 一层单向 RNN &quot;</span>))       </span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> RNN().named_parameters():</span><br><span class="line">    print(<span class="string">f&quot;<span class="subst">&#123;key:^<span class="number">40</span>&#125;</span>paramerters num: <span class="subst">&#123;np.prod(value.shape)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">print(<span class="string">&quot;&#123;:=^80&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot; 一层双向 RNN &quot;</span>))       </span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> RNN(bidirectional=<span class="literal">True</span>).named_parameters():</span><br><span class="line">    print(<span class="string">f&quot;<span class="subst">&#123;key:^<span class="number">40</span>&#125;</span>paramerters num: <span class="subst">&#123;np.prod(value.shape)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">print(<span class="string">&quot;&#123;:=^80&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot; 俩层单向 RNN &quot;</span>))       </span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> RNN(num_layers=<span class="number">2</span>).named_parameters():</span><br><span class="line">    print(<span class="string">f&quot;<span class="subst">&#123;key:^<span class="number">40</span>&#125;</span>paramerters num: <span class="subst">&#123;np.prod(value.shape)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/6.png" style="zoom:50%;">
+
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/9.png" style="zoom:50%;">
+
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/10.png" style="zoom:50%;">
+
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/11.png" style="zoom:50%;">
+
+<ul>
+<li>（128，500，16）——&gt; （128，64）x（64，64）+<strong>（128，16）x（16，64）</strong></li>
+</ul>
+<p>​    <img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/12.png" style="zoom:50%;">    </p>
+<p>​            </p>
+<ul>
+<li>8192的来源：上述（128，64）变为（128，64）x（64，64）+<strong>（128，128）x（128，64）</strong>，所以128x64=8,192 </li>
+<li>4096的来源：64x64=4,096 </li>
+</ul>
+<h3 id="实战分析"><a href="#实战分析" class="headerlink" title="实战分析"></a>实战分析</h3><h4 id="1-构建-rnn-模型"><a href="#1-构建-rnn-模型" class="headerlink" title="1 构建 rnn 模型"></a>1 构建 rnn 模型</h4><p>当考虑神经网络层的参数量时， 计算方法如下：</p>
+<ol>
+<li><p>Embedding 层：</p>
+<ul>
+<li>vocab_size 是词汇表大小。</li>
+<li>embedding_dim 是嵌入维度。</li>
+<li>参数量为 vocab_size * embedding_dim， 因为每个词汇都有一个对应的嵌入向量。</li>
+</ul>
+</li>
+<li><p>RNN 层：</p>
+<ul>
+<li><p>embedding_dim 是输入维度。</p>
+</li>
+<li><p>hidden_dim 是隐藏层维度。</p>
+</li>
+<li><p>RNN 权重参数由两部分组成：</p>
+<ul>
+<li>weight_ih： 输入到隐藏层的权重， 大小为 (hidden_dim, embedding_dim)。</li>
+<li>weight_hh： 隐藏层到隐藏层的权重， 大小为 (hidden_dim, hidden_dim)。</li>
+</ul>
+</li>
+<li><p>RNN 偏置参数由两部分组成：</p>
+<ul>
+<li>bias_ih： 输入到隐藏层的偏置， 大小为 (hidden_dim,)。</li>
+<li>bias_hh： 隐藏层到隐藏层的偏置， 大小为 (hidden_dim,)。</li>
+</ul>
+</li>
+<li><p>总参数量为 hidden_dim * (hidden_dim + embedding_dim) + 2 * hidden_dim。</p>
+</li>
+</ul>
+</li>
+<li><p>全连接层 fc：</p>
+<ul>
+<li><p>输入维度是 hidden_dim， 输出维度是 vocab_size。</p>
+</li>
+<li><p>权重参数大小为 (vocab_size, hidden_dim)。</p>
+</li>
+<li><p>偏置参数大小为 (vocab_size,)。</p>
+</li>
+<li><p>参数量为 vocab_size * hidden_dim + vocab_size。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>结合你提供的参数数量和上述计算方法：</p>
+<ul>
+<li>embedding.weight： vocab_size * embedding_dim， 即 65 * 256 = 16640。</li>
+<li>rnn.weight_ih_l0： hidden_dim * embedding_dim， 即 1024 * 256 = 262144。</li>
+<li>rnn.weight_hh_l0： hidden_dim * hidden_dim， 即 1024 * 1024 = 1048576。</li>
+<li>rnn.bias_ih_l0 和 rnn.bias_hh_l0： 每个都有 hidden_dim 个参数， 即 1024 + 1024 = 2048。</li>
+<li>fc.weight： vocab_size * hidden_dim， 即 65 * 1024 = 66560。</li>
+<li>fc.bias： vocab_size， 即 65</li>
+</ul>
+<h4 id="BRNN-的应用包括："><a href="#BRNN-的应用包括：" class="headerlink" title="BRNN 的应用包括："></a>BRNN 的应用包括：</h4><p>语音识别（与长时记忆结合）、翻译、手写识别、蛋白质结构预测、词性标记、依赖解析、实体提取</p>
+<h3 id="文本生成"><a href="#文本生成" class="headerlink" title="文本生成"></a>文本生成</h3><p>使用莎士比亚文集做文本生成</p>
+<h4 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">!wget https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;./shakespeare.txt&quot;</span>, <span class="string">&quot;r&quot;</span>, encoding=<span class="string">&quot;utf8&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    text = file.read()</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;length&quot;</span>, <span class="built_in">len</span>(text))</span><br><span class="line">print(text[<span class="number">0</span>:<span class="number">100</span>])</span><br></pre></td></tr></table></figure>
+<h4 id="构造字典"><a href="#构造字典" class="headerlink" title="构造字典"></a>构造字典</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. generate vocab</span></span><br><span class="line"><span class="comment"># 2. build mapping char-&gt;id</span></span><br><span class="line"><span class="comment"># 3. data -&gt; id_data  把数据都转为id</span></span><br><span class="line"><span class="comment"># 4. a b c d [EOS] -&gt; [BOS] b c d  预测下一个字符生成的模型，也就是输入是a，输出就是b</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#去重，留下独立字符，并排序（排序是为了好看）</span></span><br><span class="line">vocab = <span class="built_in">sorted</span>(<span class="built_in">set</span>(text))</span><br><span class="line">print(<span class="built_in">len</span>(vocab))</span><br><span class="line">print(vocab)</span><br><span class="line"></span><br><span class="line"><span class="comment">#每个字符都编好号，enumerate对每一个位置编号，生成的是列表中是元组，下面字典生成式</span></span><br><span class="line">char2idx = &#123;char:idx <span class="keyword">for</span> idx, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(vocab)&#125;</span><br><span class="line">print(char2idx)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把vocab从列表变为ndarray</span></span><br><span class="line">idx2char = np.array(vocab)</span><br><span class="line">print(idx2char)</span><br><span class="line"></span><br><span class="line"><span class="comment">#把字符都转换为id</span></span><br><span class="line">text_as_int = np.array([char2idx[c] <span class="keyword">for</span> c <span class="keyword">in</span> text])</span><br><span class="line">print(text_as_int.shape)</span><br><span class="line">print(<span class="built_in">len</span>(text_as_int))</span><br><span class="line">print(text_as_int[<span class="number">0</span>:<span class="number">10</span>])</span><br><span class="line">print(text[<span class="number">0</span>:<span class="number">10</span>])</span><br></pre></td></tr></table></figure>
+<h4 id="Dataset与Dataloader的构建"><a href="#Dataset与Dataloader的构建" class="headerlink" title="Dataset与Dataloader的构建"></a>Dataset与Dataloader的构建</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CharDataset</span>(<span class="params">Dataset</span>):</span></span><br><span class="line">    <span class="comment">#text_as_int是字符的id列表，seq_length是每个样本的长度</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, text_as_int, seq_length</span>):</span></span><br><span class="line">        self.sub_len = seq_length + <span class="number">1</span> <span class="comment">#一个样本的长度</span></span><br><span class="line">        self.text_as_int = text_as_int</span><br><span class="line">        self.num_seq = <span class="built_in">len</span>(text_as_int) // self.sub_len <span class="comment">#样本的个数</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, index</span>):</span><span class="comment">#index是样本的索引，返回的是一个样本，比如第一个，就是0-100的字符,总计101个字符</span></span><br><span class="line">        <span class="keyword">return</span> self.text_as_int[index * self.sub_len: (index + <span class="number">1</span>) * self.sub_len]</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span>(<span class="params">self</span>):</span> <span class="comment">#返回样本的个数</span></span><br><span class="line">        <span class="keyword">return</span> self.num_seq</span><br><span class="line"></span><br><span class="line"><span class="comment">#batch是一个列表，列表中的每一个元素是一个样本，有101个字符，前100个是输入，后100个是输出</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">collat_fct</span>(<span class="params">batch</span>):</span></span><br><span class="line">    src_list = [] <span class="comment">#输入</span></span><br><span class="line">    trg_list = [] <span class="comment">#输出</span></span><br><span class="line">    <span class="keyword">for</span> part <span class="keyword">in</span> batch:</span><br><span class="line">        src_list.append(part[:-<span class="number">1</span>]) <span class="comment">#输入</span></span><br><span class="line">        trg_list.append(part[<span class="number">1</span>:]) <span class="comment">#输出</span></span><br><span class="line">        </span><br><span class="line">    src_list = np.array(src_list) <span class="comment">#把列表转换为ndarray</span></span><br><span class="line">    trg_list = np.array(trg_list) <span class="comment">#把列表转换为ndarray</span></span><br><span class="line">    <span class="keyword">return</span> torch.Tensor(src_list).to(dtype=torch.int64), torch.Tensor(trg_list).to(dtype=torch.int64) <span class="comment">#返回的是一个元组，元组中的每一个元素是一个torch.Tensor</span></span><br><span class="line">        </span><br><span class="line"><span class="comment">#每个样本的长度是101，也就是100个字符+1个结束符</span></span><br><span class="line">train_ds = CharDataset(text_as_int, <span class="number">100</span>)</span><br><span class="line">train_dl = DataLoader(train_ds, batch_size=<span class="number">64</span>, shuffle=<span class="literal">True</span>, collate_fn=collat_fct)</span><br></pre></td></tr></table></figure>
+<h4 id="定义模型-1"><a href="#定义模型-1" class="headerlink" title="定义模型"></a>定义模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CharRNN</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, vocab_size, embedding_dim=<span class="number">256</span>, hidden_dim=<span class="number">1024</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>(CharRNN, self).__init__()</span><br><span class="line">        self.embedding = nn.Embedding(vocab_size, embedding_dim)</span><br><span class="line">        <span class="comment">#batch_first=True,输入的数据格式是(batch_size, seq_len, embedding_dim)</span></span><br><span class="line">        self.rnn = nn.RNN(embedding_dim, hidden_dim, batch_first=<span class="literal">True</span>)</span><br><span class="line">        self.fc = nn.Linear(hidden_dim, vocab_size)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x, hidden=<span class="literal">None</span></span>):</span></span><br><span class="line">        x = self.embedding(x) <span class="comment">#(batch_size, seq_len) -&gt; (batch_size, seq_len, embedding_dim) (64, 100, 256)</span></span><br><span class="line">        <span class="comment">#这里和02的差异是没有只拿最后一个输出，而是把所有的输出都拿出来了</span></span><br><span class="line">        <span class="comment">#(batch_size, seq_len, embedding_dim)-&gt;(batch_size, seq_len, hidden_dim)(64, 100, 1024)</span></span><br><span class="line">        output, hidden = self.rnn(x, hidden)</span><br><span class="line">        x = self.fc(output) <span class="comment">#[bs, seq_len, hidden_dim]---&gt;[bs, seq_len, vocab_size] (64, 100,65)</span></span><br><span class="line">        <span class="keyword">return</span> x, hidden <span class="comment">#x的shape是(batch_size, seq_len, vocab_size)</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">vocab_size = <span class="built_in">len</span>(vocab)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;&#123;:=^80&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot; 一层单向 RNN &quot;</span>))       </span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> CharRNN(vocab_size).named_parameters():</span><br><span class="line">    print(<span class="string">f&quot;<span class="subst">&#123;key:^<span class="number">40</span>&#125;</span>paramerters num: <span class="subst">&#123;np.prod(value.shape)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/7224/13.png" style="zoom:60%;">
+
+<h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 训练</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">training</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">    model, </span></span></span><br><span class="line"><span class="function"><span class="params">    train_loader, </span></span></span><br><span class="line"><span class="function"><span class="params">    epoch, </span></span></span><br><span class="line"><span class="function"><span class="params">    loss_fct, </span></span></span><br><span class="line"><span class="function"><span class="params">    optimizer, </span></span></span><br><span class="line"><span class="function"><span class="params">    save_ckpt_callback=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    stateful=<span class="literal">False</span>      <span class="comment"># 想用stateful，batch里的数据就必须连续，不能打乱</span></span></span></span><br><span class="line"><span class="function"><span class="params">    </span>):</span></span><br><span class="line">    record_dict = &#123;</span><br><span class="line">        <span class="string">&quot;train&quot;</span>: [],</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    global_step = <span class="number">0</span></span><br><span class="line">    model.train()</span><br><span class="line">    hidden = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">with</span> tqdm(total=epoch * <span class="built_in">len</span>(train_loader)) <span class="keyword">as</span> pbar:</span><br><span class="line">        <span class="keyword">for</span> epoch_id <span class="keyword">in</span> <span class="built_in">range</span>(epoch):</span><br><span class="line">            <span class="comment"># training</span></span><br><span class="line">            <span class="keyword">for</span> datas, labels <span class="keyword">in</span> train_loader:</span><br><span class="line">                datas = datas.to(device)</span><br><span class="line">                labels = labels.to(device)</span><br><span class="line">                <span class="comment"># 梯度清空</span></span><br><span class="line">                optimizer.zero_grad()</span><br><span class="line">                <span class="comment"># 模型前向计算,如果数据集打乱了，stateful=False，hidden就要清空</span></span><br><span class="line">                <span class="comment"># 如果数据集没有打乱，stateful=True，hidden就不需要清空</span></span><br><span class="line">                logits, hidden = model(datas, hidden=hidden <span class="keyword">if</span> stateful <span class="keyword">else</span> <span class="literal">None</span>)</span><br><span class="line">                <span class="comment"># 计算损失,交叉熵损失第一个参数要是二阶张量，第二个参数要是一阶张量，所以要reshape</span></span><br><span class="line">                loss = loss_fct(logits.reshape(-<span class="number">1</span>, vocab_size), labels.reshape(-<span class="number">1</span>))</span><br><span class="line">                <span class="comment"># 梯度回传</span></span><br><span class="line">                loss.backward()</span><br><span class="line">                <span class="comment"># 调整优化器，包括学习率的变动等</span></span><br><span class="line">                optimizer.step()</span><br><span class="line"> </span><br><span class="line">                loss = loss.cpu().item()</span><br><span class="line">                <span class="comment"># record</span></span><br><span class="line">                </span><br><span class="line">                record_dict[<span class="string">&quot;train&quot;</span>].append(&#123;</span><br><span class="line">                    <span class="string">&quot;loss&quot;</span>: loss, <span class="string">&quot;step&quot;</span>: global_step</span><br><span class="line">                &#125;)</span><br><span class="line">   </span><br><span class="line">                <span class="comment"># 保存模型权重 save model checkpoint</span></span><br><span class="line">                <span class="keyword">if</span> save_ckpt_callback <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    save_ckpt_callback(global_step, model.state_dict(), metric=-loss)</span><br><span class="line">                <span class="comment"># udate step</span></span><br><span class="line">                global_step += <span class="number">1</span></span><br><span class="line">                pbar.update(<span class="number">1</span>)</span><br><span class="line">                pbar.set_postfix(&#123;<span class="string">&quot;epoch&quot;</span>: epoch_id&#125;)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> record_dict</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">epoch = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">model = CharRNN(vocab_size=vocab_size)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 定义损失函数 采用交叉熵损失 </span></span><br><span class="line">loss_fct = nn.CrossEntropyLoss()</span><br><span class="line"><span class="comment"># 2. 定义优化器 采用 adam</span></span><br><span class="line"><span class="comment"># Optimizers specified in the torch.optim package</span></span><br><span class="line">optimizer = torch.optim.Adam(model.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># save best</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">&quot;checkpoints&quot;</span>):</span><br><span class="line">    os.makedirs(<span class="string">&quot;checkpoints&quot;</span>)</span><br><span class="line">save_ckpt_callback = SaveCheckpointsCallback(<span class="string">&quot;checkpoints/text_generation&quot;</span>, save_step=<span class="number">1000</span>, save_best_only=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model = model.to(device)</span><br><span class="line"></span><br><span class="line">record = training(</span><br><span class="line">    model,</span><br><span class="line">    train_dl,</span><br><span class="line">    epoch,</span><br><span class="line">    loss_fct,</span><br><span class="line">    optimizer,</span><br><span class="line">    save_ckpt_callback=save_ckpt_callback,</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果数据集没有打乱，stateful=True，hidden就不需要清空</li>
+<li>计算损失,交叉熵损失第一个参数要是二阶张量，第二个参数要是一阶张量，所以要reshape：<ul>
+<li>第一个参数将原本的（3，100，64）——&gt;（300，64）</li>
+<li>第二个参数将原本的（64，100）——&gt;（6400）</li>
+</ul>
+</li>
+</ul>
+<h4 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个概率分布，表示每个类别被选中的概率</span></span><br><span class="line"><span class="comment"># 这里我们有一个简单的四个类别的概率分布</span></span><br><span class="line">prob_dist = torch.tensor([<span class="number">0.1</span>, <span class="number">0.45</span>, <span class="number">0.35</span>, <span class="number">0.1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 multinomial 进行抽样</span></span><br><span class="line"><span class="comment"># num_samples 表示要抽取的样本数量</span></span><br><span class="line">num_samples = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 抽取样本，随机抽样，概率越高，抽到的概率就越高</span></span><br><span class="line">samples = torch.multinomial(prob_dist, <span class="number">1</span>, replacement=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;概率分布:&quot;</span>, prob_dist)</span><br><span class="line">print(<span class="string">&quot;抽取的样本索引:&quot;</span>, samples)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示每个样本对应的概率</span></span><br><span class="line">print(<span class="string">&quot;每个样本对应的概率:&quot;</span>, prob_dist[samples])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_text</span>(<span class="params">model, start_string, max_len=<span class="number">1000</span>, temperature=<span class="number">1.0</span>, stream=<span class="literal">True</span></span>):</span></span><br><span class="line">    input_eval = torch.Tensor([char2idx[char] <span class="keyword">for</span> char <span class="keyword">in</span> start_string]).to(dtype=torch.int64, device=device).reshape(<span class="number">1</span>, -<span class="number">1</span>) <span class="comment">#bacth_size=1, seq_len长度是多少都可以 （1,5）</span></span><br><span class="line">    hidden = <span class="literal">None</span></span><br><span class="line">    text_generated = [] <span class="comment">#用来保存生成的文本</span></span><br><span class="line">    model.<span class="built_in">eval</span>()</span><br><span class="line">    pbar = tqdm(<span class="built_in">range</span>(max_len)) <span class="comment"># 进度条</span></span><br><span class="line">    print(start_string, end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    <span class="comment"># no_grad是一个上下文管理器，用于指定在其中的代码块中不需要计算梯度。在这个区域内，不会记录梯度信息，用于在生成文本时不影响模型权重。</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> pbar:<span class="comment">#控制进度条</span></span><br><span class="line">            logits, hidden = model(input_eval, hidden=hidden)</span><br><span class="line">            <span class="comment"># 温度采样，较高的温度会增加预测结果的多样性，较低的温度则更加保守。</span></span><br><span class="line">            <span class="comment">#取-1的目的是只要最后，拼到原有的输入上</span></span><br><span class="line">            logits = logits[<span class="number">0</span>, -<span class="number">1</span>, :] / temperature</span><br><span class="line">            <span class="comment"># using multinomial to sampling</span></span><br><span class="line">            probs = F.softmax(logits, dim=-<span class="number">1</span>) <span class="comment">#算为概率分布</span></span><br><span class="line">            idx = torch.multinomial(probs, <span class="number">1</span>).item() <span class="comment">#从概率分布中抽取一个样本,取概率较大的那些</span></span><br><span class="line">            input_eval = torch.Tensor([idx]).to(dtype=torch.int64, device=device).reshape(<span class="number">1</span>, -<span class="number">1</span>) <span class="comment">#把idx转为tensor</span></span><br><span class="line">            text_generated.append(idx)</span><br><span class="line">            <span class="keyword">if</span> stream:</span><br><span class="line">                print(idx2char[idx], end=<span class="string">&quot;&quot;</span>, flush=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join([idx2char[i] <span class="keyword">for</span> i <span class="keyword">in</span> text_generated])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># load checkpoints</span></span><br><span class="line">model.load_state_dict(torch.load(<span class="string">&quot;checkpoints/text_generation/best.ckpt&quot;</span>, map_location=<span class="string">&quot;cpu&quot;</span>))</span><br><span class="line">start_string = <span class="string">&quot;All: &quot;</span> <span class="comment">#这里就是开头，什么都可以</span></span><br><span class="line">res = generate_text(model, start_string, max_len=<span class="number">1000</span>, temperature=<span class="number">0.5</span>, stream=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>logits = logits[0, -1, :] / temperature：</p>
+<ul>
+<li><p>除 temperature之后，softmax的概率值越接近，每个生成越随机。</p>
+</li>
+<li><p>当 temperature 较小（接近 0）时，模型生成的输出会更加 <strong>确定</strong> 和 <strong>保守</strong>。</p>
+<p>模型会倾向于选择 <strong>概率较高的单词</strong>，而 <strong>低概率的单词</strong> 基本不会被选中。</p>
+</li>
+<li><p>当 temperature 较大（比如大于 1）时，模型生成的输出会更加 <strong>多样化</strong> 和 <strong>随机</strong>。</p>
+<p>温度较大时，生成时概率分布变得更加平滑，低概率的单词也有机会被选择，从而 <strong>增加了生成文本的多样性</strong>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">Shane</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://hexo.ml/7224.html">https://hexo.ml/7224.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hexo.ml" target="_blank">Shane 's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a><a class="post-meta__tags" href="/tags/RNN/">RNN</a></div><div class="post_share"><div class="social-share" data-image="https://i.ibb.co/s2pR2LB/58367946742189816.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://i.ibb.co/RgwjvsV/image.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://i.ibb.co/RgwjvsV/image.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://i.ibb.co/mCHCLBz/image.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://i.ibb.co/mCHCLBz/image.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/63226.html"><img class="prev-cover" data-lazy-src="https://i.ibb.co/rk09PZv/chonglou.webp" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Word2Vec与Embedding</div></div></a></div><div class="next-post pull-right"><a href="/21398.html"><img class="next-cover" data-lazy-src="https://i.ibb.co/fGF1rjY/123.webp" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">长短期记忆网络LSTM</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/53759.html" title="GPU并行训练"><img class="cover" data-lazy-src="https://i.ibb.co/xG7jGwW/7.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-25</div><div class="title">GPU并行训练</div></div></a></div><div><a href="/63226.html" title="Word2Vec与Embedding"><img class="cover" data-lazy-src="https://i.ibb.co/rk09PZv/chonglou.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-25</div><div class="title">Word2Vec与Embedding</div></div></a></div><div><a href="/21398.html" title="长短期记忆网络LSTM"><img class="cover" data-lazy-src="https://i.ibb.co/fGF1rjY/123.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-25</div><div class="title">长短期记忆网络LSTM</div></div></a></div><div><a href="/34690.html" title="seq2seq模型"><img class="cover" data-lazy-src="https://i.ibb.co/zPS3z28/20210103181032.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-24</div><div class="title">seq2seq模型</div></div></a></div><div><a href="/45354.html" title="深度学习-——卷积神经网络"><img class="cover" data-lazy-src="https://i.ibb.co/s2pR2LB/58367946742189816.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-25</div><div class="title">深度学习-——卷积神经网络</div></div></a></div><div><a href="/39756.html" title="深度学习-1-——神经网络、softmax以及交叉熵损失"><img class="cover" data-lazy-src="https://i.ibb.co/rk09PZv/chonglou.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-25</div><div class="title">深度学习-1-——神经网络、softmax以及交叉熵损失</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://i.ibb.co/Qnww6rp/20210209231648.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Shane</div><div class="author-info__description">一个收藏回忆与分享技术的地方！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">31</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Q1Shane"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-RNN"><span class="toc-number">1.</span> <span class="toc-text">循环神经网络(RNN)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81RNN"><span class="toc-number">1.1.</span> <span class="toc-text">为什么需要RNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SimpleRNN"><span class="toc-number">1.2.</span> <span class="toc-text">SimpleRNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E5%8F%8C%E5%B1%82RNN"><span class="toc-number">1.3.</span> <span class="toc-text">单向双层RNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E5%90%91%E5%8D%95%E5%B1%82RNN"><span class="toc-number">1.4.</span> <span class="toc-text">双向单层RNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E5%90%91%E5%8F%8C%E5%B1%82RNN"><span class="toc-number">1.5.</span> <span class="toc-text">双向双层RNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.6.</span> <span class="toc-text">定义模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E5%88%86%E6%9E%90"><span class="toc-number">1.7.</span> <span class="toc-text">实战分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%9E%84%E5%BB%BA-rnn-%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.7.1.</span> <span class="toc-text">1 构建 rnn 模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BRNN-%E7%9A%84%E5%BA%94%E7%94%A8%E5%8C%85%E6%8B%AC%EF%BC%9A"><span class="toc-number">1.7.2.</span> <span class="toc-text">BRNN 的应用包括：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E7%94%9F%E6%88%90"><span class="toc-number">1.8.</span> <span class="toc-text">文本生成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="toc-number">1.8.1.</span> <span class="toc-text">数据准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%AD%97%E5%85%B8"><span class="toc-number">1.8.2.</span> <span class="toc-text">构造字典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Dataset%E4%B8%8EDataloader%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="toc-number">1.8.3.</span> <span class="toc-text">Dataset与Dataloader的构建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B-1"><span class="toc-number">1.8.4.</span> <span class="toc-text">定义模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83"><span class="toc-number">1.8.5.</span> <span class="toc-text">训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E7%90%86"><span class="toc-number">1.8.6.</span> <span class="toc-text">推理</span></a></li></ol></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/42505.html" title="论文解读：MuCGEC"><img data-lazy-src="https://i.ibb.co/QJ1fDJM/9.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="论文解读：MuCGEC"/></a><div class="content"><a class="title" href="/42505.html" title="论文解读：MuCGEC">论文解读：MuCGEC</a><time datetime="2023-05-17T00:11:23.000Z" title="发表于 2023-05-17 08:11:23">2023-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/34690.html" title="seq2seq模型"><img data-lazy-src="https://i.ibb.co/zPS3z28/20210103181032.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="seq2seq模型"/></a><div class="content"><a class="title" href="/34690.html" title="seq2seq模型">seq2seq模型</a><time datetime="2022-08-24T12:24:15.000Z" title="发表于 2022-08-24 20:24:15">2022-08-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/53759.html" title="GPU并行训练"><img data-lazy-src="https://i.ibb.co/xG7jGwW/7.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="GPU并行训练"/></a><div class="content"><a class="title" href="/53759.html" title="GPU并行训练">GPU并行训练</a><time datetime="2022-06-25T12:24:15.000Z" title="发表于 2022-06-25 20:24:15">2022-06-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/63226.html" title="Word2Vec与Embedding"><img data-lazy-src="https://i.ibb.co/rk09PZv/chonglou.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="Word2Vec与Embedding"/></a><div class="content"><a class="title" href="/63226.html" title="Word2Vec与Embedding">Word2Vec与Embedding</a><time datetime="2022-04-25T12:24:15.000Z" title="发表于 2022-04-25 20:24:15">2022-04-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/7224.html" title="循环神经网络"><img data-lazy-src="https://i.ibb.co/s2pR2LB/58367946742189816.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="循环神经网络"/></a><div class="content"><a class="title" href="/7224.html" title="循环神经网络">循环神经网络</a><time datetime="2022-04-25T12:24:15.000Z" title="发表于 2022-04-25 20:24:15">2022-04-25</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Shane</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'DLtC6dHfP11bGkqkjUFWnD00-MdYXbMMI',
+      appKey: 'uA7SpdGiCWi0BpIigPRpsHsN',
+      placeholder: '大佬们，踩一脚？',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.17.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+    content = content.replace(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webp)/g, '') // remove image link
+    content = content.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi, '') // remove url
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    
+    let defaultIcon = ''
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          let name = 'src'
+          if(true) {
+            name = 'data-lazy-src'
+          }
+          result += `<a href='${array[i].url}' class="thumbnail"><img ${name}='${getIcon(array[i].avatar, array[i].mail)}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick}</span><time> / ${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+      let serverURL = ''
+      if (false) {
+        serverURL = ''
+      } else {
+        serverURL = 'https://DLtC6dHf.api.lncldglobal.com'
+      }
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'DLtC6dHfP11bGkqkjUFWnD00-MdYXbMMI',
+        "X-LC-Key": 'uA7SpdGiCWi0BpIigPRpsHsN',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': e.QQAvatar,
+            'content': changeContent(e.comment),
+            'mail': e.mail,
+            'nick': e.nick,
+            'url': e.url,
+            'date': e.createdAt,
+          }
+        })
+        saveToLocal.set('leancloud-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('leancloud-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="000PeZCQ1i4XVs" data-server="tencent" data-type="artist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})</script></div><script src="https://cdn.jsdelivr.net/npm/live2d-widget@^3.1.3/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>

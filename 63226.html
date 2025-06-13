@@ -1,0 +1,494 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Word2Vec与Embedding | Shane 's Blog</title><meta name="keywords" content="深度学习,大模型,Word2Vec,Embedding"><meta name="author" content="Shane"><meta name="copyright" content="Shane"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="默认">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Word2Vec与Embedding">
+<meta property="og:url" content="https://hexo.ml/63226.html">
+<meta property="og:site_name" content="Shane &#39;s Blog">
+<meta property="og:description" content="默认">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.ibb.co/rk09PZv/chonglou.webp">
+<meta property="article:published_time" content="2022-04-25T12:24:15.000Z">
+<meta property="article:modified_time" content="2022-04-25T12:24:15.000Z">
+<meta property="article:author" content="Shane">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="大模型">
+<meta property="article:tag" content="Word2Vec">
+<meta property="article:tag" content="Embedding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.ibb.co/rk09PZv/chonglou.webp"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121000054.png"><link rel="canonical" href="https://hexo.ml/63226"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"本文修改于","messageNext":"天前，如果本文有一定的时效性，那么本文可能已经失效~"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":10,"languages":{"author":"作者: Shane","link":"链接: ","source":"来源: Shane 's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-25 20:24:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/hexo.min.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Shane 's Blog" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://i.ibb.co/Qnww6rp/20210209231648.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">31</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://i.ibb.co/rk09PZv/chonglou.webp)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Shane 's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Word2Vec与Embedding</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-25T12:24:15.000Z" title="发表于 2022-04-25 20:24:15">2022-04-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-25T12:24:15.000Z" title="更新于 2022-04-25 20:24:15">2022-04-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><link rel="stylesheet external nofollow noreferrer" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.2.1/css/hint.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h2><h3 id="什么是-Word2vec"><a href="#什么是-Word2vec" class="headerlink" title="什么是 Word2vec?"></a>什么是 Word2vec?</h3><p>NLP 里面，最细粒度的是 词语，词语组成句子，句子再组成段落、篇章、文档。所以处理 NLP 的问题，首先就要拿词语开刀。</p>
+<p> NLP 里的词语，是人类的抽象总结，是符号形式的（比如中文、英文、拉丁文等等），所以需要把他们转换成数值形式，或者说——嵌入到一个数学空间里，这种嵌入方式，就叫词嵌入（word embedding)，而 Word2vec，就是词嵌入（ word embedding) 的一种</p>
+<p>在 NLP 中，把 x 看做一个句子里的一个词语，y 是这个词语的上下文词语，那么这里的 f，便是 NLP 中经常出现的『语言模型』（language model），这个模型的目的，就是判断 (x,y) 这个样本，是否符合自然语言的法则，更通俗点说就是：词语x和词语y放在一起，是不是人话。</p>
+<p>Word2vec 正是来源于这个思想，但它的最终目的，不是要把 f 训练得多么完美，而是只关心模型训练完后的副产物——模型参数（这里特指神经网络的权重），并将这些参数，作为输入 x 的某种向量化的表示，这个向量便叫做——词向量</p>
+<p>我们来看个例子，如何用 Word2vec 寻找相似词：</p>
+<ul>
+<li>对于一句话：『她们 夸 吴彦祖 帅 到 没朋友』，如果输入 x 是『吴彦祖』，那么 y 可以是『她们』、『夸』、『帅』、『没朋友』这些词</li>
+<li>现有另一句话：『她们 夸 我 帅 到 没朋友』，如果输入 x 是『我』，那么不难发现，这里的上下文 y 跟上面一句话一样</li>
+<li>从而 f(吴彦祖) = f(我) = y，所以大数据告诉我们：我 = 吴彦祖（完美的结论</li>
+</ul>
+<h3 id="Skip-gram-和-CBOW-模型"><a href="#Skip-gram-和-CBOW-模型" class="headerlink" title="Skip-gram 和 CBOW 模型"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhida.zhihu.com/search?content_id=2709857&content_type=Article&match_order=1&q=Skip-gram&zhida_source=entity">Skip-gram</a> 和 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zhida.zhihu.com/search?content_id=2709857&content_type=Article&match_order=1&q=CBOW&zhida_source=entity">CBOW</a> 模型</h3><p>上面我们提到了语言模型</p>
+<ul>
+<li>如果是用一个词语作为输入，来预测它周围的上下文，那这个模型叫做『Skip-gram 模型』</li>
+<li>而如果是拿一个词语的上下文作为输入，来预测这个词语本身，则是 『CBOW 模型』</li>
+</ul>
+<p>我们先来看个最简单的例子。上面说到， y 是 x 的上下文，所以 y 只取上下文里一个词语的时候，语言模型就变成：</p>
+<blockquote>
+<p>用当前词 x 预测它的下一个词 y</p>
+</blockquote>
+<p>但如上面所说，一般的数学模型只接受数值型输入，这里的 x 该怎么表示呢？ 显然不能用 Word2vec，因为这是我们训练完模型的产物，现在我们想要的是 x 的一个原始输入形式。</p>
+<p>答案是：<strong>one-hot encoder</strong></p>
+<p>当模型训练完后，最后得到的其实是<strong>神经网络的权重</strong>，比如现在输入一个 x 的 one-hot encoder: [1,0,0,…,0]，对应刚说的那个词语『吴彦祖』，则在输入层到隐含层的权重里，只有对应 1 这个位置的权重被激活，这些权重的个数，跟隐含层节点数是一致的，从而这些权重组成一个向量 vx 来表示x，而因为每个词语的 one-hot encoder 里面 1 的位置是不同的，所以，这个向量 vx 就可以用来唯一表示 x。</p>
+<h3 id="Skip-gram-更一般的情形"><a href="#Skip-gram-更一般的情形" class="headerlink" title="Skip-gram 更一般的情形"></a>Skip-gram 更一般的情形</h3><p>一对多</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/63226/1.png" style="zoom:25%;">
+
+<h3 id="CBOW-更一般的情形"><a href="#CBOW-更一般的情形" class="headerlink" title="CBOW 更一般的情形"></a>CBOW 更一般的情形</h3><p><strong>更为常用，</strong>跟 Skip-gram 相似，只不过:</p>
+<blockquote>
+<p>Skip-gram 是预测一个词的上下文，而 CBOW 是用上下文预测这个词</p>
+<p>多对一</p>
+</blockquote>
+<p>网络结构如下:</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/63226/2.png" style="zoom:33%;">
+
+<p>更 Skip-gram 的模型并联不同，这里是输入变成了多个单词，所以要对输入处理下（一般是求和然后平均），输出的 cost function 不变</p>
+<p><strong>最终训练好的N-dim的向量（是一个密集向量）就是表示当前输出词语的词向量。</strong>相当于多维特征去表征一个词的词义，可以发现，相近的词向量之间的距离是对应相等的。比如：国王与皇后的距离与男人与女人的距离是相同的。</p>
+<h2 id="Embedding"><a href="#Embedding" class="headerlink" title="Embedding"></a>Embedding</h2><p>Embedding(词嵌入)：word2vec是Embedding的一种，</p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow <span class="keyword">import</span> keras  <span class="comment">#这里的波浪线不用管</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#用karas有的数据集imdb，电影分类,分电影是积极的，还是消极的</span></span><br><span class="line">imdb = keras.datasets.imdb</span><br><span class="line"><span class="comment">#载入数据使用下面两个参数</span></span><br><span class="line">vocab_size = <span class="number">10000</span>  <span class="comment">#词典大小，仅保留训练数据中前10000个最经常出现的单词，低频单词被舍弃</span></span><br><span class="line">index_from = <span class="number">3</span>  <span class="comment">#0,1,2,3空出来做别的事</span></span><br><span class="line"><span class="comment">#前一万个词出现词频最高的会保留下来进行处理，后面的作为特殊字符处理，</span></span><br><span class="line"><span class="comment"># 小于3的id都是特殊字符，下面代码有写</span></span><br><span class="line"><span class="comment"># 需要注意的一点是取出来的词表还是从1开始的，需要做处理</span></span><br><span class="line">(train_data, train_labels), (test_data, test_labels) = imdb.load_data(</span><br><span class="line">    num_words=vocab_size, index_from=index_from)</span><br><span class="line"></span><br><span class="line"><span class="comment">#载入词表，看下词表长度，词表就像英语字典</span></span><br><span class="line">word_index = imdb.get_word_index()</span><br><span class="line">print(<span class="built_in">len</span>(word_index))</span><br><span class="line">print(<span class="built_in">type</span>(word_index))</span><br><span class="line"><span class="comment">#词表虽然有8万多，但是我们只载入了最高频的1万词！！！！</span></span><br></pre></td></tr></table></figure>
+<h4 id="构造-word2idx-和-idx2word"><a href="#构造-word2idx-和-idx2word" class="headerlink" title="构造 word2idx 和 idx2word"></a>构造 word2idx 和 idx2word</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">word2idx = &#123;word: idx + <span class="number">3</span> <span class="keyword">for</span> word, idx <span class="keyword">in</span> word_index.items()&#125;  <span class="comment"># 0,1,2,3空出来做别的事,这里的idx是从1开始的,所以加3</span></span><br><span class="line">word2idx.update(&#123;</span><br><span class="line">    <span class="string">&quot;[PAD]&quot;</span>: <span class="number">0</span>,  <span class="comment"># 填充 token</span></span><br><span class="line">    <span class="string">&quot;[BOS]&quot;</span>: <span class="number">1</span>,  <span class="comment"># begin of sentence</span></span><br><span class="line">    <span class="string">&quot;[UNK]&quot;</span>: <span class="number">2</span>,  <span class="comment"># 未知 token</span></span><br><span class="line">    <span class="string">&quot;[EOS]&quot;</span>: <span class="number">3</span>,  <span class="comment"># end of sentence</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">idx2word = &#123;idx: word <span class="keyword">for</span> word, idx <span class="keyword">in</span> word2idx.items()&#125;  <span class="comment"># 反向词典,id变为单词(键值反转)</span></span><br></pre></td></tr></table></figure>
+<h4 id="Tokenizer"><a href="#Tokenizer" class="headerlink" title="Tokenizer"></a>Tokenizer</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tokenizer</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, word2idx, idx2word, max_length=<span class="number">500</span>, pad_idx=<span class="number">0</span>, bos_idx=<span class="number">1</span>, eos_idx=<span class="number">3</span>, unk_idx=<span class="number">2</span></span>):</span></span><br><span class="line">        self.word2idx = word2idx  <span class="comment">#词表,单词到id</span></span><br><span class="line">        self.idx2word = idx2word  <span class="comment">#词表，id到单词</span></span><br><span class="line">        self.max_length = max_length</span><br><span class="line">        self.pad_idx = pad_idx  <span class="comment">#填充</span></span><br><span class="line">        self.bos_idx = bos_idx  <span class="comment">#开始</span></span><br><span class="line">        self.eos_idx = eos_idx  <span class="comment">#结束</span></span><br><span class="line">        self.unk_idx = unk_idx  <span class="comment">#未知，未出现在最高频词表中的词</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encode</span>(<span class="params">self, text_list</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        将文本列表转化为索引列表</span></span><br><span class="line"><span class="string">        :param text_list:当前批次的文本列表</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        max_length = <span class="built_in">min</span>(self.max_length, <span class="number">2</span> + <span class="built_in">max</span>(</span><br><span class="line">            [<span class="built_in">len</span>(text) <span class="keyword">for</span> text <span class="keyword">in</span> text_list]))  <span class="comment">#最大长度，最大长度是500，但是如果句子长度小于500，就取句子长度（句子长度是本组句子中最长的），2是为了留出开始和结束的位置</span></span><br><span class="line">        indices = []</span><br><span class="line">        <span class="keyword">for</span> text <span class="keyword">in</span> text_list:</span><br><span class="line">            index = [self.word2idx.get(word, self.unk_idx) <span class="keyword">for</span> word <span class="keyword">in</span> text]  <span class="comment">#单词转化为id，未知的词用unk_idx代替</span></span><br><span class="line">            index = [self.bos_idx] + index + [self.eos_idx]  <span class="comment">#添加开始和结束</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(index) &lt; max_length:</span><br><span class="line">                index = index + [self.pad_idx] * (max_length - <span class="built_in">len</span>(index))  <span class="comment">#填充0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                index = index[:max_length]  <span class="comment">#如果句子长度大于500，就截断</span></span><br><span class="line">            indices.append(index)</span><br><span class="line">        <span class="keyword">return</span> torch.tensor(indices)  <span class="comment">#二维列表转化为tensor</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decode</span>(<span class="params">self, indices_list, remove_bos=<span class="literal">True</span>, remove_eos=<span class="literal">True</span>, remove_pad=<span class="literal">True</span>, split=<span class="literal">False</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        将索引列表转化为文本列表</span></span><br><span class="line"><span class="string">        :param indices_list:某批次的索引列表</span></span><br><span class="line"><span class="string">        :param remove_bos:</span></span><br><span class="line"><span class="string">        :param remove_eos:</span></span><br><span class="line"><span class="string">        :param remove_pad:</span></span><br><span class="line"><span class="string">        :param split:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        text_list = []</span><br><span class="line">        <span class="keyword">for</span> indices <span class="keyword">in</span> indices_list:</span><br><span class="line">            text = []</span><br><span class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> indices:</span><br><span class="line">                word = self.idx2word.get(index, <span class="string">&quot;[UNK]&quot;</span>)</span><br><span class="line">                <span class="keyword">if</span> remove_bos <span class="keyword">and</span> word == <span class="string">&quot;[BOS]&quot;</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">if</span> remove_eos <span class="keyword">and</span> word == <span class="string">&quot;[EOS]&quot;</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> remove_pad <span class="keyword">and</span> word == <span class="string">&quot;[PAD]&quot;</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                text.append(word)</span><br><span class="line">            text_list.append(<span class="string">&quot; &quot;</span>.join(text) <span class="keyword">if</span> <span class="keyword">not</span> split <span class="keyword">else</span> text)</span><br><span class="line">        <span class="keyword">return</span> text_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tokenizer = Tokenizer(word2idx=word2idx, idx2word=idx2word)</span><br><span class="line">raw_text = [<span class="string">&quot;hello world&quot;</span>.split(), <span class="string">&quot;tokenize text datas with batch&quot;</span>.split(), <span class="string">&quot;this is a test&quot;</span>.split()]</span><br><span class="line">indices = tokenizer.encode(raw_text)  <span class="comment">#encode支持批量处理</span></span><br><span class="line">decode_text = tokenizer.decode(indices.tolist(), remove_bos=<span class="literal">False</span>, remove_eos=<span class="literal">False</span>, remove_pad=<span class="literal">False</span>)</span><br><span class="line">print(<span class="string">&quot;raw text&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> raw <span class="keyword">in</span> raw_text:</span><br><span class="line">    print(raw)</span><br><span class="line">print(<span class="string">&quot;indices&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> indices:</span><br><span class="line">    print(index)</span><br><span class="line">print(<span class="string">&quot;decode text&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> decode <span class="keyword">in</span> decode_text:</span><br><span class="line">    print(decode)</span><br></pre></td></tr></table></figure>
+<p>对应效果：</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/63226/3.png" style="zoom:50%;">
+
+<h4 id="数据集与-DataLoader"><a href="#数据集与-DataLoader" class="headerlink" title="数据集与 DataLoader"></a>数据集与 DataLoader</h4><p>由于是tf的数据集，dataset需要重写：</p>
+<ul>
+<li>init</li>
+<li>getitem</li>
+<li>Len</li>
+</ul>
+<p>并且注意：由于刚导入train_data是包含ids的一系列数据(其中包含词表大小和get_word_index())，每一个样本是不包含结束符的，所以需要先进行decode然后encode为其补上结束符。并且需要对batch进行encode，统一长度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IMDBDataset</span>(<span class="params">Dataset</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, data, labels, remain_length=<span class="literal">True</span></span>):</span></span><br><span class="line">        <span class="keyword">if</span> remain_length:  <span class="comment">#字符串输出样本中，是否含有【BOS】和【EOS】，【PAD】</span></span><br><span class="line">            self.data = tokenizer.decode(data, remove_bos=<span class="literal">False</span>, remove_eos=<span class="literal">False</span>, remove_pad=<span class="literal">False</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 缩减一下数据</span></span><br><span class="line">            self.data = tokenizer.decode(data)</span><br><span class="line">        self.labels = labels</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span>(<span class="params">self, index</span>):</span></span><br><span class="line">        text = self.data[index]</span><br><span class="line">        label = self.labels[index]</span><br><span class="line">        <span class="keyword">return</span> text, label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">collate_fct</span>(<span class="params">batch</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    回调函数：</span></span><br><span class="line"><span class="string">    将batch(一批)数据处理成tensor形式</span></span><br><span class="line"><span class="string">    :param batch:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    text_list = [item[<span class="number">0</span>].split() <span class="keyword">for</span> item <span class="keyword">in</span> batch]  <span class="comment">#batch是128样本，每个样本类型是元组，第一个元素是文本，第二个元素是标签</span></span><br><span class="line">    label_list = [item[<span class="number">1</span>] <span class="keyword">for</span> item <span class="keyword">in</span> batch]</span><br><span class="line">    text_list = tokenizer.encode(text_list).to(dtype=torch.<span class="built_in">int</span>)  <span class="comment"># 文本转化为索引</span></span><br><span class="line">    <span class="keyword">return</span> text_list, torch.tensor(label_list).reshape(-<span class="number">1</span>, <span class="number">1</span>).to(dtype=torch.<span class="built_in">float</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">train_ds = IMDBDataset(train_data, train_labels)</span><br><span class="line">test_ds = IMDBDataset(test_data, test_labels)</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">128</span></span><br><span class="line">train_dl = DataLoader(train_ds, batch_size=batch_size, shuffle=<span class="literal">True</span>, collate_fn=collate_fct)  <span class="comment">#调用回调函数：collate_fn是处理batch的函数！！</span></span><br><span class="line">test_dl = DataLoader(test_ds, batch_size=batch_size, shuffle=<span class="literal">False</span>, collate_fn=collate_fct)</span><br></pre></td></tr></table></figure>
+<p>此时的train_dl为：[128,500]，为了进一步将其转变为密集向量，将对其转换为one-hot编码：[128,500,10000]，相当于将原本的每条数据中的每个id改为对应的one-hot编码(10000为vocab_size)</p>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/63226/4.png" style="zoom:60%;">
+
+<p>选择10000*16的矩阵(需要训练，包含权值w)，这样通过矩阵相乘，最后可以得到500x16的矩阵，这样500个词每一个词都又一个16的密集向量所表示。</p>
+<h4 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># target output size of 5</span></span><br><span class="line">m = nn.AdaptiveAvgPool1d(<span class="number">1</span>)  <span class="comment"># 自适应平均池化</span></span><br><span class="line"><span class="built_in">input</span> = torch.randn(<span class="number">1</span>, <span class="number">3</span>, <span class="number">6</span>)</span><br><span class="line">output = m(<span class="built_in">input</span>)</span><br><span class="line">output.size()  <span class="comment">#可以看到最后一维变成了1</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AddingModel</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, embedding_dim=<span class="number">16</span>, hidden_dim=<span class="number">64</span>, vocab_size=vocab_size</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(AddingModel, self).__init__()</span><br><span class="line">        self.embeding = nn.Embedding(vocab_size, embedding_dim)  <span class="comment"># 词嵌入</span></span><br><span class="line">        self.pool = nn.AdaptiveAvgPool1d(<span class="number">1</span>)  <span class="comment"># 自适应平均池化,对应tf是全局平均值池化</span></span><br><span class="line">        self.layer = nn.Linear(embedding_dim, hidden_dim)  <span class="comment"># 全连接层</span></span><br><span class="line">        self.fc = nn.Linear(hidden_dim, <span class="number">1</span>)  <span class="comment"># 全连接层</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="comment"># [bs, seq length] [128, 500]  [128,500,10000]---&gt;[128,500,16]</span></span><br><span class="line">        x = self.embeding(x)</span><br><span class="line">        <span class="comment"># [bs, seq length, embedding_dim]--&gt;[bs, embedding_dim, seq length]，尺寸[128,500,16]--》[128,16,500]</span></span><br><span class="line">        x = x.permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">        x = self.pool(x)  <span class="comment"># 每个样本变为一个密集向量，在seq_length维度上进行平均池化，[128,16,500]--&gt;[128,16,1]</span></span><br><span class="line">        x=x.squeeze(<span class="number">2</span>)  <span class="comment"># [bs, embedding_dim, 1] -&gt;[bs, embedding_dim]</span></span><br><span class="line">        <span class="comment"># [bs, embedding_dim] -&gt; [bs, hidden_dim]</span></span><br><span class="line">        x = self.layer(x)</span><br><span class="line">        x = self.fc(x)  <span class="comment"># [bs, hidden_dim] -&gt; [bs, 1]</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> AddingModel().named_parameters():</span><br><span class="line">    print(<span class="string">f&quot;<span class="subst">&#123;key:^<span class="number">40</span>&#125;</span>paramerters num: <span class="subst">&#123;np.prod(value.shape)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/63226/5.png" style="zoom:60%;">
+
+<h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><ul>
+<li>损失函数使用的是<strong>二进制交叉熵损失</strong>：torch.nn.functional.binary_cross_entropy_with_logits, 先sigmoid再计算交叉熵</li>
+<li><strong>二进制交叉熵损失</strong>又叫对数似然损失：用于使用一个神经元，做二分类，也即逻辑回归所使用的分类。</li>
+</ul>
+<img src= "https://cdn.jsdelivr.net/gh/weilining/img@main/img/loading.gif" data-lazy-src="/63226/6.png" style="zoom:50%;">
+
+<ul>
+<li>而多个神经元做多分类的时候，则使用的是交叉熵损失(只有前面一半)</li>
+<li>binary_cross_entropy_with_logits与.binary_cross_entropy的区别：在于with_logits会先进行sigmoid，再计算交叉熵。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">training</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">        model,</span></span></span><br><span class="line"><span class="function"><span class="params">        train_loader,</span></span></span><br><span class="line"><span class="function"><span class="params">        val_loader,</span></span></span><br><span class="line"><span class="function"><span class="params">        epoch,</span></span></span><br><span class="line"><span class="function"><span class="params">        loss_fct,</span></span></span><br><span class="line"><span class="function"><span class="params">        optimizer,</span></span></span><br><span class="line"><span class="function"><span class="params">        tensorboard_callback=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        save_ckpt_callback=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        early_stop_callback=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        eval_step=<span class="number">500</span>,</span></span></span><br><span class="line"><span class="function"><span class="params"></span>):</span></span><br><span class="line">    record_dict = &#123;</span><br><span class="line">        <span class="string">&quot;train&quot;</span>: [],</span><br><span class="line">        <span class="string">&quot;val&quot;</span>: []</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    global_step = <span class="number">0</span></span><br><span class="line">    model.train()</span><br><span class="line">    <span class="keyword">with</span> tqdm(total=epoch * <span class="built_in">len</span>(train_loader)) <span class="keyword">as</span> pbar:</span><br><span class="line">        <span class="keyword">for</span> epoch_id <span class="keyword">in</span> <span class="built_in">range</span>(epoch):</span><br><span class="line">            <span class="comment"># training</span></span><br><span class="line">            <span class="keyword">for</span> datas, labels <span class="keyword">in</span> train_loader:</span><br><span class="line">                datas = datas.to(device)</span><br><span class="line">                labels = labels.to(device)</span><br><span class="line">                <span class="comment"># 梯度清空</span></span><br><span class="line">                optimizer.zero_grad()</span><br><span class="line">                <span class="comment"># 模型前向计算</span></span><br><span class="line">                logits = model(datas)</span><br><span class="line">                <span class="comment"># 计算损失</span></span><br><span class="line">                loss = loss_fct(logits, labels)</span><br><span class="line">                <span class="comment"># 梯度回传</span></span><br><span class="line">                loss.backward()</span><br><span class="line">                <span class="comment"># 调整优化器，包括学习率的变动等</span></span><br><span class="line">                optimizer.step()</span><br><span class="line">                preds = logits &gt; <span class="number">0</span> <span class="comment">#当sigmoid输出大于0.5时，预测为1，否则预测为0，这里大于0，刚好sigmoid的值是0.5，预测为1</span></span><br><span class="line"></span><br><span class="line">                acc = accuracy_score(labels.cpu().numpy(), preds.cpu().numpy())</span><br><span class="line">                loss = loss.cpu().item()</span><br><span class="line">                <span class="comment"># record</span></span><br><span class="line"></span><br><span class="line">                record_dict[<span class="string">&quot;train&quot;</span>].append(&#123;</span><br><span class="line">                    <span class="string">&quot;loss&quot;</span>: loss, <span class="string">&quot;acc&quot;</span>: acc, <span class="string">&quot;step&quot;</span>: global_step</span><br><span class="line">                &#125;)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># evaluating</span></span><br><span class="line">                <span class="keyword">if</span> global_step % eval_step == <span class="number">0</span>:</span><br><span class="line">                    model.<span class="built_in">eval</span>()</span><br><span class="line">                    val_loss, val_acc = evaluating(model, val_loader, loss_fct)</span><br><span class="line">                    record_dict[<span class="string">&quot;val&quot;</span>].append(&#123;</span><br><span class="line">                        <span class="string">&quot;loss&quot;</span>: val_loss, <span class="string">&quot;acc&quot;</span>: val_acc, <span class="string">&quot;step&quot;</span>: global_step</span><br><span class="line">                    &#125;)</span><br><span class="line">                    model.train()</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># 1. 使用 tensorboard 可视化</span></span><br><span class="line">                    <span class="keyword">if</span> tensorboard_callback <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                        tensorboard_callback(</span><br><span class="line">                            global_step,</span><br><span class="line">                            loss=loss, val_loss=val_loss,</span><br><span class="line">                            acc=acc, val_acc=val_acc,</span><br><span class="line">                            lr=optimizer.param_groups[<span class="number">0</span>][<span class="string">&quot;lr&quot;</span>],</span><br><span class="line">                        )</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># 2. 保存模型权重 save model checkpoint</span></span><br><span class="line">                    <span class="keyword">if</span> save_ckpt_callback <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                        save_ckpt_callback(global_step, model.state_dict(), metric=val_acc)</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># 3. 早停 Early Stop</span></span><br><span class="line">                    <span class="keyword">if</span> early_stop_callback <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                        early_stop_callback(val_acc)</span><br><span class="line">                        <span class="keyword">if</span> early_stop_callback.early_stop:</span><br><span class="line">                            print(<span class="string">f&quot;Early stop at epoch <span class="subst">&#123;epoch_id&#125;</span> / global_step <span class="subst">&#123;global_step&#125;</span>&quot;</span>)</span><br><span class="line">                            <span class="keyword">return</span> record_dict</span><br><span class="line"></span><br><span class="line">                <span class="comment"># udate step</span></span><br><span class="line">                global_step += <span class="number">1</span></span><br><span class="line">                pbar.update(<span class="number">1</span>)</span><br><span class="line">                pbar.set_postfix(&#123;<span class="string">&quot;epoch&quot;</span>: epoch_id&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> record_dict</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">epoch = <span class="number">20</span></span><br><span class="line"></span><br><span class="line">model = AddingModel()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 定义损失函数 采用二进制交叉熵损失, 先sigmoid再计算交叉熵</span></span><br><span class="line">loss_fct = F.binary_cross_entropy_with_logits</span><br><span class="line"><span class="comment"># loss_fct =nn.BCEWithLogitsLoss()</span></span><br><span class="line"><span class="comment"># 2. 定义优化器 采用 adam</span></span><br><span class="line"><span class="comment"># Optimizers specified in the torch.optim package</span></span><br><span class="line">optimizer = torch.optim.Adam(model.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. tensorboard 可视化</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">&quot;runs&quot;</span>):</span><br><span class="line">    os.mkdir(<span class="string">&quot;runs&quot;</span>)</span><br><span class="line">tensorboard_callback = TensorBoardCallback(<span class="string">&quot;runs/imdb-adding&quot;</span>)</span><br><span class="line"><span class="comment"># tensorboard_callback.draw_model(model, [1, MAX_LENGTH])</span></span><br><span class="line"><span class="comment"># 2. save best</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">&quot;checkpoints&quot;</span>):</span><br><span class="line">    os.makedirs(<span class="string">&quot;checkpoints&quot;</span>)</span><br><span class="line">save_ckpt_callback = SaveCheckpointsCallback(<span class="string">&quot;checkpoints/imdb-adding&quot;</span>, save_step=<span class="built_in">len</span>(train_dl), save_best_only=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># 3. early stop</span></span><br><span class="line">early_stop_callback = EarlyStopCallback(patience=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">model = model.to(device)</span><br><span class="line">record = training(</span><br><span class="line">    model,</span><br><span class="line">    train_dl,</span><br><span class="line">    test_dl,</span><br><span class="line">    epoch,</span><br><span class="line">    loss_fct,</span><br><span class="line">    optimizer,</span><br><span class="line">    tensorboard_callback=tensorboard_callback,</span><br><span class="line">    save_ckpt_callback=save_ckpt_callback,</span><br><span class="line">    early_stop_callback=early_stop_callback,</span><br><span class="line">    eval_step=<span class="built_in">len</span>(train_dl)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+<a id="more"></a>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noreferrer">Shane</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://hexo.ml/63226.html">https://hexo.ml/63226.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hexo.ml" target="_blank">Shane 's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a><a class="post-meta__tags" href="/tags/Word2Vec/">Word2Vec</a><a class="post-meta__tags" href="/tags/Embedding/">Embedding</a></div><div class="post_share"><div class="social-share" data-image="https://i.ibb.co/rk09PZv/chonglou.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://i.ibb.co/RgwjvsV/image.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://i.ibb.co/RgwjvsV/image.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://i.ibb.co/mCHCLBz/image.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" data-lazy-src="https://i.ibb.co/mCHCLBz/image.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/53759.html"><img class="prev-cover" data-lazy-src="https://i.ibb.co/xG7jGwW/7.jpg" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">GPU并行训练</div></div></a></div><div class="next-post pull-right"><a href="/7224.html"><img class="next-cover" data-lazy-src="https://i.ibb.co/s2pR2LB/58367946742189816.webp" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">循环神经网络</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/53759.html" title="GPU并行训练"><img class="cover" data-lazy-src="https://i.ibb.co/xG7jGwW/7.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-25</div><div class="title">GPU并行训练</div></div></a></div><div><a href="/7224.html" title="循环神经网络"><img class="cover" data-lazy-src="https://i.ibb.co/s2pR2LB/58367946742189816.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-25</div><div class="title">循环神经网络</div></div></a></div><div><a href="/21398.html" title="长短期记忆网络LSTM"><img class="cover" data-lazy-src="https://i.ibb.co/fGF1rjY/123.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-25</div><div class="title">长短期记忆网络LSTM</div></div></a></div><div><a href="/34690.html" title="seq2seq模型"><img class="cover" data-lazy-src="https://i.ibb.co/zPS3z28/20210103181032.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-24</div><div class="title">seq2seq模型</div></div></a></div><div><a href="/45354.html" title="深度学习-——卷积神经网络"><img class="cover" data-lazy-src="https://i.ibb.co/s2pR2LB/58367946742189816.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-25</div><div class="title">深度学习-——卷积神经网络</div></div></a></div><div><a href="/39756.html" title="深度学习-1-——神经网络、softmax以及交叉熵损失"><img class="cover" data-lazy-src="https://i.ibb.co/rk09PZv/chonglou.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-25</div><div class="title">深度学习-1-——神经网络、softmax以及交叉熵损失</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://i.ibb.co/Qnww6rp/20210209231648.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Shane</div><div class="author-info__description">一个收藏回忆与分享技术的地方！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">31</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Q1Shane"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Word2Vec"><span class="toc-number">1.</span> <span class="toc-text">Word2Vec</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Word2vec"><span class="toc-number">1.1.</span> <span class="toc-text">什么是 Word2vec?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Skip-gram-%E5%92%8C-CBOW-%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">Skip-gram 和 CBOW 模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Skip-gram-%E6%9B%B4%E4%B8%80%E8%88%AC%E7%9A%84%E6%83%85%E5%BD%A2"><span class="toc-number">1.3.</span> <span class="toc-text">Skip-gram 更一般的情形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CBOW-%E6%9B%B4%E4%B8%80%E8%88%AC%E7%9A%84%E6%83%85%E5%BD%A2"><span class="toc-number">1.4.</span> <span class="toc-text">CBOW 更一般的情形</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Embedding"><span class="toc-number">2.</span> <span class="toc-text">Embedding</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">代码：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%84%E9%80%A0-word2idx-%E5%92%8C-idx2word"><span class="toc-number">2.1.1.</span> <span class="toc-text">构造 word2idx 和 idx2word</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tokenizer"><span class="toc-number">2.1.2.</span> <span class="toc-text">Tokenizer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8E-DataLoader"><span class="toc-number">2.1.3.</span> <span class="toc-text">数据集与 DataLoader</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.1.4.</span> <span class="toc-text">定义模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83"><span class="toc-number">2.1.5.</span> <span class="toc-text">训练</span></a></li></ol></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/42505.html" title="论文解读：MuCGEC"><img data-lazy-src="https://i.ibb.co/QJ1fDJM/9.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="论文解读：MuCGEC"/></a><div class="content"><a class="title" href="/42505.html" title="论文解读：MuCGEC">论文解读：MuCGEC</a><time datetime="2023-05-17T00:11:23.000Z" title="发表于 2023-05-17 08:11:23">2023-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/34690.html" title="seq2seq模型"><img data-lazy-src="https://i.ibb.co/zPS3z28/20210103181032.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="seq2seq模型"/></a><div class="content"><a class="title" href="/34690.html" title="seq2seq模型">seq2seq模型</a><time datetime="2022-08-24T12:24:15.000Z" title="发表于 2022-08-24 20:24:15">2022-08-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/53759.html" title="GPU并行训练"><img data-lazy-src="https://i.ibb.co/xG7jGwW/7.jpg" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="GPU并行训练"/></a><div class="content"><a class="title" href="/53759.html" title="GPU并行训练">GPU并行训练</a><time datetime="2022-06-25T12:24:15.000Z" title="发表于 2022-06-25 20:24:15">2022-06-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/63226.html" title="Word2Vec与Embedding"><img data-lazy-src="https://i.ibb.co/rk09PZv/chonglou.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="Word2Vec与Embedding"/></a><div class="content"><a class="title" href="/63226.html" title="Word2Vec与Embedding">Word2Vec与Embedding</a><time datetime="2022-04-25T12:24:15.000Z" title="发表于 2022-04-25 20:24:15">2022-04-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/7224.html" title="循环神经网络"><img data-lazy-src="https://i.ibb.co/s2pR2LB/58367946742189816.webp" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/weilining/img@main/img/20201121001110.png'" alt="循环神经网络"/></a><div class="content"><a class="title" href="/7224.html" title="循环神经网络">循环神经网络</a><time datetime="2022-04-25T12:24:15.000Z" title="发表于 2022-04-25 20:24:15">2022-04-25</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Shane</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'DLtC6dHfP11bGkqkjUFWnD00-MdYXbMMI',
+      appKey: 'uA7SpdGiCWi0BpIigPRpsHsN',
+      placeholder: '大佬们，踩一脚？',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.17.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+    content = content.replace(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webp)/g, '') // remove image link
+    content = content.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi, '') // remove url
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getIcon = (icon, mail) => {
+    if (icon) return icon
+    
+    let defaultIcon = ''
+    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
+    return iconUrl
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          let name = 'src'
+          if(true) {
+            name = 'data-lazy-src'
+          }
+          result += `<a href='${array[i].url}' class="thumbnail"><img ${name}='${getIcon(array[i].avatar, array[i].mail)}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick}</span><time> / ${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = () => {
+      let serverURL = ''
+      if (false) {
+        serverURL = ''
+      } else {
+        serverURL = 'https://DLtC6dHf.api.lncldglobal.com'
+      }
+
+    var settings = {
+      "method": "GET",
+      "headers": {
+        "X-LC-Id": 'DLtC6dHfP11bGkqkjUFWnD00-MdYXbMMI',
+        "X-LC-Key": 'uA7SpdGiCWi0BpIigPRpsHsN',
+        "Content-Type": "application/json"
+      },
+    }
+
+    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
+      .then(response => response.json())
+      .then(data => {
+        const valineArray = data.results.map(function (e) {
+          return {
+            'avatar': e.QQAvatar,
+            'content': changeContent(e.comment),
+            'mail': e.mail,
+            'nick': e.nick,
+            'url': e.url,
+            'date': e.createdAt,
+          }
+        })
+        saveToLocal.set('leancloud-newest-comments', JSON.stringify(valineArray), 10/(60*24))
+        generateHtml(valineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      }) 
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('leancloud-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="000PeZCQ1i4XVs" data-server="tencent" data-type="artist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})</script></div><script src="https://cdn.jsdelivr.net/npm/live2d-widget@^3.1.3/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>
